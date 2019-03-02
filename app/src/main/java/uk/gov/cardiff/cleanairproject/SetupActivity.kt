@@ -10,7 +10,7 @@ class SetupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setup)
         // Stop setup showing again
-        setSetupComplete()
+        // setSetupComplete()
     }
 
     private fun setSetupComplete() {
