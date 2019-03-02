@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Council Colours-->
+    <color name="colorPrimary">#017988</color>
+    <color name="colorPrimaryDark">#176381</color>
+    <color name="colorAccent">#017988</color>
+
+    <!-- Blue Colours-->
+    <!--<color name="colorPrimary">#4C9CFF</color>-->
+    <!--<color name="colorPrimaryDark">#3366FF</color>-->
+    <!--<color name="colorAccent">#4C9CFF</color>-->
+</resources>
