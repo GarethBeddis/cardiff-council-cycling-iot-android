@@ -6,7 +6,7 @@ This repository contains the code for the Android application for the Cardiff Co
 
 ### Prerequisites
 
-To build and run this application, you will need Android Studio with the Android 9.0 Pie SDK (API Level 28) installed, and a physical or virtual Android device running Android 5.1 Lollipop or higher.
+To build and run this application, you will need Android Studio with the Android 9.0 Pie SDK (API Level 28) installed, and a physical or virtual Android device running Android 6 Marshmallow or higher.
 
 [Download Android Studio](https://developer.android.com/studio)
 
