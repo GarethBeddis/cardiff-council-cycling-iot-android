@@ -9,4 +9,7 @@
     <!--<color name="colorPrimary">#4C9CFF</color>-->
     <!--<color name="colorPrimaryDark">#3366FF</color>-->
     <!--<color name="colorAccent">#4C9CFF</color>-->
+
+    <!-- General -->
+    <color name="background">#ffffff</color>
 </resources>
