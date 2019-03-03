@@ -7,14 +7,38 @@
         android:layout_height="match_parent"
         tools:context=".setup.fragments.LocationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+            android:src="@drawable/ic_location_gradient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location Fragment"
+            android:id="@+id/image"
+            app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/button_enable_location"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription"/>
+
+    <TextView
+            android:text="@string/location_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            app:layout_constraintBottom_toTopOf="@+id/summary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="4dp"
+            style="@style/SetupTitle"/>
+
+    <TextView
+            android:text="@string/location_summary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/summary"
+            app:layout_constraintEnd_toEndOf="@+id/button_enable_location"
+            app:layout_constraintStart_toStartOf="@+id/button_enable_location"
+            android:layout_marginBottom="42dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_enable_location"
+            style="@style/SetupSummary"/>
 
     <Button
             android:id="@+id/button_enable_location"

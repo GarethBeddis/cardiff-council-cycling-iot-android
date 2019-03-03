@@ -8,4 +8,8 @@
     <string name="welcome_summary">
         Gyda Phrosiect Awyr Glân Caerdydd, rydym yn gweithio gyda\'n gilydd ar gyfer dinas iachach well.
     </string>
+    <string name="location_title">Gofyniad Mynediad Lleoliad</string>
+    <string name="location_summary">
+        Mae arnom angen mynediad i\'ch lleoliad fel y gallwn olrhain pa rannau o Gaerdydd sydd fwyaf llygredig.
+    </string>
 </resources>
