@@ -6,18 +6,19 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import kotlinx.android.synthetic.main.fragment_welcome.*
+
 import uk.gov.cardiff.cleanairproject.R
 import uk.gov.cardiff.cleanairproject.setup.Animations
+import uk.gov.cardiff.cleanairproject.setup.Listeners
+import uk.gov.cardiff.cleanairproject.setup.Pages
 
 class WelcomeFragment : Fragment() {
 
-    private lateinit var listener: OnCompleteListener
-    private lateinit var buttonLogin: Button
+    private lateinit var listener: Listeners
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Set Fragment Animations
         this.exitTransition = Animations.getSlideLeftAnimation()
         this.enterTransition = Animations.getSlideRightAnimation()
@@ -28,24 +29,22 @@ class WelcomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_welcome, container, false)
-        buttonLogin = view.findViewById<Button>(R.id.button_login) as Button
-        buttonLogin.setOnClickListener {
-            listener.onCompleteListener()
+        return inflater.inflate(R.layout.fragment_welcome, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // On login button click, go to the location page
+        button_login.setOnClickListener {
+            listener.changeFragmentListener(Pages.LOCATION)
         }
-        return view
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnCompleteListener) {
+        if (context is Listeners) {
             listener = context
         } else {
             throw RuntimeException("$context must implement OnComplete")
         }
-    }
-
-    interface OnCompleteListener {
-        fun onCompleteListener()
     }
 }

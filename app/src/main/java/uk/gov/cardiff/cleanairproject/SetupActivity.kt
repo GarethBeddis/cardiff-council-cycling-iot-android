@@ -1,12 +1,15 @@
 package uk.gov.cardiff.cleanairproject
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import uk.gov.cardiff.cleanairproject.setup.Animations
+
+import uk.gov.cardiff.cleanairproject.setup.Listeners
+import uk.gov.cardiff.cleanairproject.setup.Pages
 import uk.gov.cardiff.cleanairproject.setup.fragments.LocationFragment
 import uk.gov.cardiff.cleanairproject.setup.fragments.WelcomeFragment
 
-class SetupActivity : AppCompatActivity(), WelcomeFragment.OnCompleteListener {
+class SetupActivity : AppCompatActivity(), Listeners {
 
     private var welcomeFragment = WelcomeFragment()
     private var locationFragment = LocationFragment()
@@ -16,31 +19,33 @@ class SetupActivity : AppCompatActivity(), WelcomeFragment.OnCompleteListener {
         setTheme(R.style.AppTheme_Setup)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setup)
-
         // Set the starting fragment
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, welcomeFragment)
         transaction.commit()
-
-        // Stop setup showing again
-        // setSetupComplete()
     }
 
-    private fun setSetupComplete() {
+    override fun finishSetup() {
         // Set the FirstTimeSetup completed preference
         getSharedPreferences("FirstTimeSetup", MODE_PRIVATE)
             .edit()
             .putBoolean("completed", true)
             .apply()
+        // Switch to MainActivity
+        startActivity(Intent(this, MainActivity::class.java))
+        // Stop SetupActivity
+        finish()
     }
 
-    override fun onCompleteListener() {
-        // This is a like locationFragment.setEnterTransition(slideRight) in Java
-        locationFragment.enterTransition = Animations.getSlideRightAnimation()
+    override fun changeFragmentListener(targetPage: Pages) {
+        val targetFragment = when(targetPage) {
+            Pages.WELCOME -> welcomeFragment
+            Pages.LOCATION -> locationFragment
+        }
 
         // Switch Fragment
         fragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, locationFragment)
+            .replace(R.id.fragment_container, targetFragment)
             .addToBackStack(null)
             .commit()
     }
