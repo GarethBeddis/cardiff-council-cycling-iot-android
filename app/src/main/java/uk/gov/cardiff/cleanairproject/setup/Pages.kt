@@ -1,5 +1,5 @@
 package uk.gov.cardiff.cleanairproject.setup
 
 enum class Pages {
-    WELCOME, LOCATION
+    WELCOME, LOCATION, BLUETOOTH, FINISHED
 }

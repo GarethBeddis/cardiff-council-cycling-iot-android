@@ -6,14 +6,13 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_location.*
+import kotlinx.android.synthetic.main.fragment_finished.*
 
 import uk.gov.cardiff.cleanairproject.R
 import uk.gov.cardiff.cleanairproject.setup.Animations
 import uk.gov.cardiff.cleanairproject.setup.Listeners
-import uk.gov.cardiff.cleanairproject.setup.Pages
 
-class LocationFragment : Fragment() {
+class FinishedFragment : Fragment() {
 
     private lateinit var listener: Listeners
 
@@ -29,13 +28,13 @@ class LocationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_location, container, false)
+        return inflater.inflate(R.layout.fragment_finished, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // On location button click, finish setup
-        button_enable_location.setOnClickListener {
-            listener.changeFragmentListener(Pages.BLUETOOTH)
+        button_enter_app.setOnClickListener {
+            listener.finishSetup()
         }
     }
 

@@ -6,6 +6,8 @@ import android.os.Bundle
 
 import uk.gov.cardiff.cleanairproject.setup.Listeners
 import uk.gov.cardiff.cleanairproject.setup.Pages
+import uk.gov.cardiff.cleanairproject.setup.fragments.BluetoothFragment
+import uk.gov.cardiff.cleanairproject.setup.fragments.FinishedFragment
 import uk.gov.cardiff.cleanairproject.setup.fragments.LocationFragment
 import uk.gov.cardiff.cleanairproject.setup.fragments.WelcomeFragment
 
@@ -13,6 +15,8 @@ class SetupActivity : AppCompatActivity(), Listeners {
 
     private var welcomeFragment = WelcomeFragment()
     private var locationFragment = LocationFragment()
+    private var bluetoothFragment = BluetoothFragment()
+    private var finishedFragment = FinishedFragment()
     private val fragmentManager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +45,8 @@ class SetupActivity : AppCompatActivity(), Listeners {
         val targetFragment = when(targetPage) {
             Pages.WELCOME -> welcomeFragment
             Pages.LOCATION -> locationFragment
+            Pages.BLUETOOTH -> bluetoothFragment
+            Pages.FINISHED -> finishedFragment
         }
 
         // Switch Fragment
