@@ -12,4 +12,5 @@
     <string name="location_summary">
         Mae arnom angen mynediad i\'ch lleoliad fel y gallwn olrhain pa rannau o Gaerdydd sydd fwyaf llygredig.
     </string>
+    <string name="location_enable">Galluogi Lleoliad</string>
 </resources>

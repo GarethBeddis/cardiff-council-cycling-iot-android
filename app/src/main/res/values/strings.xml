@@ -15,4 +15,5 @@
     <string name="location_summary">
         We need access to your location so we can track which parts of Cardiff are the most polluted.
     </string>
+    <string name="location_enable">Enable Location</string>
 </resources>

@@ -42,7 +42,7 @@
 
     <Button
             android:id="@+id/button_enable_location"
-            android:text="Enable Location"
+            android:text="@string/location_enable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
