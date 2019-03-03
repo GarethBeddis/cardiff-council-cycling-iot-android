@@ -1,5 +1,4 @@
-package uk.gov.cardiff.cleanairproject.setup_fragments
-
+package uk.gov.cardiff.cleanairproject.setup.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import uk.gov.cardiff.cleanairproject.R
+import uk.gov.cardiff.cleanairproject.setup.Animations
 
 class LocationFragment : Fragment() {
 

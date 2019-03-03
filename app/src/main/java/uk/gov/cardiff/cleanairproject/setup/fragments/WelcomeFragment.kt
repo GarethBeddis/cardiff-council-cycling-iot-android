@@ -1,4 +1,4 @@
-package uk.gov.cardiff.cleanairproject.setup_fragments
+package uk.gov.cardiff.cleanairproject.setup.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import uk.gov.cardiff.cleanairproject.R
+import uk.gov.cardiff.cleanairproject.setup.Animations
 
 class WelcomeFragment : Fragment() {
 

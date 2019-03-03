@@ -2,9 +2,9 @@ package uk.gov.cardiff.cleanairproject
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import uk.gov.cardiff.cleanairproject.setup_fragments.Animations
-import uk.gov.cardiff.cleanairproject.setup_fragments.LocationFragment
-import uk.gov.cardiff.cleanairproject.setup_fragments.WelcomeFragment
+import uk.gov.cardiff.cleanairproject.setup.Animations
+import uk.gov.cardiff.cleanairproject.setup.fragments.LocationFragment
+import uk.gov.cardiff.cleanairproject.setup.fragments.WelcomeFragment
 
 class SetupActivity : AppCompatActivity(), WelcomeFragment.OnCompleteListener {
 

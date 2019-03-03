@@ -1,4 +1,4 @@
-package uk.gov.cardiff.cleanairproject.setup_fragments
+package uk.gov.cardiff.cleanairproject.setup
 
 import android.support.v4.view.animation.PathInterpolatorCompat
 import android.transition.Slide
