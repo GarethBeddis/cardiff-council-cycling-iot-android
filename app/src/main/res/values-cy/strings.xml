@@ -4,4 +4,8 @@
     <string name="setup_login">Mewngofnodi</string>
     <string name="setup_create_account">Creu cyfrif</string>
     <string name="setup_terms">Telerau ac Amodau</string>
+    <string name="welcome_title">Croeso</string>
+    <string name="welcome_summary">
+        Gyda Phrosiect Awyr Glân Caerdydd, rydym yn gweithio gyda\'n gilydd ar gyfer dinas iachach well.
+    </string>
 </resources>
