@@ -36,9 +36,9 @@ class BluetoothFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // On login button click, go to the location page
         button_pair_bluetooth.setOnClickListener {
-            startActivity(Intent("android.bluetooth.devicepicker.action.LAUNCH"))
             // TODO: Wait until a sensor is detected before continuing
-            listener.changeFragmentListener(Pages.FINISHED)
+            // Current implementation waits until the device picker is closed
+            startActivityForResult(Intent("android.bluetooth.devicepicker.action.LAUNCH"), 1)
         }
     }
 
@@ -49,5 +49,10 @@ class BluetoothFragment : Fragment() {
         } else {
             throw RuntimeException("$context must implement OnComplete")
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // When the Bluetooth Device picker is closed, go to the next page
+        listener.changeFragmentListener(Pages.FINISHED)
     }
 }
