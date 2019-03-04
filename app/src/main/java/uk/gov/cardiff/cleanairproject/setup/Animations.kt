@@ -4,15 +4,22 @@ import android.support.v4.view.animation.PathInterpolatorCompat
 import android.transition.Slide
 import android.view.Gravity
 
+/**
+ * This class contains commonly used animations for SetupActivity fragments
+ * to reduce repeating code.
+ */
 class Animations {
 
     companion object {
 
+        //Prepare the animation duration
         private const val duration = 400.toLong()
+
+        // Prepare a custom interpolator (like cubic-bezier in CSS)
         private val interpolator = PathInterpolatorCompat.create(
-            0.42.toFloat(),
-            1.35.toFloat(),
-            0.4.toFloat(),
+            0.3.toFloat(),
+            1.25.toFloat(),
+            0.5.toFloat(),
             1.0.toFloat())
 
         fun getSlideLeftAnimation(): Slide {

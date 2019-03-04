@@ -44,7 +44,7 @@ class WelcomeFragment : Fragment() {
         if (context is Listeners) {
             listener = context
         } else {
-            throw RuntimeException("$context must implement OnComplete")
+            throw RuntimeException("$context must implement the Listeners interface")
         }
     }
 }
