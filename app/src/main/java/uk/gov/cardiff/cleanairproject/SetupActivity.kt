@@ -20,8 +20,6 @@ import uk.gov.cardiff.cleanairproject.setup.fragments.FinishedFragment
 import uk.gov.cardiff.cleanairproject.setup.fragments.LocationFragment
 import uk.gov.cardiff.cleanairproject.setup.fragments.WelcomeFragment
 
-private const val PERMISSION_REQUEST_CODE_LOCATION = 100
-
 class SetupActivity : AppCompatActivity(), Listeners {
 
     private val fragmentManager = supportFragmentManager
@@ -86,7 +84,7 @@ class SetupActivity : AppCompatActivity(), Listeners {
             // Request the permission
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                PERMISSION_REQUEST_CODE_LOCATION
+                1
             )
         } else {
             // If the permission has already been granted, go to the Bluetooth page
