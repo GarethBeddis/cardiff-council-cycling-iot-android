@@ -1,6 +1,7 @@
 package uk.gov.cardiff.cleanairproject.setup.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -35,6 +36,8 @@ class BluetoothFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // On login button click, go to the location page
         button_pair_bluetooth.setOnClickListener {
+            startActivity(Intent("android.bluetooth.devicepicker.action.LAUNCH"))
+            // TODO: Wait until a sensor is detected before continuing
             listener.changeFragmentListener(Pages.FINISHED)
         }
     }
