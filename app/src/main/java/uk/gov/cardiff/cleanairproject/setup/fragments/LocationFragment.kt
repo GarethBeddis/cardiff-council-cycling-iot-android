@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.fragment_location.*
 import uk.gov.cardiff.cleanairproject.R
 import uk.gov.cardiff.cleanairproject.setup.Animations
 import uk.gov.cardiff.cleanairproject.setup.Listeners
-import uk.gov.cardiff.cleanairproject.setup.Pages
 
 class LocationFragment : Fragment() {
 
@@ -35,7 +34,7 @@ class LocationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // On location button click, finish setup
         button_enable_location.setOnClickListener {
-            listener.changeFragmentListener(Pages.BLUETOOTH)
+            listener.requestLocationPermission()
         }
     }
 
