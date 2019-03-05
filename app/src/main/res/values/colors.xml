@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Council Colours-->
-    <color name="colorPrimary">#017988</color>
-    <color name="colorPrimaryDark">#176381</color>
-    <color name="colorAccent">#017988</color>
-    <color name="colorRipple">#8097c6d8</color>
-    <color name="colorSetupGradientStart">#FF017988</color>
-    <color name="colorSetupGradientEnd">#FF01383F</color>
+    <!--<color name="colorPrimary">#017988</color>-->
+    <!--<color name="colorPrimaryDark">#176381</color>-->
+    <!--<color name="colorAccent">#017988</color>-->
+    <!--<color name="colorRipple">#8097c6d8</color>-->
+    <!--<color name="colorSetupGradientStart">#FF017988</color>-->
+    <!--<color name="colorSetupGradientEnd">#FF01383F</color>-->
 
     <!-- Blue Colours-->
-    <!--<color name="colorPrimary">#4C9CFF</color>-->
-    <!--<color name="colorPrimaryDark">#3366FF</color>-->
-    <!--<color name="colorAccent">#4C9CFF</color>-->
-    <!--<color name="colorRipple">#80b2d3ff</color>-->
-    <!--<color name="colorSetupGradientStart">#FF1780FF</color>-->
-    <!--<color name="colorSetupGradientEnd">#FF0036D7</color>-->
+    <color name="colorPrimary">#4C9CFF</color>
+    <color name="colorPrimaryDark">#3366FF</color>
+    <color name="colorAccent">#4C9CFF</color>
+    <color name="colorRipple">#80b2d3ff</color>
+    <color name="colorSetupGradientStart">#FF1780FF</color>
+    <color name="colorSetupGradientEnd">#FF0036D7</color>
 
     <!-- General -->
     <color name="background">#ffffff</color>

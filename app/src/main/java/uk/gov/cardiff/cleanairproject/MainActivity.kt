@@ -14,10 +14,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val playPauseFab = fab as FloatingMusicActionButton
+        val playPauseFab = playPauseButton as FloatingMusicActionButton
         playPauseFab.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_PAUSE)
 
-        fab.setOnMusicFabClickListener(object : FloatingMusicActionButton.OnMusicFabClickListener {
+        playPauseButton.setOnMusicFabClickListener(object : FloatingMusicActionButton.OnMusicFabClickListener {
             override fun onClick(view: View) {
                 //do stuff
             }
