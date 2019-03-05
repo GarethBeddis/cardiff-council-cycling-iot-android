@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Aer Glân</string>
+    <string name="setup_login">Mewngofnodi</string>
+    <string name="setup_create_account">Creu cyfrif</string>
+    <string name="setup_terms">Telerau ac Amodau</string>
+    <string name="welcome_title">Croeso</string>
+    <string name="welcome_summary">
+        Gyda Phrosiect Awyr Glân Caerdydd, rydym yn gweithio gyda\'n gilydd ar gyfer dinas iachach well.
+    </string>
+    <string name="location_title">Gofyniad Mynediad Lleoliad</string>
+    <string name="location_summary">
+        Mae arnom angen mynediad i\'ch lleoliad fel y gallwn olrhain pa rannau o Gaerdydd sydd fwyaf llygredig.
+    </string>
+    <string name="location_enable">Galluogi Lleoliad</string>
+
+    <string name="bluetooth_title">Cysylltu\'r Synwyryddion</string>
+    <string name="bluetooth_summary">
+        I gysylltu y synwyryddion, cadwch y botwm pâr nes i\'r golau ddechrau plygu, yna pwyswch y Bluetooth isod.
+    </string>
+    <string name="bluetooth_pair">Pâr Bluetooth</string>
+    <string name="finished_title">Rydych chi i gyd wedi eu gosod</string>
+    <string name="finished_summary">
+        Bydd yr app nawr yn cysylltu â\'r synwyryddion yn awtomatig a chael darlleniadau pan fyddwch chi\'n eu troi ymlaen.
+    </string>
+    <string name="finished_enter">Awn ni</string>
 </resources>

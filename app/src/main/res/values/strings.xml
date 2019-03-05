@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- General -->
     <string name="app_name">Clean Air</string>
+
     <string name="noise">Noise</string>
     <string name="air">Air Pollution</string>
     <string name="syncStatus">Sync Status</string>
+
+    <!-- Setup -->
+    <string name="setup_login">Login</string>
+    <string name="setup_create_account">Create Account</string>
+    <string name="setup_terms">Terms &amp; Conditions</string>
+    <string name="welcome_title">Welcome</string>
+    <string name="welcome_summary">
+        With the Cardiff Clean Air Project, we\'re working together for a better, healthier city.
+    </string>
+    <string name="location_title">Location Access Required</string>
+    <string name="location_summary">
+        We need access to your location so we can track which parts of Cardiff are the most polluted.
+    </string>
+    <string name="location_enable">Enable Location</string>
+    <string name="bluetooth_title">Connecting the Sensors</string>
+    <string name="bluetooth_summary">
+        To connect the sensors, hold the pair button until the light starts blinking, then press pair bluetooth below.
+    </string>
+    <string name="bluetooth_pair">Pair Bluetooth</string>
+    <string name="finished_title">You\'re all set</string>
+    <string name="finished_summary">
+        The app will now automatically connect to the sensors and get readings when you turn them on.
+    </string>
+    <string name="finished_enter">Let\'s Go</string>
 </resources>
