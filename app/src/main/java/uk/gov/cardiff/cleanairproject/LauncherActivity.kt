@@ -11,11 +11,23 @@ class LauncherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO: Determine whether to show SetupActivity or MainActivity
         // Switch Activity
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        launchActivity()
         // Finish the Splash Activity
         finish()
+    }
+
+    private fun launchActivity() {
+        // Get the FirstTimeSetup completed preference
+        val sharedPref = getSharedPreferences("FirstTimeSetup", MODE_PRIVATE)
+        val setupComplete = sharedPref.getBoolean("completed", false)
+        // Get the intent
+        val intent = if (setupComplete) {
+            Intent(this, MainActivity::class.java)
+        } else {
+            Intent(this, SetupActivity::class.java)
+        }
+        // Start the activity
+        startActivity(intent)
     }
 }
