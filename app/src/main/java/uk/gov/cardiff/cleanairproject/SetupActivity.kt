@@ -35,8 +35,10 @@ class SetupActivity : AppCompatActivity(), Listeners {
         setTheme(R.style.AppTheme_Setup)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setup)
-        // Set the starting fragment
-        fragmentManager.beginTransaction().add(R.id.fragment_container, welcomeFragment).commit()
+        // If there's no savedInstanceState, set the starting fragment
+        if (savedInstanceState == null) {
+            fragmentManager.beginTransaction().add(R.id.fragment_container, welcomeFragment).commit()
+        }
     }
 
     private fun changeFragment(targetFragment: Fragment, canGoBack: Boolean) {
