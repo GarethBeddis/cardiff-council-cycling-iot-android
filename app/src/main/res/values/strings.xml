@@ -37,9 +37,11 @@
     <string name="error_message_email">Enter Valid Email</string>
     <string name="error_message_password">Enter Password</string>
     <string name="success_message">Registration Successful</string>
-    <string name="text_not_member">No account yet? Create one</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="text_not_member">Don\'t have an account? Sign up</string>
     <string name="text_already_member">Already a member? Login</string>
     <string name="error_email_exists">Email Already Exists</string>
     <string name="error_password_match">Password Does Not Match</string>
     <string name="error_valid_email_password">Invalid Email or Password</string>
+    <string name="existing_user">Already a member? Login</string>
 </resources>
