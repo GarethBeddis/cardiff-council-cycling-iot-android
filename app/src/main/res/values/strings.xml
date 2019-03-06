@@ -34,5 +34,6 @@
     <string name="air_measurement">µg/m3</string>
     <string name="syncStatus">Sync Status</string>
     <string name="upToDate">Up To Date</string>
+    <string name="connected">Connected</string>
 
 </resources>
