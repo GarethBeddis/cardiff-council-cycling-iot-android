@@ -69,16 +69,25 @@ class SetupActivity : AppCompatActivity(), Listeners {
 
     override fun changeFragmentListener(targetPage: Pages) {
         // Get the matching fragment
-        val targetFragment = when(targetPage) {
-            Pages.WELCOME -> welcomeFragment
-            Pages.LOCATION -> locationFragment
-            Pages.BLUETOOTH -> bluetoothFragment
-            Pages.FINISHED -> finishedFragment
-            Pages.LOGIN -> loginFragment
-            Pages.REGISTER -> registerFragment
+        val targetFragment: Fragment
+        var canGoBack = false
+        when(targetPage) {
+            Pages.WELCOME -> targetFragment = welcomeFragment
+            Pages.LOCATION -> targetFragment = locationFragment
+            Pages.BLUETOOTH -> targetFragment = bluetoothFragment
+            Pages.FINISHED -> targetFragment = finishedFragment
+            Pages.LOGIN -> {
+                targetFragment = loginFragment
+                canGoBack = true
+            }
+            Pages.REGISTER -> {
+                targetFragment = registerFragment
+                canGoBack = true
+            }
         }
+        
         // Switch Fragment
-        changeFragment(targetFragment, false)
+        changeFragment(targetFragment, canGoBack)
     }
 
     override fun requestLocationPermission() {
@@ -129,7 +138,7 @@ class SetupActivity : AppCompatActivity(), Listeners {
             finish()
         }
     }
-    
+
     // Hide the keyboard if open so snackbar message is visible
     // Ref: https://stackoverflow.com/questions/13593069/androidhide-keyboard-after-button-click/13593232
     override fun hideKeyboard() {
