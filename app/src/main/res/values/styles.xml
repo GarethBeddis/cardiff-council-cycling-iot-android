@@ -89,7 +89,15 @@
     <style name="ReadingMeasurement">
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/grey</item>
+        <item name="android:paddingTop">2sp</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Reading -->
+    <style name="Reading">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <!-- Connection -->
