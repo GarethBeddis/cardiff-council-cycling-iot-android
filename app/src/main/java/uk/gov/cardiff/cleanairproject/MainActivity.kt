@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import uk.gov.cardiff.cleanairproject.foreground.ForegroundService
 
 class MainActivity : AppCompatActivity() {
-    var started = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -24,20 +23,20 @@ class MainActivity : AppCompatActivity() {
         playPauseButton.setOnMusicFabClickListener(object : FloatingMusicActionButton.OnMusicFabClickListener {
             override fun onClick(view: View) {
 
-                if(started == false){
+                if(playPauseFab.currentMode.isShowingPlayIcon){
                     val intent = Intent(this@MainActivity, ForegroundService::class.java)
                     intent.action = ForegroundService.START_FOREGROUND_SERVICE
                     startService(intent)
-                    started = true
-                }else if(started == true){
+                }else {
                     val intent = Intent(this@MainActivity, ForegroundService::class.java)
                     intent.action = ForegroundService.STOP_FOREGROUND_SERVICE
                     startService(intent)
-                    started = false
                 }
             }
 
         })
+
+
     }
 
 
