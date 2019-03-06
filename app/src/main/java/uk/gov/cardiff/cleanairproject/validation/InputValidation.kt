@@ -54,9 +54,8 @@ class InputValidation
         return true
     }
 
-    // TODO: Is this necessary?
     // Method to Hide keyboard
-    private fun hideKeyboardFrom(view: View) {
+    fun hideKeyboardFrom(view: View) {
         val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
