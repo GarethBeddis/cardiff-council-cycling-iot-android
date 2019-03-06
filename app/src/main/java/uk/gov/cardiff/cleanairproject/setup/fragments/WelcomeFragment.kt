@@ -35,7 +35,10 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // On login button click, go to the location page
         button_login.setOnClickListener {
-            listener.changeFragmentListener(Pages.LOCATION)
+            listener.changeFragmentListener(Pages.LOGIN)
+        }
+        button_create_account.setOnClickListener {
+            listener.changeFragmentListener(Pages.REGISTER)
         }
     }
 
