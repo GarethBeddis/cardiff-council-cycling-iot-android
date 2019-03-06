@@ -12,6 +12,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme.Launcher">
+
+        <!-- Declare foreground service -->
+        <service
+                android:name=".foreground.ForegroundService"
+                android:enabled="true"
+                android:exported="true" />
+
         <activity android:name=".LauncherActivity"
                   android:configChanges="orientation"
                   android:screenOrientation="portrait">
