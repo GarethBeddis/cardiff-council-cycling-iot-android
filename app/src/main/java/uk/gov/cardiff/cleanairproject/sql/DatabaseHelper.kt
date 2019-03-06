@@ -7,16 +7,15 @@ import android.database.sqlite.SQLiteOpenHelper
 import uk.gov.cardiff.cleanairproject.model.User
 import java.util.*
 
-
 // Ref: https://github.com/Android-Tutorials-Hub/login-register-sqlite-tutorial-Kotlin/blob/master/app/src/main/java/com/androidtutorialshub/loginregisterkotlin/sql/DatabaseHelper.kt
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    // create table sql query
+    // Create table sql query
     private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_ID + " TEXT,"
             + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")")
 
-    // drop table sql query
+    // Drop table sql query
     private val DROP_USER_TABLE = "DROP TABLE IF EXISTS $TABLE_USER"
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -30,11 +29,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         onCreate(db)
     }
 
-    /**
-     * This method to update user record
-     *
-     * @param user
-     */
+    // Update a user record
     fun updateUser(user: User) {
         val db = this.writableDatabase
 
@@ -48,11 +43,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
     }
 
-    /**
-     * This method is to delete user record
-     *
-     * @param user
-     */
+    // Delete a user record
     fun deleteUser(user: User) {
 
         val db = this.writableDatabase
@@ -60,34 +51,22 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.delete(TABLE_USER, "$COLUMN_USER_ID = ?",
             arrayOf(user.id.toString()))
         db.close()
-
-
     }
 
-    /**
-     * This method to check user exist or not
-     *
-     * @param email
-     * @return true/false
-     */
+    // Checks if a user exists by email
     fun checkUser(email: String): Boolean {
 
-        // array of columns to fetch
+        // Array of columns to fetch
         val columns = arrayOf(COLUMN_USER_ID)
         val db = this.readableDatabase
 
-        // selection criteria
+        // Selection criteria
         val selection = "$COLUMN_USER_EMAIL = ?"
 
-        // selection argument
+        // Selection argument
         val selectionArgs = arrayOf(email)
 
-        // query user table with condition
-        /**
-         * Here query function is used to fetch records from user table this function works like we use sql query.
-         * SQL query equivalent to this query function is
-         * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com';
-         */
+        // Query user table with condition
         val cursor = db.query(TABLE_USER, //Table to query
             columns,        //columns to return
             selection,      //columns for the WHERE clause
@@ -95,7 +74,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             null,  //group the rows
             null,   //filter by row groups
             null)  //The sort order
-
 
         val cursorCount = cursor.count
         cursor.close()
@@ -108,13 +86,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return false
     }
 
-    /**
-     * This method to check user exist or not
-     *
-     * @param email
-     * @param password
-     * @return true/false
-     */
     fun checkUser(email: String, password: String): Boolean {
 
         // array of columns to fetch
@@ -132,7 +103,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         /**
          * Here query function is used to fetch records from user table this function works like we use sql query.
          * SQL query equivalent to this query function is
-         * SELECT user_id FROM user WHERE user_email = 'name@email.com' AND user_password = 'qwerty';
+         * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com' AND user_password = 'qwerty';
          */
         val cursor = db.query(TABLE_USER, //Table to query
             columns, //columns to return

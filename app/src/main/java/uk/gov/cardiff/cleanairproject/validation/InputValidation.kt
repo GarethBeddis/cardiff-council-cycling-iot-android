@@ -10,21 +10,11 @@ import android.view.inputmethod.InputMethodManager
 
 // Ref: https://github.com/Android-Tutorials-Hub/login-register-sqlite-tutorial-Kotlin/blob/master/app/src/main/java/com/androidtutorialshub/loginregisterkotlin/helpers/InputValidation.kt
 class InputValidation
-/**
- * constructor
- *
- * @param context
- */
+
+    // Constructor
     (private val context: Context) {
 
-    /**
-     * method to check InputEditText filled .
-     *
-     * @param textInputEditText
-     * @param textInputLayout
-     * @param message
-     * @return
-     */
+    // Method to check if InputEditText is filled
     fun isInputEditTextFilled(textInputEditText: TextInputEditText, textInputLayout: TextInputLayout, message: String): Boolean {
         val value = textInputEditText.text.toString().trim()
         if (value.isEmpty()) {
@@ -34,19 +24,10 @@ class InputValidation
         } else {
             textInputLayout.isErrorEnabled = false
         }
-
         return true
     }
 
-
-    /**
-     * method to check InputEditText has valid email .
-     *
-     * @param textInputEditText
-     * @param textInputLayout
-     * @param message
-     * @return
-     */
+    // Method to check if InputEditText contains a valid email
     fun isInputEditTextEmail(textInputEditText: TextInputEditText, textInputLayout: TextInputLayout, message: String): Boolean {
         val value = textInputEditText.text.toString().trim()
         if (value.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
@@ -59,15 +40,7 @@ class InputValidation
         return true
     }
 
-    /**
-     * method to check both InputEditText value matches.
-     *
-     * @param textInputEditText1
-     * @param textInputEditText2
-     * @param textInputLayout
-     * @param message
-     * @return
-     */
+    // Method to check both InputEditText values match
     fun isInputEditTextMatches(textInputEditText1: TextInputEditText, textInputEditText2: TextInputEditText, textInputLayout: TextInputLayout, message: String): Boolean {
         val value1 = textInputEditText1.text.toString().trim()
         val value2 = textInputEditText2.text.toString().trim()
@@ -81,11 +54,8 @@ class InputValidation
         return true
     }
 
-    /**
-     * method to Hide keyboard
-     *
-     * @param view
-     */
+    // TODO: Is this necessary?
+    // Method to Hide keyboard
     private fun hideKeyboardFrom(view: View) {
         val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
