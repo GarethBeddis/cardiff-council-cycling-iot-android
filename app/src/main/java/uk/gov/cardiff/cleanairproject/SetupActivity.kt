@@ -39,11 +39,6 @@ class SetupActivity : AppCompatActivity(), Listeners {
         if (savedInstanceState == null) {
             fragmentManager.beginTransaction().add(R.id.fragment_container, welcomeFragment).commit()
         }
-    // REMOVE BEFORE MERGE
-        getSharedPreferences("FirstTimeSetup", MODE_PRIVATE)
-            .edit()
-            .putBoolean("completed", true)
-            .apply()
     }
 
     private fun changeFragment(targetFragment: Fragment, canGoBack: Boolean) {
