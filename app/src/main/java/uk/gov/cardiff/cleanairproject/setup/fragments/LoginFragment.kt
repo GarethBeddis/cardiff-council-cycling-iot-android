@@ -83,11 +83,10 @@ class LoginFragment : Fragment() {
         listener.hideKeyboard()
 
         // If valid credentials are entered, log user in
-        // Whitespace is removed from text views using:  .trim { it <= ' ' }
         if (databaseHelper.checkUser(textInputEmail.text.toString().trim(), textInputPassword.text.toString().trim())) {
             listener.changeFragmentListener(Pages.LOCATION)
         } else {
-            // Snack Bar to show success message that record is wrong
+            // Snack Bar to show success message that input is invalid
             Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show()
         }
     }

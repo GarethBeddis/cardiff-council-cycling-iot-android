@@ -38,7 +38,6 @@ class RegisterFragment : Fragment() {
     private lateinit var inputValidation: InputValidation
     private lateinit var databaseHelper: DatabaseHelper
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Set Fragment Animations
@@ -92,6 +91,7 @@ class RegisterFragment : Fragment() {
         if (!inputValidation.isInputEditTextMatches(textInputPassword, textInputConfirmPassword, textInputLayoutConfirmPassword, getString(R.string.error_password_match))) { return }
         listener.hideKeyboard()
 
+        // Add user to the database and log in
         if (!databaseHelper.checkUser(textInputEmail.text.toString().trim())) {
             val user = User(
                 email = textInputEmail.text.toString().trim(),

@@ -139,7 +139,7 @@ class SetupActivity : AppCompatActivity(), Listeners {
         }
     }
 
-    // Hide the keyboard if open so snackbar message is visible
+    // Hide the keyboard if open so snack bar message is visible
     // Ref: https://stackoverflow.com/questions/13593069/androidhide-keyboard-after-button-click/13593232
     override fun hideKeyboard() {
         try {
