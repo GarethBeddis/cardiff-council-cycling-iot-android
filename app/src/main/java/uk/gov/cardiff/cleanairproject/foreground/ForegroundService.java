@@ -24,7 +24,7 @@ public class ForegroundService extends Service {
 
     public static final String STOP_FOREGROUND_SERVICE = "ACTION_STOP_FOREGROUND_SERVICE";
 
-    public static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+    public static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public ForegroundService(){
 
@@ -63,6 +63,8 @@ public class ForegroundService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    private NotificationManager notManager;
+
     /* Used to build and start foreground service. */
     private void startForegroundService()
     {
@@ -82,6 +84,7 @@ public class ForegroundService extends Service {
         mBuilder.setContentTitle("Cardiff Clean Air Project");
         mBuilder.setContentText("");
         mBuilder.setPriority(Notification.PRIORITY_MAX);
+        mBuilder.setOnlyAlertOnce(true);
 
         notManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -97,6 +100,8 @@ public class ForegroundService extends Service {
             mBuilder.setChannelId(channelID);
         }
 
+
+
         // Start foreground service.
         startForeground(1, mBuilder.build());
 
@@ -107,15 +112,20 @@ public class ForegroundService extends Service {
     {
         Log.d(TAG_FOREGROUND_SERVICE, "Stop foreground service.");
 
+        //stops the scheduler from creating more notifications
+        scheduler.shutdownNow();
+        scheduler.isTerminated();
+
         // Stop foreground service and remove the notification.
         stopForeground(true);
 
-        scheduler.shutdown(); //stops the scheduler from creating more notifications
+
         // Stop the foreground service.
         stopSelf();
     }
 
     private void readings(final NotificationCompat.Builder builder, final NotificationManager manager){
+        scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleWithFixedDelay(new Runnable(){
             @Override
             public void run(){
