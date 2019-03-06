@@ -53,6 +53,7 @@
 
 
         <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/syncTick"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:src="@drawable/ic_sync_check"
@@ -61,25 +62,31 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="25dp" android:id="@+id/appCompatImageView3"/>
+                android:layout_marginStart="25dp"/>
 
         <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/statusTitleText"
                 android:layout_width="150sp"
                 android:layout_height="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="18dp"
-                app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
+                app:layout_constraintStart_toEndOf="@+id/syncTick"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="20dp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/syncStatus"
-                style="@style/ReadingTitle" android:id="@+id/appCompatTextView7"/>
+                style="@style/ReadingTitle"/>
 
         <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/statusText"
                 android:layout_width="150sp"
-                android:layout_height="30sp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="42dp"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0"
+                android:layout_height="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="42dp"
+                app:layout_constraintTop_toBottomOf="@+id/statusTitleText"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 android:text="@string/upToDate"
                 style="@style/ReadingMeasurement"/>
 
@@ -103,6 +110,7 @@
             android:elevation="12dp">
 
         <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/airPollutionIcon"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:src="@drawable/ic_air_pollution"
@@ -111,43 +119,42 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="25dp"
-                android:id="@+id/appCompatImageView"/>
+                android:layout_marginStart="25dp"/>
 
         <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/airPollutionTitleText"
                 android:layout_width="150sp"
                 android:layout_height="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="18dp"
-                app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+                app:layout_constraintStart_toEndOf="@+id/airPollutionIcon"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="20dp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/air"
-                style="@style/ReadingTitle"
-                android:id="@+id/appCompatTextView4"/>
+                style="@style/ReadingTitle"/>
 
         <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/airPollutionUnitText"
                 android:layout_width="60sp"
                 android:layout_height="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="102dp"
-                android:id="@+id/appCompatTextView6"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView5"
+                app:layout_constraintTop_toTopOf="@+id/airPollutionReadingText"
                 app:layout_constraintVertical_bias="0.0"
                 android:text="@string/air_measurement"
                 style="@style/ReadingMeasurement"/>
 
         <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/airPollutionReadingText"
                 android:layout_width="30sp"
                 android:layout_height="30sp"
-                android:id="@+id/appCompatTextView5"
-                app:layout_constraintEnd_toStartOf="@+id/appCompatTextView6"
+                app:layout_constraintEnd_toStartOf="@+id/airPollutionUnitText"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4"
+                app:layout_constraintTop_toBottomOf="@+id/airPollutionTitleText"
                 app:layout_constraintVertical_bias="0.0"
                 style="@style/Reading"
                 android:text="40"/>
@@ -172,6 +179,7 @@
             android:elevation="12dp">
 
         <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/noiseIcon"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:src="@drawable/ic_noise"
@@ -180,10 +188,10 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="25dp"
-                android:id="@+id/appCompatImageView2"/>
+                android:layout_marginStart="25dp"/>
 
         <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/noiseTitleText"
                 android:layout_width="150sp"
                 android:layout_height="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -192,26 +200,27 @@
                 android:layout_marginTop="20dp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/noise"
-                app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
-                style="@style/ReadingTitle" android:id="@+id/appCompatTextView"/>
+                app:layout_constraintStart_toEndOf="@+id/noiseIcon"
+                style="@style/ReadingTitle"/>
 
         <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/noiseUnitText"
                 android:layout_width="50sp"
                 android:layout_height="30sp"
-                android:id="@+id/appCompatTextView2"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/noiseReadingText"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="112dp"
                 android:text="@string/noise_measurement"
                 style="@style/ReadingMeasurement"/>
 
         <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/noiseReadingText"
                 android:layout_width="30sp"
                 android:layout_height="30sp"
-                app:layout_constraintEnd_toStartOf="@+id/appCompatTextView2"
+                app:layout_constraintEnd_toStartOf="@+id/noiseUnitText"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
-                android:id="@+id/appCompatTextView3"
+                app:layout_constraintTop_toBottomOf="@+id/noiseTitleText"
                 app:layout_constraintVertical_bias="0.0"
                 style="@style/Reading"
                 android:text="40"/>
@@ -221,11 +230,11 @@
 
     <be.rijckaert.tim.animatedvector.FloatingMusicActionButton
             android:id="@+id/playPauseButton"
-            android:layout_width="60dp"
+            android:layout_width="55sp"
             app:backgroundTint="@color/colorAccent"
             android:layout_gravity="bottom|center"
             app:mode="playToPause"
-            android:layout_height="57dp"
+            android:layout_height="55sp"
             android:layout_margin="@dimen/fab_margin"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
