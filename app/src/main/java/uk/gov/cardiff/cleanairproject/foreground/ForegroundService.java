@@ -11,6 +11,11 @@ import android.widget.Toast;
 import uk.gov.cardiff.cleanairproject.MainActivity;
 import uk.gov.cardiff.cleanairproject.R;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 public class ForegroundService extends Service {
 
     private static final String TAG_FOREGROUND_SERVICE = "FOREGROUND_SERVICE";
@@ -19,9 +24,7 @@ public class ForegroundService extends Service {
 
     public static final String STOP_FOREGROUND_SERVICE = "ACTION_STOP_FOREGROUND_SERVICE";
 
-    public static final String PAUSE = "ACTION_PAUSE";
-
-    public static final String PLAY = "ACTION_PLAY";
+    public static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     public ForegroundService(){
 
@@ -75,9 +78,9 @@ public class ForegroundService extends Service {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "notify_001");
 
         mBuilder.setContentIntent(pendingIntent);
-        mBuilder.setSmallIcon(R.drawable.ic_launcher_foreground);
-        mBuilder.setContentTitle("Hey");
-        mBuilder.setContentText("guys");
+        mBuilder.setSmallIcon(R.drawable.ic_logo_gradient);
+        mBuilder.setContentTitle("Cardiff Clean Air Project");
+        mBuilder.setContentText("");
         mBuilder.setPriority(Notification.PRIORITY_MAX);
 
         notManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -96,6 +99,8 @@ public class ForegroundService extends Service {
 
         // Start foreground service.
         startForeground(1, mBuilder.build());
+
+        readings(mBuilder, notManager);
     }
 
     private void stopForegroundService()
@@ -105,8 +110,20 @@ public class ForegroundService extends Service {
         // Stop foreground service and remove the notification.
         stopForeground(true);
 
+        scheduler.shutdown(); //stops the scheduler from creating more notifications
         // Stop the foreground service.
         stopSelf();
+    }
+
+    private void readings(final NotificationCompat.Builder builder, final NotificationManager manager){
+        scheduler.scheduleWithFixedDelay(new Runnable(){
+            @Override
+            public void run(){
+                //notification content can be edited here
+                builder.setContentText(String.valueOf((int)(Math.random()*100)));
+                manager.notify(1, builder.build());
+            }
+        },3,3,SECONDS);
     }
 
 }
