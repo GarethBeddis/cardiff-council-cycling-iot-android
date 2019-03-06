@@ -44,4 +44,5 @@
     <string name="error_password_match">Password Does Not Match</string>
     <string name="error_valid_email_password">Invalid Email or Password</string>
     <string name="existing_user">Already a member? Login</string>
+
 </resources>
