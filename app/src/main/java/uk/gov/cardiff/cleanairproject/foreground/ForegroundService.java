@@ -52,11 +52,9 @@ public class ForegroundService extends Service {
             {
                 case START_FOREGROUND_SERVICE:
                     startForegroundService();
-                    Toast.makeText(getApplicationContext(), "Foreground service is started.", Toast.LENGTH_LONG).show();
                     break;
                 case STOP_FOREGROUND_SERVICE:
                     stopForegroundService();
-                    Toast.makeText(getApplicationContext(), "Foreground service is stopped.", Toast.LENGTH_LONG).show();
                     break;
             }
         }
@@ -92,7 +90,7 @@ public class ForegroundService extends Service {
             String channelID = "notify_001";
             NotificationChannel serviceChannel = new NotificationChannel(
                     channelID,
-                    "Example Service Channel",
+                    "Readings Channel",
                     NotificationManager.IMPORTANCE_DEFAULT
             );
 
@@ -103,6 +101,7 @@ public class ForegroundService extends Service {
 
 
         // Start foreground service.
+
         startForeground(1, mBuilder.build());
 
         readings(mBuilder, notManager);
@@ -114,7 +113,6 @@ public class ForegroundService extends Service {
 
         //stops the scheduler from creating more notifications
         scheduler.shutdownNow();
-        scheduler.isTerminated();
 
         // Stop foreground service and remove the notification.
         stopForeground(true);
