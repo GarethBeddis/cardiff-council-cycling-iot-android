@@ -92,4 +92,13 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <!-- Connection -->
+    <style name="Connection">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:paddingTop">4sp</item>
+    </style>
+
 </resources>
