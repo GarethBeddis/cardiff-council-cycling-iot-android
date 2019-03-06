@@ -26,4 +26,14 @@
         The app will now automatically connect to the sensors and get readings when you turn them on.
     </string>
     <string name="finished_enter">Let\'s Go</string>
+
+    <!-- Readings -->
+    <string name="noise">Noise</string>
+    <string name="noise_measurement">dBA</string>
+    <string name="air">Air Pollution</string>
+    <string name="air_measurement">µg/m3</string>
+    <string name="syncStatus">Sync Status</string>
+    <string name="upToDate">Up To Date</string>
+    <string name="connected">Connected</string>
+
 </resources>
