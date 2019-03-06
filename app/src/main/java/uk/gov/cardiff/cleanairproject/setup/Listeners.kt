@@ -7,4 +7,5 @@ interface Listeners {
     fun changeFragmentListener(targetPage: Pages)
     fun requestLocationPermission()
     fun finishSetup()
+    fun hideKeyboard()
 }

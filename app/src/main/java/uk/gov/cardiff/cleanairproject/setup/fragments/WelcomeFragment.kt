@@ -37,6 +37,9 @@ class WelcomeFragment : Fragment() {
         button_login.setOnClickListener {
             listener.changeFragmentListener(Pages.LOGIN)
         }
+        button_create_account.setOnClickListener {
+            listener.changeFragmentListener(Pages.REGISTER)
+        }
     }
 
     override fun onAttach(context: Context) {

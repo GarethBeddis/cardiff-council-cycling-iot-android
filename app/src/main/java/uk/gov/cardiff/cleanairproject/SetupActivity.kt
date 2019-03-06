@@ -1,6 +1,7 @@
 package uk.gov.cardiff.cleanairproject
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
@@ -11,15 +12,12 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 
 import uk.gov.cardiff.cleanairproject.setup.Listeners
 import uk.gov.cardiff.cleanairproject.setup.Pages
-import uk.gov.cardiff.cleanairproject.setup.fragments.BluetoothFragment
-import uk.gov.cardiff.cleanairproject.setup.fragments.FinishedFragment
-import uk.gov.cardiff.cleanairproject.setup.fragments.LocationFragment
-import uk.gov.cardiff.cleanairproject.setup.fragments.WelcomeFragment
-import uk.gov.cardiff.cleanairproject.setup.fragments.LoginFragment
+import uk.gov.cardiff.cleanairproject.setup.fragments.*
 
 class SetupActivity : AppCompatActivity(), Listeners {
 
@@ -29,6 +27,7 @@ class SetupActivity : AppCompatActivity(), Listeners {
     private val bluetoothFragment = BluetoothFragment()
     private val finishedFragment = FinishedFragment()
     private val loginFragment = LoginFragment()
+    private val registerFragment = RegisterFragment()
 
     private var historySteps = 0
     private var backToExitPressed = false
@@ -76,6 +75,7 @@ class SetupActivity : AppCompatActivity(), Listeners {
             Pages.BLUETOOTH -> bluetoothFragment
             Pages.FINISHED -> finishedFragment
             Pages.LOGIN -> loginFragment
+            Pages.REGISTER -> registerFragment
         }
         // Switch Fragment
         changeFragment(targetFragment, false)
@@ -127,6 +127,17 @@ class SetupActivity : AppCompatActivity(), Listeners {
         } else {
             // Close the app
             finish()
+        }
+    }
+    
+    // Hide the keyboard if open so snackbar message is visible
+    // Ref: https://stackoverflow.com/questions/13593069/androidhide-keyboard-after-button-click/13593232
+    override fun hideKeyboard() {
+        try {
+            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
+        } catch (e: Exception) {
+            // TODO: handle exception
         }
     }
 }

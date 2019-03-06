@@ -29,6 +29,19 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         onCreate(db)
     }
 
+    // Add a user record
+    fun addUser(user: User) {
+        val db = this.writableDatabase
+
+        val values = ContentValues()
+        values.put(COLUMN_USER_EMAIL, user.email)
+        values.put(COLUMN_USER_PASSWORD, user.password)
+
+        // Inserting Row
+        db.insert(TABLE_USER, null, values)
+        db.close()
+    }
+
     // Update a user record
     fun updateUser(user: User) {
         val db = this.writableDatabase
