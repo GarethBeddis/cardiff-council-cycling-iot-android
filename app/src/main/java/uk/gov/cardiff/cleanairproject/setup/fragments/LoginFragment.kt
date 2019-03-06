@@ -16,10 +16,7 @@ import uk.gov.cardiff.cleanairproject.setup.Listeners
 import uk.gov.cardiff.cleanairproject.setup.Pages
 import uk.gov.cardiff.cleanairproject.sql.DatabaseHelper
 import uk.gov.cardiff.cleanairproject.validation.InputValidation
-import android.view.inputmethod.InputMethodManager
 import uk.gov.cardiff.cleanairproject.R
-
-// TODO: Allow user to go back a fragment
 
 // Adapted from ref: https://github.com/Android-Tutorials-Hub/login-register-sqlite-tutorial-Kotlin/tree/master/app/src/main/java/com/androidtutorialshub/loginregisterkotlin/activities
 class LoginFragment : Fragment() {
@@ -28,12 +25,11 @@ class LoginFragment : Fragment() {
     private lateinit var nestedScrollView: NestedScrollView
     private lateinit var textInputLayoutEmail: TextInputLayout
     private lateinit var textInputLayoutPassword: TextInputLayout
-    private lateinit var textInputEditTextEmail: TextInputEditText
-    private lateinit var textInputEditTextPassword: TextInputEditText
-    private lateinit var appCompatButtonLogin: AppCompatButton
+    private lateinit var textInputEmail: TextInputEditText
+    private lateinit var textInputPassword: TextInputEditText
+    private lateinit var buttonLogin: AppCompatButton
     private lateinit var inputValidation: InputValidation
     private lateinit var databaseHelper: DatabaseHelper
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,17 +51,17 @@ class LoginFragment : Fragment() {
 
         // Initialise views
         nestedScrollView = view.findViewById(R.id.nestedScrollView)
-        textInputLayoutEmail = view.findViewById<View>(R.id.textInputLayoutEmail) as TextInputLayout
-        textInputLayoutPassword = view.findViewById<View>(R.id.textInputLayoutPassword) as TextInputLayout
-        textInputEditTextEmail = view.findViewById<View>(R.id.textInputEditTextEmail) as TextInputEditText
-        textInputEditTextPassword = view.findViewById<View>(R.id.textInputEditTextPassword) as TextInputEditText
-        appCompatButtonLogin = view.findViewById<View>(R.id.appCompatButtonLogin) as AppCompatButton
+        textInputLayoutEmail = view.findViewById<View>(R.id.text_input_layout_email) as TextInputLayout
+        textInputLayoutPassword = view.findViewById<View>(R.id.text_input_layout_password) as TextInputLayout
+        textInputEmail = view.findViewById<View>(R.id.text_input_email) as TextInputEditText
+        textInputPassword = view.findViewById<View>(R.id.text_input_password) as TextInputEditText
+        buttonLogin = view.findViewById<View>(R.id.button_login) as AppCompatButton
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        appCompatButtonLogin.setOnClickListener { verifyFromSQLite() }
+        buttonLogin.setOnClickListener { verifyFromSQLite() }
     }
 
     override fun onAttach(context: Context) {
@@ -81,14 +77,14 @@ class LoginFragment : Fragment() {
     private fun verifyFromSQLite() {
 
         // Validate email and password fields, if invalid return appropriate message
-        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) { return }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) { return }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword,getString(R.string.error_message_email))) { return }
+        if (!inputValidation.isInputEditTextEmail(textInputEmail, textInputLayoutEmail, getString(R.string.error_message_email))) { return }
+        if (!inputValidation.isInputEditTextFilled(textInputEmail, textInputLayoutEmail, getString(R.string.error_message_email))) { return }
+        if (!inputValidation.isInputEditTextFilled(textInputPassword, textInputLayoutPassword,getString(R.string.error_message_password))) { return }
         listener.hideKeyboard()
 
         // If valid credentials are entered, log user in
         // Whitespace is removed from text views using:  .trim { it <= ' ' }
-        if (databaseHelper.checkUser(textInputEditTextEmail.text.toString().trim(), textInputEditTextPassword.text.toString().trim())) {
+        if (databaseHelper.checkUser(textInputEmail.text.toString().trim(), textInputPassword.text.toString().trim())) {
             listener.changeFragmentListener(Pages.LOCATION)
         } else {
             // Snack Bar to show success message that record is wrong

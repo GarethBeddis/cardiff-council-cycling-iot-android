@@ -31,10 +31,10 @@ class RegisterFragment : Fragment() {
     private lateinit var textInputLayoutEmail: TextInputLayout
     private lateinit var textInputLayoutPassword: TextInputLayout
     private lateinit var textInputLayoutConfirmPassword: TextInputLayout
-    private lateinit var textInputEditTextEmail: TextInputEditText
-    private lateinit var textInputEditTextPassword: TextInputEditText
-    private lateinit var textInputEditTextConfirmPassword: TextInputEditText
-    private lateinit var appCompatButtonRegister: AppCompatButton
+    private lateinit var textInputEmail: TextInputEditText
+    private lateinit var textInputPassword: TextInputEditText
+    private lateinit var textInputConfirmPassword: TextInputEditText
+    private lateinit var buttonRegister: AppCompatButton
     private lateinit var inputValidation: InputValidation
     private lateinit var databaseHelper: DatabaseHelper
 
@@ -59,19 +59,19 @@ class RegisterFragment : Fragment() {
 
         // Initialise views
         nestedScrollView = view.findViewById(R.id.nestedScrollView)
-        textInputLayoutEmail = view.findViewById(R.id.textInputLayoutEmail) as TextInputLayout
-        textInputLayoutPassword = view.findViewById(R.id.textInputLayoutPassword) as TextInputLayout
-        textInputLayoutConfirmPassword = view.findViewById(R.id.textInputLayoutConfirmPassword) as TextInputLayout
-        textInputEditTextEmail = view.findViewById(R.id.textInputEditTextEmail) as TextInputEditText
-        textInputEditTextPassword = view.findViewById<View>(R.id.textInputEditTextPassword) as TextInputEditText
-        textInputEditTextConfirmPassword = view.findViewById(R.id.textInputEditTextConfirmPassword) as TextInputEditText
-        appCompatButtonRegister = view.findViewById(R.id.appCompatButtonRegister) as AppCompatButton
+        textInputLayoutEmail = view.findViewById(R.id.text_input_layout_email) as TextInputLayout
+        textInputLayoutPassword = view.findViewById(R.id.text_input_layout_password) as TextInputLayout
+        textInputLayoutConfirmPassword = view.findViewById(R.id.text_input_layout_confirm_password) as TextInputLayout
+        textInputEmail = view.findViewById(R.id.text_input_email) as TextInputEditText
+        textInputPassword = view.findViewById<View>(R.id.text_input_password) as TextInputEditText
+        textInputConfirmPassword = view.findViewById(R.id.text_input_confirm_password) as TextInputEditText
+        buttonRegister = view.findViewById(R.id.button_register) as AppCompatButton
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        appCompatButtonRegister.setOnClickListener { postDataToSQLite() }
+        buttonRegister.setOnClickListener { postDataToSQLite() }
     }
 
     override fun onAttach(context: Context) {
@@ -86,18 +86,19 @@ class RegisterFragment : Fragment() {
     // Validate the input text fields and post data to SQLite
     private fun postDataToSQLite() {
 
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) { return }
-        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) { return }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_password))) { return }
-        if (!inputValidation.isInputEditTextMatches(textInputEditTextPassword, textInputEditTextConfirmPassword, textInputLayoutConfirmPassword, getString(R.string.error_password_match))) { return }
+        if (!inputValidation.isInputEditTextFilled(textInputEmail, textInputLayoutEmail, getString(R.string.error_message_email))) { return }
+        if (!inputValidation.isInputEditTextEmail(textInputEmail, textInputLayoutEmail, getString(R.string.error_message_email))) { return }
+        if (!inputValidation.isInputEditTextFilled(textInputPassword, textInputLayoutPassword, getString(R.string.error_message_password))) { return }
+        if (!inputValidation.isInputEditTextMatches(textInputPassword, textInputConfirmPassword, textInputLayoutConfirmPassword, getString(R.string.error_password_match))) { return }
         listener.hideKeyboard()
 
-        if (!databaseHelper.checkUser(textInputEditTextEmail.text.toString().trim())) {
+        if (!databaseHelper.checkUser(textInputEmail.text.toString().trim())) {
             val user = User(
-                email = textInputEditTextEmail.text.toString().trim(),
-                password = textInputEditTextPassword.text.toString().trim())
+                email = textInputEmail.text.toString().trim(),
+                password = textInputPassword.text.toString().trim())
 
             databaseHelper.addUser(user)
+            listener.changeFragmentListener(Pages.LOCATION)
 
             // Snack Bar to show success message that record saved successfully
             Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show()
