@@ -3,10 +3,13 @@
     <!-- THEMES -->
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/background</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/background</item>
+
     </style>
 
     <!-- Setup theme. -->
@@ -73,6 +76,46 @@
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/grey</item>
         <item name="android:textAlignment">center</item>
+    </style>
+
+    <!-- Reading Titles -->
+    <style name="ReadingTitle">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Reading Measurement -->
+    <style name="ReadingMeasurement">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:paddingTop">2sp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Reading -->
+    <style name="Reading">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Connection -->
+    <style name="Connection">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:paddingTop">4sp</item>
+    </style>
+
+    <!-- Card -->
+    <style name="Card">
+        <item name="android:background">@drawable/card_background</item>
+        <item name="android:elevation">12dp</item>
+        <item name="android:translationZ">0dp</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="28">@color/shadow</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="28">@color/shadow</item>
     </style>
 
 </resources>

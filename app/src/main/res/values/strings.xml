@@ -45,4 +45,13 @@
     <string name="error_valid_email_password">Invalid Email or Password</string>
     <string name="existing_user">Already a member? Login</string>
 
+    <!-- Readings -->
+    <string name="noise">Noise</string>
+    <string name="noise_measurement">dBA</string>
+    <string name="air">Air Pollution</string>
+    <string name="air_measurement">µg/m3</string>
+    <string name="syncStatus">Sync Status</string>
+    <string name="upToDate">Up To Date</string>
+    <string name="connected">Connected</string>
+
 </resources>
