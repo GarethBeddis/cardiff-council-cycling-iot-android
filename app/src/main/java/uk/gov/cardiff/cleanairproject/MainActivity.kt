@@ -2,8 +2,11 @@ package uk.gov.cardiff.cleanairproject
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.Window
+import android.widget.PopupMenu
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -25,5 +28,10 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
+    fun showPopup(v: View) {
+        val popup = PopupMenu(this, v)
+        val inflater: MenuInflater = popup.menuInflater
+        inflater.inflate(R.menu.menu_main, popup.menu)
+        popup.show()
+    }
 }
