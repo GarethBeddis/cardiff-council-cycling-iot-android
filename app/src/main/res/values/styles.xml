@@ -118,4 +118,12 @@
         <item name="android:outlineAmbientShadowColor" tools:targetApi="28">@color/shadow</item>
     </style>
 
+    <!-- Menu Icon -->
+    <style name="Menu">
+        <item name="android:background">@drawable/button_white</item>
+        <item name="android:stateListAnimator">@animator/button_state_list_animator</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="28">@color/shadow</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="28">@color/shadow</item>
+    </style>
+
 </resources>
