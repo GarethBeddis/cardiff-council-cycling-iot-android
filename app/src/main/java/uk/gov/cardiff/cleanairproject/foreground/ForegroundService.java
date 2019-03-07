@@ -70,6 +70,9 @@ public class ForegroundService extends Service {
 
         // Create notification default intent.
         Intent intent = new Intent(this, MainActivity.class);
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         // Create notification builder.

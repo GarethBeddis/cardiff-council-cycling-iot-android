@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"
+                  android:launchMode="singleInstance"
                   android:configChanges="orientation"
                   android:screenOrientation="portrait"/>
         <activity android:name=".SetupActivity"
