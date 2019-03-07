@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Main Colours-->
+    <color name="colorPrimary">#4C9CFF</color>
+    <color name="colorPrimaryDark">#3366FF</color>
+    <color name="colorAccent">#4C9CFF</color>
+    <color name="colorRipple">#80b2d3ff</color>
+    <color name="colorSetupGradientStart">#FF1780FF</color>
+    <color name="colorSetupGradientEnd">#FF0036D7</color>
+
+    <!-- General -->
+    <color name="background">#ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#8196A3</color>
+    <color name="black">#313232</color>
+    <color name="shadow">#5e8cba</color>
+</resources>
+

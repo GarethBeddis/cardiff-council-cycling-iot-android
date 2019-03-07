@@ -1,0 +1,129 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- THEMES -->
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/background</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/background</item>
+
+    </style>
+
+    <!-- Setup theme. -->
+    <style name="AppTheme.Setup" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/background</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+
+    <!-- Launcher Theme -->
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+    </style>
+    <style name="AppTheme.Launcher.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.Launcher.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.Launcher.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!-- STYLES -->
+
+    <!-- Base Button -->
+    <style name="BaseButton">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:stateListAnimator">@animator/button_state_list_animator</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="28">@color/shadow</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="28">@color/shadow</item>
+    </style>
+
+    <!-- Gradient Button -->
+    <style name="GradientButton" parent="BaseButton">
+        <item name="android:background">@drawable/button_gradient</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- White Button -->
+    <style name="WhiteButton" parent="BaseButton">
+        <item name="android:background">@drawable/button_white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Borderless Button -->
+    <style name="BorderlessButton">
+        <item name="android:background">@drawable/button_borderless</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Setup Title -->
+    <style name="SetupTitle">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- Setup Summary -->
+    <style name="SetupSummary">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <!-- Reading Titles -->
+    <style name="ReadingTitle">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Reading Measurement -->
+    <style name="ReadingMeasurement">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:paddingTop">2sp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Reading -->
+    <style name="Reading">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Connection -->
+    <style name="Connection">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:paddingTop">4sp</item>
+    </style>
+
+    <!-- Card -->
+    <style name="Card">
+        <item name="android:background">@drawable/card_background</item>
+        <item name="android:elevation">12dp</item>
+        <item name="android:translationZ">0dp</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="28">@color/shadow</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="28">@color/shadow</item>
+    </style>
+
+    <!-- Menu Icon -->
+    <style name="Menu">
+        <item name="android:background">@drawable/button_white</item>
+        <item name="android:stateListAnimator">@animator/button_state_list_animator</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="28">@color/shadow</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="28">@color/shadow</item>
+    </style>
+
+</resources>
