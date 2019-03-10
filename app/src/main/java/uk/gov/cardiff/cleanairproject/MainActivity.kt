@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.about -> {
-                    Toast.makeText(this,"Test", Toast.LENGTH_LONG).show()
+                    TODO("Add Link to About page")
                     true
                 }
                 R.id.settings -> {
@@ -46,9 +46,11 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.help -> {
+                    TODO("Add Link to Help page")
                     true
                 }
                 R.id.logout -> {
+                    TODO("Add Logout Link")
                     true
                 }
                 else -> super.onOptionsItemSelected(item)
