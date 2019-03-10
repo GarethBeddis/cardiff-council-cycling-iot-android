@@ -35,39 +35,27 @@ class MainActivity : AppCompatActivity() {
         popup.show()
     }
 
-    fun showMenu(v: View) {
-        PopupMenu(this, v).apply {
-            // MainActivity implements OnMenuItemClickListener
-            setOnMenuItemClickListener(this@MainActivity)
-            inflate(R.menu.menu_main)
-            show()
-        }
-    }
-
-    override fun onMenuItemClick(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.about -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.settings -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.help -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.logout -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                return true
+                true
             }
 
-            else -> false
+            R.id.settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                this.startActivity(intent)
+                true
+            }
+
+            R.id.help -> {
+                true
+            }
+
+            R.id.logout -> {
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
+
 }
