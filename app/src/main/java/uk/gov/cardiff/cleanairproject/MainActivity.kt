@@ -1,11 +1,11 @@
 package uk.gov.cardiff.cleanairproject
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.Window
 import android.widget.PopupMenu
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,5 +33,41 @@ class MainActivity : AppCompatActivity() {
         val inflater: MenuInflater = popup.menuInflater
         inflater.inflate(R.menu.menu_main, popup.menu)
         popup.show()
+    }
+
+    fun showMenu(v: View) {
+        PopupMenu(this, v).apply {
+            // MainActivity implements OnMenuItemClickListener
+            setOnMenuItemClickListener(this@MainActivity)
+            inflate(R.menu.menu_main)
+            show()
+        }
+    }
+
+    override fun onMenuItemClick(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.about -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.help -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.logout -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+
+            else -> false
+        }
     }
 }
