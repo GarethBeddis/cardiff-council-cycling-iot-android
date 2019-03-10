@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.about -> {
+                Toast.makeText(this,"Test", Toast.LENGTH_LONG).show()
                 true
             }
 
