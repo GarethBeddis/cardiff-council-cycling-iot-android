@@ -2,13 +2,9 @@ package uk.gov.cardiff.cleanairproject
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
@@ -38,20 +34,17 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.about -> {
                     TODO("Add Link to About page")
-                    true
                 }
                 R.id.settings -> {
-                    val intent = Intent(this, SettingsActivity::class.java)
+                    val intent = Intent(this, SettingsFragment::class.java)
                     this.startActivity(intent)
                     true
                 }
                 R.id.help -> {
                     TODO("Add Link to Help page")
-                    true
                 }
                 R.id.logout -> {
                     TODO("Add Logout Link")
-                    true
                 }
                 else -> super.onOptionsItemSelected(item)
             }

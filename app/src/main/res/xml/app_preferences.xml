@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory
+            android:key="General"
+            android:title="General"/>
+
+    <Preference
+            android:key="language"
+            android:title="Language"
+            android:summary="Switch between English and Welsh"/>
+
+    <SwitchPreference
+            android:key="darkMode"
+            android:title="Dark Mode"
+            android:summary="Switch from Light to Dark Mode"/>
+
+    <PreferenceCategory
+            android:key="privacy"
+            android:title="Privacy"/>
+
+    <SwitchPreference
+            android:key="shareDate"
+            android:title="Share Data"
+            android:summary="Turn on or off the Data sharing"/>
+
+    <SwitchPreference
+            android:key="bluetooth"
+            android:title="Bluetooth"
+            android:summary="Turn on or off Bluetooth Connectivity"/>
+
+    <SwitchPreference
+            android:key="location"
+            android:title="Location"
+            android:summary="Turn on or off Locatins services"/>
+
+    <PreferenceCategory
+            android:key="report"
+            android:title="Report"/>
+
+    <Preference
+            android:key="feedback"
+            android:title="Send feedback"
+            android:summary="Report technical issues or suggest new features"/>
+
+</PreferenceScreen>

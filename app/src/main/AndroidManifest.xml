@@ -12,7 +12,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme.Launcher">
-        <activity android:name=".SettingsActivity">
+        <activity android:name=".SettingsFragment">
         </activity>
         <activity
                 android:name=".LauncherActivity"
