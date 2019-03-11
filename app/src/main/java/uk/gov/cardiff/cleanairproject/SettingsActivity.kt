@@ -1,5 +1,6 @@
 package uk.gov.cardiff.cleanairproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.Preference
@@ -25,6 +26,9 @@ class SettingsActivity : AppCompatActivity() {
 
             val languagePref = findPreference("language") as Preference
             languagePref.setOnPreferenceClickListener {
+
+                val langIntent = Intent(android.provider.Settings.ACTION_LOCALE_SETTINGS)
+                startActivity(langIntent)
                 true
             }
         }
