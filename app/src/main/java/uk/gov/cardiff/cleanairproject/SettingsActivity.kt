@@ -2,8 +2,8 @@ package uk.gov.cardiff.cleanairproject
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
-
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -22,7 +22,12 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.app_preferences)
+
+            val languagePref = findPreference("language") as Preference
+            languagePref.setOnPreferenceClickListener {
+                true
+            }
         }
+
     }
 }
-
