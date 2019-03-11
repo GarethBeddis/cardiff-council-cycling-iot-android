@@ -11,11 +11,6 @@
             android:title="Language"
             android:summary="Switch between English and Welsh"/>
 
-    <SwitchPreference
-            android:key="darkMode"
-            android:title="Dark Mode"
-            android:summary="Switch from Light to Dark Mode"/>
-
     <PreferenceCategory
             android:key="privacy"
             android:title="Privacy"/>
