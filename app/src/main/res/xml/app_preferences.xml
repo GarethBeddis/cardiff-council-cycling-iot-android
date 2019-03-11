@@ -28,7 +28,7 @@
     <SwitchPreference
             android:key="location"
             android:title="Location"
-            android:summary="Turn on or off Locatins services"/>
+            android:summary="Turn on or off Location services"/>
 
     <PreferenceCategory
             android:key="report"

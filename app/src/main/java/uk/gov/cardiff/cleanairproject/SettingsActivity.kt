@@ -26,7 +26,7 @@ class SettingsActivity : AppCompatActivity() {
 
             val languagePref = findPreference("language") as Preference
             languagePref.setOnPreferenceClickListener {
-
+                // Intent Takes user to Device Language Settings
                 val langIntent = Intent(android.provider.Settings.ACTION_LOCALE_SETTINGS)
                 startActivity(langIntent)
                 true
