@@ -1,0 +1,28 @@
+package uk.gov.cardiff.cleanairproject
+
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.preference.PreferenceFragmentCompat
+
+
+class SettingsActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_settings)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, SettingsFragment())
+            .commit()
+    }
+
+    class SettingsFragment: PreferenceFragmentCompat() {
+
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.app_preferences)
+        }
+    }
+}
+

@@ -7,11 +7,13 @@ import android.view.View
 import android.widget.PopupMenu
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton
 import kotlinx.android.synthetic.main.activity_main.*
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val playPauseFab = playPauseButton as FloatingMusicActionButton
         playPauseFab.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_PAUSE)
         playPauseButton.setOnMusicFabClickListener(object : FloatingMusicActionButton.OnMusicFabClickListener {
@@ -23,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         menuIcon.setOnClickListener {
                 v -> showPopup(v)
         }
+
+
+
     }
     fun showPopup(v: View) {
         // Inflate
@@ -36,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                     TODO("Add Link to About page")
                 }
                 R.id.settings -> {
-                    val intent = Intent(this, SettingsFragment::class.java)
+                    val intent = Intent(this, SettingsActivity::class.java)
                     this.startActivity(intent)
                     true
                 }
