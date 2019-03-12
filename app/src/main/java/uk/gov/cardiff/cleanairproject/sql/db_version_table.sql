@@ -1,6 +1,6 @@
 -- Based on CM6211 Database Systems S13's content.
 
-USE cycling;
+USE cycling_web;
 DROP TABLE IF EXISTS db_versions;
 
 CREATE TABLE db_versions(
