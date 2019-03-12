@@ -1,17 +1,21 @@
 package uk.gov.cardiff.cleanairproject.foreground
 
 import android.app.*
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 import android.util.Log
+import android.widget.Toast
 import uk.gov.cardiff.cleanairproject.MainActivity
 import uk.gov.cardiff.cleanairproject.R
+import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-import javax.xml.datatype.DatatypeConstants.SECONDS
 
 class ForegroundService : Service() {
 
@@ -76,12 +80,13 @@ class ForegroundService : Service() {
             mBuilder.setChannelId(channelID)
         }
 
-
         // Start foreground service.
 
         startForeground(1, mBuilder.build())
 
-        readings(mBuilder, notManager)
+//        readings(mBuilder, notManager)
+
+        connect()
     }
 
     private fun stopForegroundService() {
@@ -96,6 +101,8 @@ class ForegroundService : Service() {
 
         // Stop the foreground service.
         stopSelf()
+
+        disconnect()
     }
 
     private fun readings(builder: NotificationCompat.Builder, manager: NotificationManager) {
@@ -105,7 +112,21 @@ class ForegroundService : Service() {
             builder.setContentText((Math.random() * 100).toInt().toString())
             manager.notify(1, builder.build())
         },3,3, TimeUnit.SECONDS)
+    }
 
+    public fun connect(){
+        Log.d("BLUETOOTH_SERVICE", "connected")
+        m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        m_address = "00:18:09:2F:FC:38" //add the MAC address of the device
+        val device: BluetoothDevice = m_bluetoothAdapter.getRemoteDevice(m_address)
+        m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
+        m_bluetoothAdapter.cancelDiscovery()
+        m_bluetoothSocket!!.connect()
+    }
+
+    public fun disconnect(){
+        Log.d("BLUETOOTH_SERVICE", "Disconnected")
+        m_bluetoothSocket!!.close()
     }
 
     companion object {
@@ -117,6 +138,13 @@ class ForegroundService : Service() {
         val STOP_FOREGROUND_SERVICE = "ACTION_STOP_FOREGROUND_SERVICE"
 
         var scheduler = Executors.newScheduledThreadPool(1)
+
+        var m_myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+        var m_bluetoothSocket: BluetoothSocket? = null
+        lateinit var m_progress: ProgressDialog
+        lateinit var m_bluetoothAdapter: BluetoothAdapter
+        var m_isConnected: Boolean = false
+        lateinit var m_address: String
     }
 
 }
