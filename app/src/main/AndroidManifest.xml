@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
             android:allowBackup="true"
@@ -13,6 +14,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme.Launcher">
 
+        <!-- Declare foreground service -->
+        <service
+                android:name=".foreground.ForegroundService"
+                android:enabled="true"
+                android:exported="true"
+                android:stopWithTask="true"
+        />
+
         <activity android:name=".LauncherActivity"
                   android:configChanges="orientation"
                   android:screenOrientation="portrait">
@@ -21,8 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity"
+                  android:launchMode="singleTop"
                   android:configChanges="orientation"
                   android:screenOrientation="portrait"/>
         <activity android:name=".SetupActivity"
