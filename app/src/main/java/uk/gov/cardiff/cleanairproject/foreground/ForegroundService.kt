@@ -3,7 +3,11 @@ package uk.gov.cardiff.cleanairproject.foreground
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Build
+import android.os.Bundle
 import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 import android.util.Log
@@ -16,7 +20,11 @@ import java.util.concurrent.TimeUnit.SECONDS
 
 class ForegroundService : Service() {
 
-    private val manager: NotificationManager? = null
+    private lateinit var locationManager: LocationManager
+
+    private var locationGPS: Location? = null
+
+    private var scheduler = Executors.newScheduledThreadPool(1)
 
     override fun onBind(intent: Intent): IBinder? {
         // TODO: Return the communication channel to the service.
@@ -44,6 +52,8 @@ class ForegroundService : Service() {
     private fun startForegroundService() {
         Log.d(TAG_FOREGROUND_SERVICE, "Start foreground service.")
 
+        getCurrentLocation() //start getting the GPS location coordinates
+
         // Create notification default intent.
         val intent = Intent(this, MainActivity::class.java)
         intent.action = Intent.ACTION_MAIN
@@ -52,7 +62,7 @@ class ForegroundService : Service() {
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         // Create notification builder.
-        val manager: NotificationManager
+        val manager: NotificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val builder = NotificationCompat.Builder(this, "notify_001")
 
@@ -63,8 +73,6 @@ class ForegroundService : Service() {
         builder.priority = Notification.PRIORITY_MAX
         builder.setOnlyAlertOnce(true)
 
-        manager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelID = "notify_001"
             val serviceChannel = NotificationChannel(
@@ -72,16 +80,11 @@ class ForegroundService : Service() {
                 "Readings Channel",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-
             manager.createNotificationChannel(serviceChannel)
             builder.setChannelId(channelID)
         }
-
-
         // Start foreground service.
-
         startForeground(1, builder.build())
-
         readings(builder, manager)
     }
 
@@ -99,24 +102,50 @@ class ForegroundService : Service() {
         stopSelf()
     }
 
+
+    private fun getCurrentLocation(){
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        try {
+            Log.d("GPS", "Trying")
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 0F, object : LocationListener {
+                override fun onLocationChanged(location: Location?) {
+                    if(location != null) {
+                        locationGPS = location
+                        Log.d("GPS", "Longitude:" + locationGPS!!.longitude + " Latitude:" + locationGPS!!.latitude)
+                    }
+                }
+                override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+                }
+                override fun onProviderEnabled(provider: String?) {
+                }
+                override fun onProviderDisabled(provider: String?){
+                }
+            })
+            Log.d("GPS", "It worked")
+        } catch(ex: SecurityException){
+            Log.d("GPS", "No location available")
+        }
+
+    }
+
     private fun readings(builder: NotificationCompat.Builder, manager: NotificationManager) {
         scheduler = Executors.newScheduledThreadPool(1)
         scheduler.scheduleWithFixedDelay({
             //notification content can be edited here
-            builder.setContentText((Math.random() * 100).toInt().toString())
+//            builder.setContentText((Math.random() * 100).toInt().toString())
+            if(locationGPS != null) {
+                builder.setContentText("Longitude:" + locationGPS?.longitude + " Latitude:" + locationGPS?.latitude)
+            }
             manager.notify(1, builder.build())
+
         }, 3, 3, SECONDS)
     }
 
+
     companion object {
-
         private val TAG_FOREGROUND_SERVICE = "FOREGROUND_SERVICE"
-
         val START_FOREGROUND_SERVICE = "ACTION_START_FOREGROUND_SERVICE"
-
         val STOP_FOREGROUND_SERVICE = "ACTION_STOP_FOREGROUND_SERVICE"
-
-        var scheduler = Executors.newScheduledThreadPool(1)
     }
 
 }
