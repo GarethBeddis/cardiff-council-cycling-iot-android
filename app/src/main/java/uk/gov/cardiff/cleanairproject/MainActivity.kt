@@ -1,6 +1,8 @@
 package uk.gov.cardiff.cleanairproject
 
+import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -10,16 +12,29 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
+import android.os.AsyncTask
 import android.util.Log
 
 import uk.gov.cardiff.cleanairproject.foreground.ForegroundService
+import java.io.IOException
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    companion object{
+        var m_myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb")
+        var m_bluetoothSocket: BluetoothSocket? = null
+        lateinit var m_bluetoothAdapter: BluetoothAdapter
+        var m_isConnected: Boolean = false
+        var m_address: String = "98:D3:61:FD:59:65"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        ConnectToDevice(this).execute()
 
         val playPauseFab = playPauseButton as FloatingMusicActionButton
         playPauseFab.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_PAUSE)
@@ -31,10 +46,12 @@ class MainActivity : AppCompatActivity() {
                 if(playPauseFab.currentMode.isShowingPlayIcon){
                     val intent = Intent(this@MainActivity, ForegroundService::class.java)
                     intent.action = ForegroundService.START_FOREGROUND_SERVICE
+                    sendCommand("1")
                     startService(intent)
                 }else {
                     val intent = Intent(this@MainActivity, ForegroundService::class.java)
                     intent.action = ForegroundService.STOP_FOREGROUND_SERVICE
+                    sendCommand("0")
                     startService(intent)
                 }
             }
@@ -63,32 +80,70 @@ class MainActivity : AppCompatActivity() {
         unregisterReceiver(receiver);
     }
 
+    fun sendCommand(input: String) {
+        Log.d("BTSocket", m_bluetoothSocket.toString())
+        if (m_bluetoothSocket != null) {
+            try{
+                Log.d("BTSocket", input)
+                m_bluetoothSocket!!.outputStream.write(input.toByteArray())
+            } catch(e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
 
+    fun connect(context:Context){
+        ConnectToDevice(context).execute()
+        sendCommand("1")
+        Log.d("BT", "Connected")
+    }
 
+    fun disconnect() {
+        if (m_bluetoothSocket != null) {
+            try {
+                m_bluetoothSocket!!.close()
+                Log.d("BT", "Disconnected")
+                m_bluetoothSocket = null
+                m_isConnected = false
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
 
-    //The BroadcastReceiver that listens for bluetooth broadcasts
-//    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            String action = intent.getAction();
-//            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-//
-//            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-//                ... //Device found
-//            }
-//            else if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
-//                ... //Device is now connected
-//            }
-//            else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-//                ... //Done searching
-//            }
-//            else if (BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals(action)) {
-//                ... //Device is about to disconnect
-//            }
-//            else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
-//                ... //Device has disconnected
-//            }
-//        }
-//    };
+    class ConnectToDevice(context: Context) : AsyncTask<Void, Void, String>() {
+        private var connectSuccess: Boolean = true
+        private val context: Context
+
+        init {
+            this.context = context
+        }
+
+        override fun doInBackground(vararg p0: Void?): String? {
+            try {
+                if (m_bluetoothSocket == null || !m_isConnected) {
+                    m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+                    val device: BluetoothDevice = m_bluetoothAdapter.getRemoteDevice(m_address)
+                    m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
+                    Log.d("BTSocket", "")
+                    BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
+                    m_bluetoothSocket!!.connect()
+                }
+            } catch (e: IOException) {
+                connectSuccess = false
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            if (!connectSuccess) {
+                Log.i("data", "couldn't connect")
+            } else {
+                m_isConnected = true
+            }
+        }
+    }
 
 }
