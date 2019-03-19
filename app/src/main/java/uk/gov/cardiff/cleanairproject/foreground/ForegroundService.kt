@@ -10,7 +10,6 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.IBinder
 import android.support.v4.app.NotificationCompat
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import uk.gov.cardiff.cleanairproject.MainActivity
 import uk.gov.cardiff.cleanairproject.R
@@ -32,12 +31,6 @@ class ForegroundService : Service() {
         val STOP_FOREGROUND_SERVICE = "ACTION_STOP_FOREGROUND_SERVICE"
 
         var scheduler = Executors.newScheduledThreadPool(1)
-
-        var m_myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb")
-        var m_bluetoothSocket: BluetoothSocket? = null
-        lateinit var m_bluetoothAdapter: BluetoothAdapter
-        var m_isConnected: Boolean = false
-        var m_address: String = "98:D3:61:FD:59:65"
 }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -99,9 +92,6 @@ class ForegroundService : Service() {
             mBuilder.setChannelId(channelID)
         }
 
-        ConnectToDevice(this).execute()
-        sendCommand("1")
-
         // Start foreground service.
         startForeground(1, mBuilder.build())
 
@@ -113,9 +103,6 @@ class ForegroundService : Service() {
 
         //stops the scheduler from creating more notifications
         scheduler.shutdownNow()
-
-        sendCommand("0")
-        disconnect()
 
         // Stop foreground service and remove the notification.
         stopForeground(true)
@@ -133,64 +120,6 @@ class ForegroundService : Service() {
         },3,3, TimeUnit.SECONDS)
     }
 
-    fun sendCommand(input: String) {
-        Log.d("BTSocket", m_bluetoothSocket.toString())
-        if (m_bluetoothSocket != null) {
-            try{
-                Log.d("BTSocket", input)
-                m_bluetoothSocket!!.outputStream.write(input.toByteArray())
-            } catch(e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
 
-    fun disconnect() {
-        if (m_bluetoothSocket != null) {
-            try {
-                m_bluetoothSocket!!.close()
-                Log.d("BT", "Disconnected")
-                m_bluetoothSocket = null
-                m_isConnected = false
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    private class ConnectToDevice(context: Context) : AsyncTask<Void, Void, String>() {
-        private var connectSuccess: Boolean = true
-        private val context: Context
-
-        init {
-            this.context = context
-        }
-
-        override fun doInBackground(vararg p0: Void?): String? {
-            try {
-                if (m_bluetoothSocket == null || !m_isConnected) {
-                    m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-                    val device: BluetoothDevice = m_bluetoothAdapter.getRemoteDevice(m_address)
-                    m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
-                    Log.d("BTSocket", "")
-                    BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
-                    m_bluetoothSocket!!.connect()
-                }
-            } catch (e: IOException) {
-                connectSuccess = false
-                e.printStackTrace()
-            }
-            return null
-        }
-
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
-            if (!connectSuccess) {
-                Log.i("data", "couldn't connect")
-            } else {
-                m_isConnected = true
-            }
-        }
-    }
 
 }
