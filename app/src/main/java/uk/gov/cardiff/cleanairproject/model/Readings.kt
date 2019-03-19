@@ -1,7 +1,10 @@
 package uk.gov.cardiff.cleanairproject.model;
 
+import android.icu.lang.UCharacter
 import android.provider.ContactsContract
+import org.w3c.dom.Text
 import java.sql.Time
+import java.sql.Timestamp
 
 data class Readings (
 
@@ -9,13 +12,13 @@ data class Readings (
     val RemoteId: Int,
     val JourneyId: Int,
     val JourneyRemoteId: Int,
-    val NoiseReading: Float,
-    val No2Reading: Float,
-    val PM10Reading: Float,
-    val PM25Reading: Float,
-    val TimeTaken: Time,
-    val Longitude: Float,
-    val Latitude: Float,
-    val Synced: Boolean
+    val NoiseReading: Double,
+    val No2Reading: Double,
+    val PM10Reading: Double,
+    val PM25Reading: Double,
+    val TimeTaken: Double,
+    val Longitude: Int,
+    val Latitude: Int,
+    val Synced: Int
 
 )

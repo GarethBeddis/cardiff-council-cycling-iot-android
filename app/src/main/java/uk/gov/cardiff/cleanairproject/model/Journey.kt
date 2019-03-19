@@ -1,12 +1,16 @@
 package uk.gov.cardiff.cleanairproject.model
 
+import org.w3c.dom.Text
 import java.sql.RowId
-import java.time.format.DateTimeFormatter
+import java.sql.Time
+import java.sql.Timestamp
+
+
 
 data class Journey (
     val id: Int = -1,
     val RemoteId: Int,
-    val StartTime: DateTimeFormatter,
-    val EndTime: DateTimeFormatter,
-    val Synced: Boolean
+    val StartTime: Double,
+    val EndTime: Double,
+    val Synced: Int
 )

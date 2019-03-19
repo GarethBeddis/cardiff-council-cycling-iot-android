@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import uk.gov.cardiff.cleanairproject.model.Journey
+import uk.gov.cardiff.cleanairproject.model.Readings
 import uk.gov.cardiff.cleanairproject.model.User
 import java.util.*
 
@@ -18,24 +20,24 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     private val CREATE_JOURNEY_TABLE = ("CREATE TABLE " + TABLE_JOURNEY + "(" +
             COLUMN_JOURNEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            COLUMN_REMOTE_ID + "INTEGER," +
-            COLUMN_START_TIME + "DATETIME," +
-            COLUMN_END_TIME + "DATETIME," +
-            COLUMN_SYNCED + "BOOLEAN" + ")")
+            COLUMN_REMOTE_ID + " INTEGER," +
+            COLUMN_START_TIME + " REAL," +
+            COLUMN_END_TIME + " REAL," +
+            COLUMN_SYNCED + " INTEGER" + ")")
 
     private val CREATE_READINGS_TABLE = ("CREATE TABLE " + TABLE_READINGS + "(" +
-            COLUMN_READINGS_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
-            COLUMN_REMOTE_ID + "INTEGER," +
-            COLUMN_JOURNEY_ID + "INTEGER FOREIGN KEY" +
-            COLUMN_JOURNEY_REMOTE_ID + "INTEGER," +
-            COLUMN_NOISE_READING + "FLOAT," +
-            COLUMN_NO2_READING + "FLOAT," +
-            COLUMN_PM10_READING + "FLOAT," +
-            COLUMN_PM25_READING + "FLOAT," +
-            COLUMN_TIME_TAKEN + "TIME," +
-            COLUMN_LONGITUDE + "FLOAT," +
-            COLUMN_LATITUDE + "FLLOAT," +
-            COLUMN_SYNCED + "BOOLEAN" + ")")
+            COLUMN_READINGS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            COLUMN_REMOTE_ID + " INTEGER," +
+            COLUMN_JOURNEY_ID + " INTEGER FOREIGN KEY" +
+            COLUMN_JOURNEY_REMOTE_ID + " INTEGER," +
+            COLUMN_NOISE_READING + " REAL," +
+            COLUMN_NO2_READING + " REAL," +
+            COLUMN_PM10_READING + " REAL," +
+            COLUMN_PM25_READING + " REAL," +
+            COLUMN_TIME_TAKEN + " REAL," +
+            COLUMN_LONGITUDE + " INTEGER," +
+            COLUMN_LATITUDE + " INTEGER," +
+            COLUMN_SYNCED + " INTEGER" + ")")
 
     // Drop table sql query
     private val DROP_USER_TABLE = "DROP TABLE IF EXISTS $TABLE_USER"
@@ -69,6 +71,41 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         // Inserting Row
         db.insert(TABLE_USER, null, values)
+        db.close()
+    }
+
+    fun addJourney(journey: Journey) {
+        val db = this.writableDatabase
+
+        val values = ContentValues()
+        values.put(COLUMN_JOURNEY_ID, journey.id)
+        values.put(COLUMN_JOURNEY_REMOTE_ID, journey.RemoteId)
+        values.put(COLUMN_START_TIME, journey.StartTime)
+        values.put(COLUMN_END_TIME, journey.EndTime)
+        values.put(COLUMN_NOISE_READING, journey.Synced)
+
+        // Inserting Row
+        db.insert(TABLE_JOURNEY, null, values)
+        db.close()
+    }
+
+    fun addReading(readings: Readings) {
+        val db = this.writableDatabase
+
+        val values = ContentValues()
+        values.put(COLUMN_READINGS_ID, readings.id)
+        values.put(COLUMN_JOURNEY_ID, readings.JourneyId)
+        values.put(COLUMN_JOURNEY_REMOTE_ID, readings.JourneyRemoteId)
+        values.put(COLUMN_NOISE_READING, readings.NoiseReading)
+        values.put(COLUMN_NO2_READING, readings.No2Reading)
+        values.put(COLUMN_PM10_READING, readings.PM10Reading)
+        values.put(COLUMN_PM25_READING, readings.PM25Reading)
+        values.put(COLUMN_TIME_TAKEN, readings.TimeTaken)
+        values.put(COLUMN_LONGITUDE, readings.Longitude)
+        values.put(COLUMN_LATITUDE, readings.Latitude)
+
+        // Inserting Row
+        db.insert(TABLE_READINGS, null, values)
         db.close()
     }
 

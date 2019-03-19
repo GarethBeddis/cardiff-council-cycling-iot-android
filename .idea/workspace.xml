@@ -7,11 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86784bfb-7b62-4aa9-b32d-364def90cc36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DatabaseHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DatabaseHelper.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-cy/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-cy/strings.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,14 +58,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="kt" value="3886" />
+          <entry key="kt" value="4902" />
           <entry key="sql" value="4" />
           <entry key="xml" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Kotlin" value="3886" />
+          <entry key="Kotlin" value="4902" />
           <entry key="SQL" value="4" />
           <entry key="XML" value="27" />
         </counts>
@@ -79,8 +77,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DatabaseHelper.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
-              <caret line="62" column="29" lean-forward="true" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
+            <state relative-caret-position="-1666">
+              <caret line="109" column="5" lean-forward="true" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
               <folding>
                 <element signature="e#44#273#0" expanded="true" />
               </folding>
@@ -91,10 +89,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+            <state relative-caret-position="255">
+              <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
               <folding>
-                <element signature="e#47#108#0" expanded="true" />
+                <element signature="e#47#193#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -112,10 +110,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+            <state relative-caret-position="255">
+              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
               <folding>
-                <element signature="e#46#109#0" expanded="true" />
+                <element signature="e#46#117#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -176,6 +174,7 @@
     <findStrings>
       <find>database</find>
       <find>model</find>
+      <find>float</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2639,16 +2638,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="cleanairproject" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cardiff-council-cycling-iot-android" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cardiff-council-cycling-iot-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="cleanairproject" type="462c0819:PsiDirectoryNode" />
               <item name="sql" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -2940,33 +2929,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/User.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="49" lean-forward="true" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-          <folding>
-            <element signature="e#46#109#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-          <folding>
-            <element signature="e#47#108#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DbHelper.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -2977,10 +2939,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/User.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="49" lean-forward="true" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+          <folding>
+            <element signature="e#47#193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+          <folding>
+            <element signature="e#46#117#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DatabaseHelper.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="29" lean-forward="true" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
+        <state relative-caret-position="-1666">
+          <caret line="109" column="5" lean-forward="true" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
           <folding>
             <element signature="e#44#273#0" expanded="true" />
           </folding>
