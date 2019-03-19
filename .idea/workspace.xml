@@ -7,50 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86784bfb-7b62-4aa9-b32d-364def90cc36" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_1_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_1_3_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_1_3_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_coordinatorlayout_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_coordinatorlayout_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cursoradapter_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cursoradapter_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_customview_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_customview_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_documentfile_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_documentfile_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_drawerlayout_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_drawerlayout_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_interpolator_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_interpolator_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_loader_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_loader_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_localbroadcastmanager_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_localbroadcastmanager_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_print_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_print_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_slidingpanelayout_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_slidingpanelayout_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_swiperefreshlayout_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_swiperefreshlayout_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_versionedparcelable_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_versionedparcelable_28_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/uk/gov/cardiff/cleanairproject/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/uk/gov/cardiff/cleanairproject/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sql/creation_script.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sql/db_version_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/db_version_table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DatabaseHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DatabaseHelper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-cy/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-cy/strings.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,55 +44,111 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="kt" value="12" />
+          <entry key="java" value="1" />
+          <entry key="kt" value="23" />
           <entry key="sql" value="2" />
-          <entry key="xml" value="1" />
+          <entry key="xml" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Kotlin" value="12" />
+          <entry key="JAVA" value="1" />
+          <entry key="Kotlin" value="23" />
           <entry key="SQL" value="2" />
-          <entry key="XML" value="1" />
+          <entry key="XML" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="kt" value="3886" />
           <entry key="sql" value="4" />
+          <entry key="xml" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="Kotlin" value="3886" />
           <entry key="SQL" value="4" />
+          <entry key="XML" value="27" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DatabaseHelper.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1802">
-              <caret line="114" column="43" lean-forward="true" selection-start-line="114" selection-start-column="43" selection-end-line="114" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/db_version_table.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7">
-              <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="1054">
+              <caret line="62" column="29" lean-forward="true" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
+              <folding>
+                <element signature="e#44#273#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/LauncherActivity.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+            <state relative-caret-position="306">
+              <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+              <folding>
+                <element signature="e#47#108#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/User.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="49" lean-forward="true" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+              <folding>
+                <element signature="e#46#109#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values-cy/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="37" lean-forward="true" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-170" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-874" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/Animations.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -145,25 +162,21 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/User.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/fragments/LoginFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-404">
-              <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>database</find>
+      <find>model</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2552,14 +2565,22 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/fragments/LocationFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/db_version_table.sql" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/creationScript.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/CreationScript.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/FeedReaderDbHelper.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values-cy/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DbHelper.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DatabaseHelper.kt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="10" />
-    <option name="y" value="20" />
-    <option name="width" value="1346" />
-    <option name="height" value="688" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -2609,6 +2630,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="cleanairproject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cardiff-council-cycling-iot-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cardiff-council-cycling-iot-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cleanairproject" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cardiff-council-cycling-iot-android" type="b2602c69:ProjectViewProjectNode" />
@@ -2749,23 +2780,24 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.32980332" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22768533" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
+      <window_info anchor="bottom" id="Find" visible="true" weight="0.15737705" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.3295082" />
+      <window_info anchor="bottom" id="Build" order="5" weight="0.3295082" />
       <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -2814,27 +2846,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/Listeners.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/Animations.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/fragments/WelcomeFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -2852,6 +2863,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/db_version_table.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/fragments/RegisterFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
+          <folding>
+            <element signature="e#56#864#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/fragments/LoginFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/fragments/WelcomeFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="30" column="14" lean-forward="true" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/Listeners.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/Animations.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/Pages.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -2859,31 +2915,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/User.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+        <state relative-caret-position="323">
+          <caret line="19" column="67" lean-forward="true" selection-start-line="19" selection-start-column="67" selection-end-line="19" selection-end-column="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/setup/fragments/LoginFragment.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-404">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        <state relative-caret-position="-170" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-874" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-cy/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="37" lean-forward="true" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/User.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="49" lean-forward="true" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Journey.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding>
+            <element signature="e#46#109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/model/Readings.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+          <folding>
+            <element signature="e#47#108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DbHelper.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="30" lean-forward="true" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+          <folding>
+            <element signature="e#44#273#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/DatabaseHelper.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1802">
-          <caret line="114" column="43" lean-forward="true" selection-start-line="114" selection-start-column="43" selection-end-line="114" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/gov/cardiff/cleanairproject/sql/db_version_table.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7">
-          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        <state relative-caret-position="1054">
+          <caret line="62" column="29" lean-forward="true" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
+          <folding>
+            <element signature="e#44#273#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

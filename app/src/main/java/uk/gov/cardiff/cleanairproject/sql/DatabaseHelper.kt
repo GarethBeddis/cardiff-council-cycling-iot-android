@@ -11,20 +11,50 @@ import java.util.*
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     // Create table sql query
-    private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_EMAIL + " TEXT," +
+    private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "(" +
+            COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            COLUMN_USER_EMAIL + " TEXT," +
             COLUMN_USER_PASSWORD + " TEXT" + ")")
+
+    private val CREATE_JOURNEY_TABLE = ("CREATE TABLE " + TABLE_JOURNEY + "(" +
+            COLUMN_JOURNEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            COLUMN_REMOTE_ID + "INTEGER," +
+            COLUMN_START_TIME + "DATETIME," +
+            COLUMN_END_TIME + "DATETIME," +
+            COLUMN_SYNCED + "BOOLEAN" + ")")
+
+    private val CREATE_READINGS_TABLE = ("CREATE TABLE " + TABLE_READINGS + "(" +
+            COLUMN_READINGS_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+            COLUMN_REMOTE_ID + "INTEGER," +
+            COLUMN_JOURNEY_ID + "INTEGER FOREIGN KEY" +
+            COLUMN_JOURNEY_REMOTE_ID + "INTEGER," +
+            COLUMN_NOISE_READING + "FLOAT," +
+            COLUMN_NO2_READING + "FLOAT," +
+            COLUMN_PM10_READING + "FLOAT," +
+            COLUMN_PM25_READING + "FLOAT," +
+            COLUMN_TIME_TAKEN + "TIME," +
+            COLUMN_LONGITUDE + "FLOAT," +
+            COLUMN_LATITUDE + "FLLOAT," +
+            COLUMN_SYNCED + "BOOLEAN" + ")")
 
     // Drop table sql query
     private val DROP_USER_TABLE = "DROP TABLE IF EXISTS $TABLE_USER"
 
+    private val DROP_JOURNEY_TABLE = "DROP TABLE IF EXISTS $TABLE_JOURNEY"
+
+    private val DROP_READINGS_TABLE = "DROP TABLE IF EXISTS $TABLE_READINGS"
+
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(CREATE_USER_TABLE)
+        db.execSQL(CREATE_READINGS_TABLE)
+        db.execSQL(CREATE_JOURNEY_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         //Drop User Table if exist
         db.execSQL(DROP_USER_TABLE)
+        db.execSQL(DROP_JOURNEY_TABLE)
+        db.execSQL(DROP_READINGS_TABLE)
         // Create tables again
         onCreate(db)
     }
@@ -147,10 +177,33 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         // User table name
         private val TABLE_USER = "user"
+        private val TABLE_JOURNEY = "journey"
+        private val TABLE_READINGS = "readings"
 
         // User Table Columns names
         private val COLUMN_USER_ID = "user_id"
         private val COLUMN_USER_EMAIL = "user_email"
         private val COLUMN_USER_PASSWORD = "user_password"
+
+        // Journey Table Column names
+
+        private val COLUMN_JOURNEY_ID = "journey_id"
+        private val COLUMN_REMOTE_ID = "journey_RemoteId"
+        private val COLUMN_START_TIME = "journey_StartTime"
+        private val COLUMN_END_TIME = "journey_EndTime"
+        private val COLUMN_SYNCED = "journey_Synced"
+
+        // Readings Table Column names
+
+        private val COLUMN_READINGS_ID = "readings_id"
+        private val COLUMN_JOURNEY_REMOTE_ID = "readings_Journey_RemoteID"
+        private val COLUMN_NOISE_READING = "readings_noiseReading"
+        private val COLUMN_NO2_READING = "readings_No2Reading"
+        private val COLUMN_PM10_READING = "readings_PM10Reading"
+        private val COLUMN_PM25_READING = "readings_PM25Reading"
+        private val COLUMN_TIME_TAKEN = "readings_TimeTaken"
+        private val COLUMN_LONGITUDE = "readings_longitude"
+        private val COLUMN_LATITUDE = "readings_latitude"
+
     }
 }

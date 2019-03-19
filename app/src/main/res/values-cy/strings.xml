@@ -29,27 +29,27 @@
     <string name="finished_enter">Awn ni</string>
 
     <!-- Login / Register -->
-    <string name="hint_name">Name</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_confirm_password">Confirm Password</string>
-    <string name="text_login">Login</string>
-    <string name="text_register">Register</string>
-    <string name="error_message_email">Enter Valid Email</string>
-    <string name="error_message_password">Enter Password</string>
-    <string name="success_message">Registration Successful</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="text_not_member">Don\'t have an account? Sign up</string>
-    <string name="text_member">Have an account? Sign in</string>
-    <string name="text_already_member">Already a member? Login</string>
-    <string name="error_email_exists">Email Already Exists</string>
-    <string name="error_password_match">Password Does Not Match</string>
-    <string name="error_valid_email_password">Invalid Email or Password</string>
-    <string name="existing_user">Already a member? Login</string>
+    <string name="hint_name">Enw</string>
+    <string name="hint_email">E-bost</string>
+    <string name="hint_password">Cyfrinair</string>
+    <string name="hint_confirm_password">Cadarnhewch y Cyfrinair</string>
+    <string name="text_login">Mewngofnodi</string>
+    <string name="text_register">Cofrestrwch</string>
+    <string name="error_message_email">Rhowch e-bost dilys</string>
+    <string name="error_message_password">Rhowch Gyfrinair</string>
+    <string name="success_message">Cofrestru\'n Llwyddiannus</string>
+    <string name="forgot_password">Wedi anghofio?</string>
+    <string name="text_not_member">Peidiwch â chael cyfrif? Cofrestru</string>
+    <string name="text_member">Cael cyfrif? Mewngofnodi</string>
+    <string name="text_already_member">Eisoes yn aelod? Mewngofnodi</string>
+    <string name="error_email_exists">Eisoes yn E-bost</string>
+    <string name="error_password_match">Nid yw Cyfrinair yn Cydweddu</string>
+    <string name="error_valid_email_password">E-bost neu Gyfrinair Annilys</string>
+    <string name="existing_user">Eisoes yn aelod? Mewngofnodi</string>
 
     <!-- Reading -->
     <string name="noise">Sŵn</string>
-    <string name="noise_measurement">dBA</string>
+    <string name="noise_measurement">dB</string>
     <string name="air">Llygredd aer</string>
     <string name="air_measurement">µg/m3</string>
     <string name="syncStatus">Statws Sync</string>
