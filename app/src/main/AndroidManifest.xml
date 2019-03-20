@@ -19,7 +19,9 @@
         <service
                 android:name=".foreground.ForegroundService"
                 android:enabled="true"
-                android:exported="true" />
+                android:exported="true"
+                android:stopWithTask="true"
+        />
 
         <activity android:name=".LauncherActivity"
                   android:configChanges="orientation"
