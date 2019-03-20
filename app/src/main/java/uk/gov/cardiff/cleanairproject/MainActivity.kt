@@ -92,12 +92,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun connect(context:Context){
-        ConnectToDevice(context).execute()
-        sendCommand("1")
-        Log.d("BT", "Connected")
-    }
-
     fun disconnect() {
         if (m_bluetoothSocket != null) {
             try {
@@ -125,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                     m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
                     val device: BluetoothDevice = m_bluetoothAdapter.getRemoteDevice(m_address)
                     m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
-                    Log.d("BTSocket", "")
+                    Log.d("BTSocket", device.name)
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
                     m_bluetoothSocket!!.connect()
                 }
