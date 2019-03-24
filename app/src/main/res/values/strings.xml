@@ -51,10 +51,14 @@
     <string name="disconnected">Disconnected</string>
     <string name="connecting">Connecting</string>
     <string name="connected">Connected</string>
+    <string name="air">Air Pollution</string>
     <string name="noise">Noise</string>
     <string name="noise_measurement">dB</string>
-    <string name="air">Air Pollution</string>
-    <string name="air_measurement">µg/m3</string>
+    <string name="default_reading">Sensing&#8230;</string>
+    <string name="air_pollution_low">Low</string>
+    <string name="air_pollution_moderate">Moderate</string>
+    <string name="air_pollution_high">High</string>
+    <string name="air_pollution_very_high">Very High</string>
     <string name="syncStatus">Sync Status</string>
     <string name="upToDate">Up To Date</string>
 

@@ -55,7 +55,11 @@
     <string name="noise">Sŵn</string>
     <string name="noise_measurement">dB</string>
     <string name="air">Llygredd aer</string>
-    <string name="air_measurement">µg/m3</string>
+    <string name="default_reading">Synhwyro&#8230;</string>
+    <string name="air_pollution_low">Isel</string>
+    <string name="air_pollution_moderate">Cymedrol</string>
+    <string name="air_pollution_high">Uchel</string>
+    <string name="air_pollution_very_high">Uchel iawn</string>
     <string name="syncStatus">Statws Sync</string>
     <string name="upToDate">Hyd yn hyn</string>
 

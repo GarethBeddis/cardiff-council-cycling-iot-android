@@ -18,11 +18,12 @@ import com.harrysoft.androidbluetoothserial.BluetoothSerialDevice
 
 import java.util.concurrent.Executors
 
-import java.util.concurrent.TimeUnit.SECONDS
 import android.bluetooth.BluetoothDevice
 import com.harrysoft.androidbluetoothserial.SimpleBluetoothDeviceInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.json.JSONException
+import org.json.JSONObject
 
 class ForegroundService : Service() {
 
@@ -43,7 +44,6 @@ class ForegroundService : Service() {
     override fun onCreate() {
         super.onCreate()
         binder = Binder()
-        Log.d(TAG_FOREGROUND_SERVICE, "My foreground service onCreate().")
     }
 
     override fun onDestroy() {
@@ -70,7 +70,6 @@ class ForegroundService : Service() {
     }
 
     private fun startForegroundService() {
-        Log.d(TAG_FOREGROUND_SERVICE, "Start foreground service.")
         // Start getting the GPS location coordinates
         getCurrentLocation()
         // Get the notification manager
@@ -95,7 +94,6 @@ class ForegroundService : Service() {
         }
         startForeground(1, notification?.build())
         subscribeToBluetooth()
-        subscribeToReadings()
     }
 
     private fun buildNotification():NotificationCompat.Builder {
@@ -127,13 +125,11 @@ class ForegroundService : Service() {
         if (bluetoothDevice != null) {
             bluetoothManager.closeDevice(bluetoothDevice)
         }
-        // Stops the scheduler and location updates
+        // Stop the scheduler and location updates
         scheduler.shutdownNow()
         locationManager.removeUpdates(locationListener)
         // Let the activity know the service has stopped
-        if(callback != null) {
-            callback?.onServiceStopped()
-        }
+        callback?.onServiceStopped()
         // Stop the foreground service
         isRunning = false
         stopForeground(true)
@@ -146,7 +142,6 @@ class ForegroundService : Service() {
             override fun onLocationChanged(location: Location?) {
                 if(location != null) {
                     locationGPS = location
-                    Log.d("GPS", "Longitude:" + locationGPS!!.longitude + " Latitude:" + locationGPS!!.latitude)
                 }
             }
             override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
@@ -155,22 +150,10 @@ class ForegroundService : Service() {
         }
         // Request Updates
         try {
-            Log.d("GPS", "Trying")
-            // Move event listening object
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 0F, locationListener)
-            Log.d("GPS", "It worked")
         } catch(ex: SecurityException){
-            Log.d("GPS", "No location available")
+            stopForegroundService()
         }
-    }
-
-    private fun subscribeToReadings() {
-        scheduler = Executors.newScheduledThreadPool(1)
-        scheduler.scheduleWithFixedDelay({
-            if(locationGPS != null && this.callback != null) {
-                this.callback?.onReading(locationGPS?.longitude)
-            }
-        }, 3, 3, SECONDS)
     }
 
     private fun subscribeToBluetooth() {
@@ -204,19 +187,35 @@ class ForegroundService : Service() {
         notificationManager.notify(1, notification?.build())
         // Let the main activity know that the device is connected
         connected = true
-        if(callback != null) {
-            callback?.onConnected()
-        }
+        callback?.onConnected()
     }
 
     private fun onMessageReceived(message: String) {
-        Log.d("Bluetooth Message", message)
+        newReading(message)
     }
 
     private fun onError(error: Throwable) {
         // Handle errors - This is hopefully just the sensors being disconnected
         Log.e("Bluetooth", error.message)
         stopForegroundService()
+    }
+
+    private fun newReading(data: String) {
+        if (locationGPS != null) {
+            try {
+                val jsonData = JSONObject(data).getJSONObject("cleanAir")
+                callback?.onReading(
+                    locationGPS?.longitude,
+                    locationGPS?.latitude,
+                    jsonData.getInt("no2"),
+                    jsonData.getInt("pm25"),
+                    jsonData.getInt("pm100"),
+                    jsonData.getInt("db")
+                )
+            } catch (error: JSONException) {
+                Log.e("Invalid JSON", error.toString())
+            }
+        }
     }
 
     companion object {
