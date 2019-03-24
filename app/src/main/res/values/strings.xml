@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General -->
-    <string name="app_name">Clean Air</string>
+    <string name="app_name">Cardiff Clean Air Project</string>
+    <string name="app_name_short">Clean Air</string>
 
     <!-- Setup -->
     <string name="setup_login">Login</string>
@@ -54,5 +55,10 @@
     <string name="syncStatus">Sync Status</string>
     <string name="upToDate">Up To Date</string>
     <string name="connected">Connected</string>
+
+    <!-- Notifications -->
+    <string name="notification_title">Sensor Hub Connected</string>
+    <string name="notification_content">Tap to view readings.</string>
+    <string name="notification_action">Stop</string>
 
 </resources>
