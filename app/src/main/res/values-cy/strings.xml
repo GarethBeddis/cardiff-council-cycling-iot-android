@@ -60,6 +60,6 @@
     <!-- Notifications -->
     <string name="notification_title">Canolfan Synhwyrydd Cysylltiedig</string>
     <string name="notification_content">Tap i weld darlleniadau.</string>
-    <string name="notification_action">Stopiwch</string>
+    <string name="notification_action">Datgysylltwch</string>
 
 </resources>

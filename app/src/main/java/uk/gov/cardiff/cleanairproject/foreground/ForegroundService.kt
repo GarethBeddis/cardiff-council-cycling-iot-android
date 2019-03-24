@@ -22,8 +22,11 @@ class ForegroundService : Service() {
 
     private lateinit var binder: Binder
     private lateinit var locationManager: LocationManager
+    private lateinit var locationListener: LocationListener
+    private var callback: ServiceCallback? = null
     private var locationGPS: Location? = null
     private var scheduler = Executors.newScheduledThreadPool(1)
+
 
     override fun onCreate() {
         super.onCreate()
@@ -31,8 +34,17 @@ class ForegroundService : Service() {
         Log.d(TAG_FOREGROUND_SERVICE, "My foreground service onCreate().")
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        isRunning = false
+    }
+
     override fun onBind(intent: Intent): IBinder? {
         return binder
+    }
+
+    fun setCallBack(callback: ServiceCallback?) {
+        this.callback = callback
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -49,6 +61,31 @@ class ForegroundService : Service() {
         Log.d(TAG_FOREGROUND_SERVICE, "Start foreground service.")
         // Start getting the GPS location coordinates
         getCurrentLocation()
+        // Get the notification manager
+        val manager: NotificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        // Build the notification
+        val notification = buildNotification()
+        // Set the notification channel for Oreo and newer
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channelID = "notify_001"
+            val channelName = "Readings"
+            val channel = NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+            channel.setSound(null, null)
+            channel.enableLights(false)
+            channel.enableVibration(false)
+            manager.createNotificationChannel(channel)
+            notification.setChannelId(channelID)
+        }
+        // Start foreground service.
+        isRunning = true
+        if(this.callback != null) {
+            this.callback?.onServiceStarted()
+        }
+        startForeground(1, notification.build())
+        subscribeToReadings()
+    }
+
+    private fun buildNotification():NotificationCompat.Builder {
         // Prepare the notification on tap intent
         val onTapIntent = Intent(this, MainActivity::class.java)
             .setAction(Intent.ACTION_MAIN)
@@ -59,9 +96,7 @@ class ForegroundService : Service() {
             .setAction(STOP_FOREGROUND_SERVICE)
         val stopPendingIntent = PendingIntent.getService(this, 0, stopIntent, 0)
         // Get the notification manager
-        val manager: NotificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        // Prepare the notification
-        val builder = NotificationCompat.Builder(this, "notify_001")
+        return NotificationCompat.Builder(this, "notify_001")
             .setContentIntent(onTapPendingIntent)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(resources.getString(R.string.notification_title))
@@ -72,68 +107,53 @@ class ForegroundService : Service() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setOnlyAlertOnce(true)
             .addAction(android.R.drawable.ic_media_pause, resources.getString(R.string.notification_action), stopPendingIntent)
-        // Prepare the notification channel for Oreo and newer
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelID = "notify_001"
-            val channelName = "Readings Channel"
-            val channel = NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_DEFAULT)
-            channel.setSound(null, null)
-            channel.enableLights(false)
-            channel.enableVibration(false)
-            manager.createNotificationChannel(channel)
-            builder.setChannelId(channelID)
-        }
-        // Start foreground service.
-        startForeground(1, builder.build())
-        readings(builder, manager)
     }
 
     private fun stopForegroundService() {
         Log.d(TAG_FOREGROUND_SERVICE, "Stop foreground service.")
-        // Stops the scheduler from creating more notifications
+        // Stops the scheduler and location updates
         scheduler.shutdownNow()
-        // Stop foreground service and remove the notification
-        stopForeground(true)
+        locationManager.removeUpdates(locationListener)
+        // Let the activity know the service has stopped
+        if(this.callback != null) {
+            this.callback?.onServiceStopped()
+        }
         // Stop the foreground service
+        isRunning = false
+        stopForeground(true)
         stopSelf()
     }
 
-
     private fun getCurrentLocation(){
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        locationListener = object : LocationListener {
+            override fun onLocationChanged(location: Location?) {
+                if(location != null) {
+                    locationGPS = location
+                    Log.d("GPS", "Longitude:" + locationGPS!!.longitude + " Latitude:" + locationGPS!!.latitude)
+                }
+            }
+            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+            override fun onProviderEnabled(provider: String?) {}
+            override fun onProviderDisabled(provider: String?){}
+        }
+        // Request Updates
         try {
             Log.d("GPS", "Trying")
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 0F, object : LocationListener {
-                override fun onLocationChanged(location: Location?) {
-                    if(location != null) {
-                        locationGPS = location
-                        Log.d("GPS", "Longitude:" + locationGPS!!.longitude + " Latitude:" + locationGPS!!.latitude)
-                    }
-                }
-                override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-                }
-                override fun onProviderEnabled(provider: String?) {
-                }
-                override fun onProviderDisabled(provider: String?){
-                }
-            })
+            // Move event listening object
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 0F, locationListener)
             Log.d("GPS", "It worked")
         } catch(ex: SecurityException){
             Log.d("GPS", "No location available")
         }
-
     }
 
-    private fun readings(builder: NotificationCompat.Builder, manager: NotificationManager) {
+    private fun subscribeToReadings() {
         scheduler = Executors.newScheduledThreadPool(1)
         scheduler.scheduleWithFixedDelay({
-            //notification content can be edited here
-//            builder.setContentText((Math.random() * 100).toInt().toString())
-            if(locationGPS != null) {
-//                builder.setContentText("Longitude:" + locationGPS?.longitude + " Latitude:" + locationGPS?.latitude)
+            if(locationGPS != null && this.callback != null) {
+                this.callback?.onReading(locationGPS?.longitude)
             }
-            manager.notify(1, builder.build())
-
         }, 3, 3, SECONDS)
     }
 
@@ -141,11 +161,11 @@ class ForegroundService : Service() {
         private const val TAG_FOREGROUND_SERVICE = "FOREGROUND_SERVICE"
         const val START_FOREGROUND_SERVICE = "ACTION_START_FOREGROUND_SERVICE"
         const val STOP_FOREGROUND_SERVICE = "ACTION_STOP_FOREGROUND_SERVICE"
+        var isRunning = false
     }
 
     inner class Binder : android.os.Binder() {
         val service: ForegroundService
             get() = this@ForegroundService
     }
-
 }

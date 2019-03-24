@@ -59,6 +59,6 @@
     <!-- Notifications -->
     <string name="notification_title">Sensor Hub Connected</string>
     <string name="notification_content">Tap to view readings.</string>
-    <string name="notification_action">Stop</string>
+    <string name="notification_action">Disconnect</string>
 
 </resources>
