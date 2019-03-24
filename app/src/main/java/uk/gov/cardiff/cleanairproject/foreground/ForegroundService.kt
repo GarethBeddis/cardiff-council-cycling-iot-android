@@ -13,19 +13,27 @@ import android.support.v4.app.NotificationCompat
 import android.util.Log
 import uk.gov.cardiff.cleanairproject.MainActivity
 import uk.gov.cardiff.cleanairproject.R
+import com.harrysoft.androidbluetoothserial.BluetoothManager
+import com.harrysoft.androidbluetoothserial.BluetoothSerialDevice
 
 import java.util.concurrent.Executors
 
 import java.util.concurrent.TimeUnit.SECONDS
+import android.bluetooth.BluetoothDevice
+import com.harrysoft.androidbluetoothserial.SimpleBluetoothDeviceInterface
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class ForegroundService : Service() {
 
     private lateinit var binder: Binder
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
+    private lateinit var bluetoothManager: BluetoothManager
     private var callback: ServiceCallback? = null
     private var locationGPS: Location? = null
     private var scheduler = Executors.newScheduledThreadPool(1)
+    private var bluetoothDevice: SimpleBluetoothDeviceInterface? = null
 
 
     override fun onCreate() {
@@ -82,6 +90,7 @@ class ForegroundService : Service() {
             this.callback?.onServiceStarted()
         }
         startForeground(1, notification.build())
+        subscribeToBluetooth()
         subscribeToReadings()
     }
 
@@ -111,6 +120,10 @@ class ForegroundService : Service() {
 
     private fun stopForegroundService() {
         Log.d(TAG_FOREGROUND_SERVICE, "Stop foreground service.")
+        // Disconnect sensors if they're connected
+        if (bluetoothDevice != null) {
+            bluetoothManager.closeDevice(bluetoothDevice)
+        }
         // Stops the scheduler and location updates
         scheduler.shutdownNow()
         locationManager.removeUpdates(locationListener)
@@ -155,6 +168,43 @@ class ForegroundService : Service() {
                 this.callback?.onReading(locationGPS?.longitude)
             }
         }, 3, 3, SECONDS)
+    }
+
+    private fun subscribeToBluetooth() {
+        bluetoothManager = BluetoothManager.getInstance()
+        var sensorHub: BluetoothDevice? = null
+        val pairedDevices = bluetoothManager.pairedDevicesList
+        for (device in pairedDevices) {
+            if (device.name == "Clean Air Sensor Hub") {
+                sensorHub = device
+            }
+        }
+        @SuppressWarnings("unused")
+        if (sensorHub != null) {
+            bluetoothManager.openSerialDevice(sensorHub.address)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onConnected, this::onError)
+        }
+    }
+
+    private fun onConnected(connectedDevice: BluetoothSerialDevice) {
+        bluetoothDevice = connectedDevice.toSimpleDeviceInterface()
+        bluetoothDevice?.setListeners(
+            this::onMessageReceived,
+            null,
+            this::onError)
+        bluetoothDevice?.sendMessage("OK")
+    }
+
+    private fun onMessageReceived(message: String) {
+        Log.d("Bluetooth Message", message)
+    }
+
+    private fun onError(error: Throwable) {
+        // Handle errors - This is hopefully just the sensors being disconnected
+        Log.e("Bluetooth", error.message)
+        stopForegroundService()
     }
 
     companion object {
