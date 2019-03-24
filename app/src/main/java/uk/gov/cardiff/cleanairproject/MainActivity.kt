@@ -11,6 +11,7 @@ import android.content.Context
 import android.content.ServiceConnection
 import android.os.IBinder
 import android.util.Log
+import android.widget.TextView
 import uk.gov.cardiff.cleanairproject.foreground.ServiceCallback
 
 class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
@@ -72,12 +73,22 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
 
     override fun onServiceStarted() {
         playPauseFab.changeMode(FloatingMusicActionButton.Mode.PAUSE_TO_PLAY)
-        Log.d("Service Connection", "Connected")
+        // Check if the service is already connected and set the connection status text
+        if (foregroundService?.connected == true) {
+            connectionStatus.text = resources.getString(R.string.connected)
+        } else {
+            connectionStatus.text = resources.getString(R.string.connecting)
+        }
     }
 
     override fun onServiceStopped() {
         playPauseFab.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_PAUSE)
-        Log.d("Service Connection", "Disconnected")
+        // Set the connection status text
+        connectionStatus.text = resources.getString(R.string.disconnected)
+    }
+
+    override fun onConnected() {
+        connectionStatus.text = resources.getString(R.string.connected)
     }
 
     override fun onReading(longitude: Double?) {

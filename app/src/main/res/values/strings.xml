@@ -48,17 +48,20 @@
     <string name="existing_user">Already a member? Login</string>
 
     <!-- Readings -->
+    <string name="disconnected">Disconnected</string>
+    <string name="connecting">Connecting</string>
+    <string name="connected">Connected</string>
     <string name="noise">Noise</string>
-    <string name="noise_measurement">dBA</string>
+    <string name="noise_measurement">dB</string>
     <string name="air">Air Pollution</string>
     <string name="air_measurement">µg/m3</string>
     <string name="syncStatus">Sync Status</string>
     <string name="upToDate">Up To Date</string>
-    <string name="connected">Connected</string>
 
     <!-- Notifications -->
-    <string name="notification_title">Sensor Hub Connected</string>
-    <string name="notification_content">Tap to view readings.</string>
+    <string name="notification_title">Connecting to Sensor Hub</string>
+    <string name="notification_title_connected">Sensor Hub Connected</string>
+    <string name="notification_content">Tap to view readings</string>
     <string name="notification_action">Disconnect</string>
 
 </resources>

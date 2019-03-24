@@ -49,16 +49,19 @@
     <string name="existing_user">Already a member? Login</string>
 
     <!-- Reading -->
+    <string name="disconnected">Wedi\'i ddatgysylltu</string>
+    <string name="connecting">Cysylltu</string>
+    <string name="connected">Cysylltiedig</string>
     <string name="noise">Sŵn</string>
-    <string name="noise_measurement">dBA</string>
+    <string name="noise_measurement">dB</string>
     <string name="air">Llygredd aer</string>
     <string name="air_measurement">µg/m3</string>
     <string name="syncStatus">Statws Sync</string>
     <string name="upToDate">Hyd yn hyn</string>
-    <string name="connected">Cysylltiedig</string>
 
     <!-- Notifications -->
-    <string name="notification_title">Canolfan Synhwyrydd Cysylltiedig</string>
+    <string name="notification_title">Canolbwynt Cysylltu â\'r Synhwyrydd</string>
+    <string name="notification_title_connected">Canolfan Synhwyrydd Cysylltiedig</string>
     <string name="notification_content">Tap i weld darlleniadau.</string>
     <string name="notification_action">Datgysylltwch</string>
 

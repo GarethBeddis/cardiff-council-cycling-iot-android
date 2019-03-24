@@ -27,14 +27,18 @@ import io.reactivex.schedulers.Schedulers
 class ForegroundService : Service() {
 
     private lateinit var binder: Binder
+    private lateinit var notificationManager: NotificationManager
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private lateinit var bluetoothManager: BluetoothManager
+
     private var callback: ServiceCallback? = null
+    private var notification: NotificationCompat.Builder? = null
     private var locationGPS: Location? = null
     private var scheduler = Executors.newScheduledThreadPool(1)
     private var bluetoothDevice: SimpleBluetoothDeviceInterface? = null
 
+    var connected = false
 
     override fun onCreate() {
         super.onCreate()
@@ -70,9 +74,9 @@ class ForegroundService : Service() {
         // Start getting the GPS location coordinates
         getCurrentLocation()
         // Get the notification manager
-        val manager: NotificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         // Build the notification
-        val notification = buildNotification()
+        notification = buildNotification()
         // Set the notification channel for Oreo and newer
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelID = "notify_001"
@@ -81,15 +85,15 @@ class ForegroundService : Service() {
             channel.setSound(null, null)
             channel.enableLights(false)
             channel.enableVibration(false)
-            manager.createNotificationChannel(channel)
-            notification.setChannelId(channelID)
+            notificationManager.createNotificationChannel(channel)
+            notification?.setChannelId(channelID)
         }
         // Start foreground service.
         isRunning = true
         if(this.callback != null) {
             this.callback?.onServiceStarted()
         }
-        startForeground(1, notification.build())
+        startForeground(1, notification?.build())
         subscribeToBluetooth()
         subscribeToReadings()
     }
@@ -119,7 +123,6 @@ class ForegroundService : Service() {
     }
 
     private fun stopForegroundService() {
-        Log.d(TAG_FOREGROUND_SERVICE, "Stop foreground service.")
         // Disconnect sensors if they're connected
         if (bluetoothDevice != null) {
             bluetoothManager.closeDevice(bluetoothDevice)
@@ -128,8 +131,8 @@ class ForegroundService : Service() {
         scheduler.shutdownNow()
         locationManager.removeUpdates(locationListener)
         // Let the activity know the service has stopped
-        if(this.callback != null) {
-            this.callback?.onServiceStopped()
+        if(callback != null) {
+            callback?.onServiceStopped()
         }
         // Stop the foreground service
         isRunning = false
@@ -189,12 +192,21 @@ class ForegroundService : Service() {
     }
 
     private fun onConnected(connectedDevice: BluetoothSerialDevice) {
+        // Set the device and listeners
         bluetoothDevice = connectedDevice.toSimpleDeviceInterface()
         bluetoothDevice?.setListeners(
             this::onMessageReceived,
             null,
             this::onError)
         bluetoothDevice?.sendMessage("OK")
+        // Update the notification text
+        notification?.setContentTitle(resources.getString(R.string.notification_title_connected))
+        notificationManager.notify(1, notification?.build())
+        // Let the main activity know that the device is connected
+        connected = true
+        if(callback != null) {
+            callback?.onConnected()
+        }
     }
 
     private fun onMessageReceived(message: String) {
