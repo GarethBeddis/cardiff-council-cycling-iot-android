@@ -11,6 +11,7 @@
 
     <!-- General -->
     <color name="background">#ffffff</color>
+    <color name="background_grey">#f9f9fb</color>
     <color name="white">#ffffff</color>
     <color name="grey">#8196A3</color>
     <color name="black">#313232</color>
