@@ -53,8 +53,12 @@
     <string name="connecting">Cysylltu</string>
     <string name="connected">Cysylltiedig</string>
     <string name="noise">Sŵn</string>
-    <string name="noise_measurement">dB</string>
+    <string name="noise_reading">%1$sdB</string>
     <string name="air">Llygredd aer</string>
+    <string name="air_no2">NO2</string>
+    <string name="air_pm25">PM2.5</string>
+    <string name="air_pm100">PM100</string>
+    <string name="air_reading">%1$sμg/m3</string>
     <string name="default_reading">Synhwyro&#8230;</string>
     <string name="air_pollution_low">Isel</string>
     <string name="air_pollution_moderate">Cymedrol</string>

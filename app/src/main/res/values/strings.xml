@@ -52,8 +52,12 @@
     <string name="connecting">Connecting</string>
     <string name="connected">Connected</string>
     <string name="air">Air Pollution</string>
+    <string name="air_no2">NO2</string>
+    <string name="air_pm25">PM2.5</string>
+    <string name="air_pm100">PM100</string>
+    <string name="air_reading">%1$sμg/m3</string>
     <string name="noise">Noise</string>
-    <string name="noise_measurement">dB</string>
+    <string name="noise_reading">%1$sdB</string>
     <string name="default_reading">Sensing&#8230;</string>
     <string name="air_pollution_low">Low</string>
     <string name="air_pollution_moderate">Moderate</string>

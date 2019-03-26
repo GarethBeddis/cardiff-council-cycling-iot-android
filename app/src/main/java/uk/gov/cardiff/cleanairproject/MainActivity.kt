@@ -97,7 +97,10 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
             Bands.HIGH -> resources.getString(R.string.air_pollution_high)
             Bands.VERY_HIGH -> resources.getString(R.string.air_pollution_very_high)
         }
-        noiseReadingValue.text = db.toString() + resources.getString(R.string.noise_measurement)
+        no2Reading.text = resources.getString(R.string.air_reading, no2.toString())
+        pm25Reading.text = resources.getString(R.string.air_reading, pm25.toString())
+        pm100Reading.text = resources.getString(R.string.air_reading, pm100.toString())
+        noiseReadingValue.text = resources.getString(R.string.noise_reading, db.toString())
     }
 
     override fun onServiceStarted() {

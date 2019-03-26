@@ -14,6 +14,7 @@
     <color name="background_grey">#f9f9fb</color>
     <color name="white">#ffffff</color>
     <color name="grey">#8196A3</color>
+    <color name="light_grey">#f2f5f8</color>
     <color name="black">#313232</color>
     <color name="shadow">#5e8cba</color>
 </resources>
