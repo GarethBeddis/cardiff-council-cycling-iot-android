@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         setContentView(R.layout.activity_main)
         // Check that we still have location permissions
         checkLocationPermission()
+        // Set the current user
+        // TODO: Get the user email
+        currentUser.text = "user@email.com"
         // Get the FAB from the layout
         playPauseFab = playPauseButton
         // Add the FAB on click listener
@@ -81,6 +84,8 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
 
     override fun onConnected() {
         connectionStatus.text = resources.getString(R.string.connected)
+        statusImage.animate().alpha(0.0f).duration = 200
+        statusImageConnected.animate().alpha(1.0f).duration = 200
         noiseReading.animate().alpha(1.0f).duration = 200
         airPollution.animate().alpha(1.0f).duration = 200
     }
@@ -109,6 +114,8 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         playPauseFab.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_PAUSE)
         // Set the connection status text
         connectionStatus.text = resources.getString(R.string.disconnected)
+        statusImage.animate().alpha(1.0f).duration = 200
+        statusImageConnected.animate().alpha(0.0f).duration = 200
         noiseReading.animate().alpha(0.0f).duration = 200
         airPollution.animate().alpha(0.0f).duration = 200
     }
