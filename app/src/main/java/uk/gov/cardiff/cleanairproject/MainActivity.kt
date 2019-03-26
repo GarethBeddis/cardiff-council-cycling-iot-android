@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
                 startService(intent)
             }
         }
+        // Rebind the service if it's running
+        rebindService()
     }
 
     override fun onPause() {
@@ -62,14 +64,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
     override fun onResume() {
         super.onResume()
         // Rebind the service
-        if (ForegroundService.isRunning) {
-            val serviceBindingIntent = Intent(this, ForegroundService::class.java)
-            bindService(serviceBindingIntent, this, Context.BIND_AUTO_CREATE)
-            onServiceStarted()
-        } else {
-            foregroundService = null
-            onServiceStopped()
-        }
+        rebindService()
     }
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -107,7 +102,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         playPauseFab.changeMode(FloatingMusicActionButton.Mode.PAUSE_TO_PLAY)
         // Check if the service is already connected and set the connection status text
         if (foregroundService?.connected == true) {
-            connectionStatus.text = resources.getString(R.string.connected)
+            onConnected()
         } else {
             connectionStatus.text = resources.getString(R.string.connecting)
         }
@@ -121,6 +116,17 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         statusImageConnected.animate().alpha(0.0f).duration = 200
         noiseReading.animate().alpha(0.0f).duration = 200
         airPollution.animate().alpha(0.0f).duration = 200
+    }
+
+    private fun rebindService() {
+        if (ForegroundService.isRunning) {
+            val serviceBindingIntent = Intent(this, ForegroundService::class.java)
+            bindService(serviceBindingIntent, this, Context.BIND_AUTO_CREATE)
+            onServiceStarted()
+        } else {
+            foregroundService = null
+            onServiceStopped()
+        }
     }
 
     private fun checkLocationPermission() {
