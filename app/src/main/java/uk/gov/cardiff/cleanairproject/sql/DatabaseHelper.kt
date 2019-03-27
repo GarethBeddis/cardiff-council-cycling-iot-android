@@ -120,12 +120,38 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     // Delete a user record
     fun deleteUser(user: User) {
-
         val db = this.writableDatabase
-        // delete user record by id
         db.delete(TABLE_USER, "$COLUMN_USER_ID = ?",
             arrayOf(user.id.toString()))
         db.close()
+    }
+
+    // Delete a journey
+    fun deleteJourney(journey: Journey) {
+        val db = this.writableDatabase
+        db.delete(
+            TABLE_JOURNEY, "$COLUMN_JOURNEY_ID = ?",
+            arrayOf(journey.id.toString()))
+        db.close()
+    }
+
+    // Get readings count for a journey
+    fun getReadingsCount(journey: Journey): Int {
+        val db = this.readableDatabase
+        val columns = arrayOf(COLUMN_READING_ID)
+        val selectionCriteria = "$COLUMN_READING_JOURNEY_ID = ?"
+        val selectionArgs = arrayOf(journey.id.toString())
+        val cursor = db.query(TABLE_READING, //Table to query
+            columns,        //columns to return
+            selectionCriteria,      //columns for the WHERE clause
+            selectionArgs,  //The values for the WHERE clause
+            null,  //group the rows
+            null,   //filter by row groups
+            null)
+        val cursorCount = cursor.count
+        cursor.close()
+        db.close()
+        return cursorCount
     }
 
     // Checks if a user exists by email

@@ -35,12 +35,12 @@ class ForegroundService : Service() {
     private lateinit var locationListener: LocationListener
     private lateinit var bluetoothManager: BluetoothManager
     private lateinit var databaseHelper: DatabaseHelper
-    private lateinit var journey: Journey
 
     private var callback: ServiceCallback? = null
     private var notification: NotificationCompat.Builder? = null
     private var bluetoothDevice: SimpleBluetoothDeviceInterface? = null
     private var locationGPS: Location? = null
+    private var journey: Journey? = null
 
     var connected = false
 
@@ -133,7 +133,14 @@ class ForegroundService : Service() {
         locationManager.removeUpdates(locationListener)
         // Let the activity know the service has stopped
         callback?.onServiceStopped()
+        // Delete the journey if there are no readings
+        if (journey != null) {
+            if (databaseHelper.getReadingsCount(journey!!) == 0) {
+                databaseHelper.deleteJourney(journey!!)
+            }
+        }
         // Stop the foreground service
+        connected = false
         isRunning = false
         stopForeground(true)
         stopSelf()
@@ -216,7 +223,7 @@ class ForegroundService : Service() {
                 // Add the reading to the database
                 databaseHelper.addReading(Reading(
                     RemoteId = 0,
-                    JourneyId = journey.id,
+                    JourneyId = journey!!.id,
                     NoiseReading = jsonData.getDouble("db"),
                     No2Reading = jsonData.getDouble("no2"),
                     PM10Reading = jsonData.getDouble("pm100"),
