@@ -74,7 +74,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
     }
 
-    fun addJourney(journey: Journey) {
+    fun addJourney(journey: Journey):Journey {
         val db = this.writableDatabase
 
         val values = ContentValues()
@@ -85,8 +85,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(COLUMN_NOISE_READING, journey.Synced)
 
         // Inserting Row
-        db.insert(TABLE_JOURNEY, null, values)
+        journey.id = db.insert(TABLE_JOURNEY, null, values)
         db.close()
+
+        // Return the journey with the ID
+        return journey
     }
 
     fun addReading(readings: Readings) {
@@ -95,7 +98,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val values = ContentValues()
         values.put(COLUMN_READINGS_ID, readings.id)
         values.put(COLUMN_JOURNEY_ID, readings.JourneyId)
-        values.put(COLUMN_JOURNEY_REMOTE_ID, readings.JourneyRemoteId)
         values.put(COLUMN_NOISE_READING, readings.NoiseReading)
         values.put(COLUMN_NO2_READING, readings.No2Reading)
         values.put(COLUMN_PM10_READING, readings.PM10Reading)
