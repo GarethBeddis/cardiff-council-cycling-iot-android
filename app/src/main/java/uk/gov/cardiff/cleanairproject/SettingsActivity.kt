@@ -31,6 +31,13 @@ class SettingsActivity : AppCompatActivity() {
                 startActivity(langIntent)
                 true
             }
+
+            val bluetoothPref = findPreference("bluetooth") as Preference
+            bluetoothPref.setOnPreferenceClickListener {
+                val bluetoothIntent = Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS)
+                startActivity(bluetoothIntent)
+                true
+            }
         }
 
     }

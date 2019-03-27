@@ -20,7 +20,7 @@
             android:title="Share Data"
             android:summary="Turn on or off the Data sharing"/>
 
-    <SwitchPreference
+    <Preference
             android:key="bluetooth"
             android:title="Bluetooth"
             android:summary="Turn on or off Bluetooth Connectivity"/>
