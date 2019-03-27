@@ -44,23 +44,16 @@ class ForegroundService : Service() {
 
     var connected = false
 
+    // Lifecycle functions
+
     override fun onCreate() {
         super.onCreate()
         binder = Binder()
         databaseHelper = DatabaseHelper(this)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        isRunning = false
-    }
-
     override fun onBind(intent: Intent): IBinder? {
         return binder
-    }
-
-    fun setCallBack(callback: ServiceCallback?) {
-        this.callback = callback
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -73,6 +66,13 @@ class ForegroundService : Service() {
         return super.onStartCommand(intent, flags, startId)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        isRunning = false
+    }
+
+    // Start and Stop Functions
+
     private fun startForegroundService() {
         // Start getting the GPS location coordinates
         getCurrentLocation()
@@ -83,8 +83,7 @@ class ForegroundService : Service() {
         // Set the notification channel for Oreo and newer
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelID = "notify_001"
-            val channelName = "Readings"
-            val channel = NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(channelID, "Readings", NotificationManager.IMPORTANCE_DEFAULT)
             channel.setSound(null, null)
             channel.enableLights(false)
             channel.enableVibration(false)
@@ -93,12 +92,38 @@ class ForegroundService : Service() {
         }
         // Start foreground service.
         isRunning = true
-        if(this.callback != null) {
+        startForeground(1, notification?.build())
+        // Let the activity know the service has started
+        if (this.callback != null) {
             this.callback?.onServiceStarted()
         }
-        startForeground(1, notification?.build())
-        subscribeToBluetooth()
+        // Connect to the Arduino
+        connectToBluetooth()
     }
+
+    private fun stopForegroundService() {
+        // Disconnect sensors if they're connected
+        if (bluetoothDevice != null) {
+            bluetoothManager.closeDevice(bluetoothDevice)
+        }
+        // Stop location updates
+        locationManager.removeUpdates(locationListener)
+        // Let the activity know the service has stopped
+        callback?.onServiceStopped()
+        // Delete the journey if there are no readings
+        if (journey != null) {
+            if (databaseHelper.getReadingsCount(journey!!) == 0) {
+                databaseHelper.deleteJourney(journey!!)
+            }
+        }
+        // Stop the foreground service
+        connected = false
+        isRunning = false
+        stopForeground(true)
+        stopSelf()
+    }
+
+    // Notifications
 
     private fun buildNotification():NotificationCompat.Builder {
         // Prepare the notification on tap intent
@@ -124,49 +149,9 @@ class ForegroundService : Service() {
             .addAction(android.R.drawable.ic_media_pause, resources.getString(R.string.notification_action), stopPendingIntent)
     }
 
-    private fun stopForegroundService() {
-        // Disconnect sensors if they're connected
-        if (bluetoothDevice != null) {
-            bluetoothManager.closeDevice(bluetoothDevice)
-        }
-        // Stop location updates
-        locationManager.removeUpdates(locationListener)
-        // Let the activity know the service has stopped
-        callback?.onServiceStopped()
-        // Delete the journey if there are no readings
-        if (journey != null) {
-            if (databaseHelper.getReadingsCount(journey!!) == 0) {
-                databaseHelper.deleteJourney(journey!!)
-            }
-        }
-        // Stop the foreground service
-        connected = false
-        isRunning = false
-        stopForeground(true)
-        stopSelf()
-    }
+    // Bluetooth
 
-    private fun getCurrentLocation(){
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        locationListener = object : LocationListener {
-            override fun onLocationChanged(location: Location?) {
-                if(location != null) {
-                    locationGPS = location
-                }
-            }
-            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
-            override fun onProviderEnabled(provider: String?) {}
-            override fun onProviderDisabled(provider: String?){}
-        }
-        // Request Updates
-        try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 0F, locationListener)
-        } catch(ex: SecurityException){
-            stopForegroundService()
-        }
-    }
-
-    private fun subscribeToBluetooth() {
+    private fun connectToBluetooth() {
         bluetoothManager = BluetoothManager.getInstance()
         var sensorHub: BluetoothDevice? = null
         val pairedDevices = bluetoothManager.pairedDevicesList
@@ -215,6 +200,8 @@ class ForegroundService : Service() {
         stopForegroundService()
     }
 
+    // Readings
+
     private fun newReading(data: String) {
         if (locationGPS != null) {
             try {
@@ -248,15 +235,42 @@ class ForegroundService : Service() {
         }
     }
 
-    companion object {
-        private const val TAG_FOREGROUND_SERVICE = "FOREGROUND_SERVICE"
-        const val START_FOREGROUND_SERVICE = "ACTION_START_FOREGROUND_SERVICE"
-        const val STOP_FOREGROUND_SERVICE = "ACTION_STOP_FOREGROUND_SERVICE"
-        var isRunning = false
+    private fun getCurrentLocation(){
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        locationListener = object : LocationListener {
+            override fun onLocationChanged(location: Location?) {
+                if(location != null) {
+                    locationGPS = location
+                }
+            }
+            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+            override fun onProviderEnabled(provider: String?) {}
+            override fun onProviderDisabled(provider: String?){}
+        }
+        // Request Updates
+        try {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 0F, locationListener)
+        } catch(ex: SecurityException){
+            stopForegroundService()
+        }
     }
+
+    // Bindings
 
     inner class Binder : android.os.Binder() {
         val service: ForegroundService
             get() = this@ForegroundService
+    }
+
+    fun setCallBack(callback: ServiceCallback?) {
+        this.callback = callback
+    }
+
+    // Static variables
+
+    companion object {
+        const val START_FOREGROUND_SERVICE = "ACTION_START_FOREGROUND_SERVICE"
+        const val STOP_FOREGROUND_SERVICE = "ACTION_STOP_FOREGROUND_SERVICE"
+        var isRunning = false
     }
 }

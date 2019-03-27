@@ -67,6 +67,8 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         rebindService()
     }
 
+    // Service Binding
+
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         foregroundService = (service as ForegroundService.Binder).service
         foregroundService?.setCallBack(this)
@@ -76,6 +78,19 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
     override fun onServiceDisconnected(name: ComponentName?) {
         onServiceStopped()
     }
+
+    private fun rebindService() {
+        if (ForegroundService.isRunning) {
+            val serviceBindingIntent = Intent(this, ForegroundService::class.java)
+            bindService(serviceBindingIntent, this, Context.BIND_AUTO_CREATE)
+            onServiceStarted()
+        } else {
+            foregroundService = null
+            onServiceStopped()
+        }
+    }
+
+    // Service Callback Functions
 
     override fun onConnected() {
         connectionStatus.text = resources.getString(R.string.connected)
@@ -118,16 +133,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         airPollution.animate().alpha(0.0f).duration = 200
     }
 
-    private fun rebindService() {
-        if (ForegroundService.isRunning) {
-            val serviceBindingIntent = Intent(this, ForegroundService::class.java)
-            bindService(serviceBindingIntent, this, Context.BIND_AUTO_CREATE)
-            onServiceStarted()
-        } else {
-            foregroundService = null
-            onServiceStopped()
-        }
-    }
+    // Permissions
 
     private fun checkLocationPermission() {
         // Check if the permission is granted
@@ -142,8 +148,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         // If the permission has been granted, go to the Bluetooth page
         if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             Snackbar.make(
@@ -152,5 +157,4 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
             ).show()
         }
     }
-
 }
