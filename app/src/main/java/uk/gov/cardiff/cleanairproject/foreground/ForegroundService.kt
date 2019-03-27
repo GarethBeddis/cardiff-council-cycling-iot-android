@@ -16,14 +16,16 @@ import uk.gov.cardiff.cleanairproject.R
 import com.harrysoft.androidbluetoothserial.BluetoothManager
 import com.harrysoft.androidbluetoothserial.BluetoothSerialDevice
 
-import java.util.concurrent.Executors
-
 import android.bluetooth.BluetoothDevice
 import com.harrysoft.androidbluetoothserial.SimpleBluetoothDeviceInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONException
 import org.json.JSONObject
+import uk.gov.cardiff.cleanairproject.model.Journey
+import uk.gov.cardiff.cleanairproject.model.Reading
+import uk.gov.cardiff.cleanairproject.sql.DatabaseHelper
+import java.util.*
 
 class ForegroundService : Service() {
 
@@ -32,18 +34,20 @@ class ForegroundService : Service() {
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private lateinit var bluetoothManager: BluetoothManager
+    private lateinit var databaseHelper: DatabaseHelper
+    private lateinit var journey: Journey
 
     private var callback: ServiceCallback? = null
     private var notification: NotificationCompat.Builder? = null
-    private var locationGPS: Location? = null
-    private var scheduler = Executors.newScheduledThreadPool(1)
     private var bluetoothDevice: SimpleBluetoothDeviceInterface? = null
+    private var locationGPS: Location? = null
 
     var connected = false
 
     override fun onCreate() {
         super.onCreate()
         binder = Binder()
+        databaseHelper = DatabaseHelper(this)
     }
 
     override fun onDestroy() {
@@ -125,8 +129,7 @@ class ForegroundService : Service() {
         if (bluetoothDevice != null) {
             bluetoothManager.closeDevice(bluetoothDevice)
         }
-        // Stop the scheduler and location updates
-        scheduler.shutdownNow()
+        // Stop location updates
         locationManager.removeUpdates(locationListener)
         // Let the activity know the service has stopped
         callback?.onServiceStopped()
@@ -175,6 +178,11 @@ class ForegroundService : Service() {
     }
 
     private fun onConnected(connectedDevice: BluetoothSerialDevice) {
+        // Create a journey in the database
+        journey = databaseHelper.addJourney(Journey(
+            RemoteId = 0,
+            Synced = false
+        ))
         // Set the device and listeners
         bluetoothDevice = connectedDevice.toSimpleDeviceInterface()
         bluetoothDevice?.setListeners(
@@ -203,7 +211,22 @@ class ForegroundService : Service() {
     private fun newReading(data: String) {
         if (locationGPS != null) {
             try {
+                // Convert the JSON data
                 val jsonData = JSONObject(data).getJSONObject("cleanAir")
+                // Add the reading to the database
+                databaseHelper.addReading(Reading(
+                    RemoteId = 0,
+                    JourneyId = journey.id,
+                    NoiseReading = jsonData.getDouble("db"),
+                    No2Reading = jsonData.getDouble("no2"),
+                    PM10Reading = jsonData.getDouble("pm100"),
+                    PM25Reading = jsonData.getDouble("pm25"),
+                    TimeTaken = Calendar.getInstance().timeInMillis,
+                    Longitude = locationGPS!!.longitude,
+                    Latitude = locationGPS!!.latitude,
+                    Synced = false
+                ))
+                // Send the reading to the activity if it's connected
                 callback?.onReading(
                     locationGPS?.longitude,
                     locationGPS?.latitude,
