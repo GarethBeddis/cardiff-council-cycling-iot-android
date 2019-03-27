@@ -17,9 +17,9 @@
         We need access to your location so we can track which parts of Cardiff are the most polluted.
     </string>
     <string name="location_enable">Enable Location</string>
-    <string name="bluetooth_title">Connecting the Sensors</string>
+    <string name="bluetooth_title">Connecting the Sensor Hub</string>
     <string name="bluetooth_summary">
-        To connect the sensors, hold the pair button until the light starts blinking, then press pair bluetooth below.
+        To connect the sensor hub, turn on the sensor hub, then press pair bluetooth below. When asked for a pairing code, enter 1234.
     </string>
     <string name="bluetooth_pair">Pair Bluetooth</string>
     <string name="finished_title">You\'re all set</string>

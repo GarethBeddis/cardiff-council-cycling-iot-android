@@ -18,9 +18,9 @@
     </string>
     <string name="location_enable">Galluogi Lleoliad</string>
 
-    <string name="bluetooth_title">Cysylltu\'r Synwyryddion</string>
+    <string name="bluetooth_title">Canolfan Cysylltu\'r Synhwyrydd</string>
     <string name="bluetooth_summary">
-        I gysylltu y synwyryddion, cadwch y botwm pâr nes i\'r golau ddechrau plygu, yna pwyswch y Bluetooth isod.
+        I gysylltu\'r canolbwynt synhwyrydd, trowch y canolbwynt synhwyrydd ymlaen, yna pwyswch y bluetooth isod. Pan ofynnwyd am god paru, nodwch 1234.
     </string>
     <string name="bluetooth_pair">Pâr Bluetooth</string>
     <string name="finished_title">Rydych chi i gyd wedi eu gosod</string>
