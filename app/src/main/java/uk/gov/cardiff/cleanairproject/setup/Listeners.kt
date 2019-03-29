@@ -8,5 +8,4 @@ interface Listeners {
     fun saveLogin(email: String, token: String)
     fun requestLocationPermission()
     fun finishSetup()
-    fun hideKeyboard()
 }

@@ -38,6 +38,26 @@ class ServerAuthenticator(private val context: Context) {
     }
 
     fun register(email: String, password: String, listener: ServerAuthenticatorListener) {
-        // Get the token from the server
+        // Prepare the request object
+        val requestObject = HashMap<String, String>()
+        requestObject["email"] = email
+        requestObject["password"] = password
+        // Prepare the request
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.POST,
+            "$serverAddress/auth/app/register",
+            JSONObject(requestObject),
+            Response.Listener<JSONObject> {response ->
+                listener.onAuthSuccess(response.getString("token"))
+            },
+            Response.ErrorListener {error ->
+                if (error is TimeoutError) {
+                    listener.onAuthFailure(context.getString(R.string.connection_error))
+                } else {
+                    listener.onAuthFailure(context.getString(R.string.error_valid_email_password))
+                }
+            })
+        // Make the request
+        requestQueue.add(jsonRequest)
     }
 }

@@ -65,7 +65,6 @@ class LoginFragment : Fragment() {
         if (!inputValidation.isInputEditTextEmail(text_input_email, text_input_layout_email, getString(R.string.error_message_email))) return
         if (!inputValidation.isInputEditTextFilled(text_input_email, text_input_layout_email, getString(R.string.error_message_email))) return
         if (!inputValidation.isInputEditTextFilled(text_input_password, text_input_layout_password,getString(R.string.error_message_password))) return
-        listener.hideKeyboard()
         // Get the email and password
         val email = text_input_email.text.toString().trim()
         val password = text_input_password.text.toString().trim()

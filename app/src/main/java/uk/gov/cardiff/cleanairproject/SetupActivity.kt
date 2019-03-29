@@ -147,15 +147,4 @@ class SetupActivity : AppCompatActivity(), Listeners {
             finish()
         }
     }
-
-    // Hide the keyboard if open so snack bar message is visible
-    // Ref: https://stackoverflow.com/questions/13593069/androidhide-keyboard-after-button-click/13593232
-    override fun hideKeyboard() {
-        try {
-            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
-        } catch (e: Exception) {
-            // TODO: handle exception
-        }
-    }
 }

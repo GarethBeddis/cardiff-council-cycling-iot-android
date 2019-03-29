@@ -16,6 +16,7 @@
         With the Cardiff Clean Air Project, we\'re working together for a better, healthier city.
     </string>
     <string name="login_title">Login</string>
+    <string name="register_title">Register</string>
     <string name="location_title">Location Access Required</string>
     <string name="location_summary">
         We need access to your location so we can track which parts of Cardiff are the most polluted.

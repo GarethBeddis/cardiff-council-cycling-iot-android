@@ -16,6 +16,7 @@
         Gyda Phrosiect Awyr Glân Caerdydd, rydym yn gweithio gyda\'n gilydd ar gyfer dinas iachach well.
     </string>
     <string name="login_title">Mewngofnodi</string>
+    <string name="register_title">Cofrestru</string>
     <string name="location_title">Gofyniad Mynediad Lleoliad</string>
     <string name="location_summary">
         Mae arnom angen mynediad i\'ch lleoliad fel y gallwn olrhain pa rannau o Gaerdydd sydd fwyaf llygredig.
