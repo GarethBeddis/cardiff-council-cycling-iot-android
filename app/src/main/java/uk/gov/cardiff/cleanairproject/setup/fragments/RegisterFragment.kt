@@ -1,7 +1,6 @@
 package uk.gov.cardiff.cleanairproject.setup.fragments
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.view.View
 import android.content.Context
 import android.support.v4.app.Fragment
@@ -10,9 +9,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_register.*
 
 import uk.gov.cardiff.cleanairproject.R
-import uk.gov.cardiff.cleanairproject.auth.ServerAuthenticator
-import uk.gov.cardiff.cleanairproject.auth.ServerAuthenticatorListener
-import uk.gov.cardiff.cleanairproject.model.User
 import uk.gov.cardiff.cleanairproject.setup.Animations
 import uk.gov.cardiff.cleanairproject.setup.Listeners
 import uk.gov.cardiff.cleanairproject.setup.Pages
@@ -71,16 +67,6 @@ class RegisterFragment : Fragment() {
         val email = text_input_email.text.toString().trim()
         val password = text_input_password.text.toString().trim()
         // Authenticate with the server
-        ServerAuthenticator(context!!).register(email, password,
-            object : ServerAuthenticatorListener {
-                override fun onAuthSuccess(token: String) {
-                    // Set the FirstTimeSetup completed preference
-                    listener.saveLogin(email, token)
-                    listener.changeFragmentListener(Pages.LOCATION)
-                }
-                override fun onAuthFailure(error: String) {
-                    Snackbar.make(view!!, error, Snackbar.LENGTH_LONG).show()
-                }
-            })
+        listener.register(email, password)
     }
 }

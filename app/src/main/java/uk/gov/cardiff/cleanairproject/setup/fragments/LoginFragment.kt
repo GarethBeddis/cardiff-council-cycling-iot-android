@@ -68,17 +68,7 @@ class LoginFragment : Fragment() {
         // Get the email and password
         val email = text_input_email.text.toString().trim()
         val password = text_input_password.text.toString().trim()
-        // Authenticate with the server
-        ServerAuthenticator(context!!).login(email, password,
-            object : ServerAuthenticatorListener {
-                override fun onAuthSuccess(token: String) {
-                    // Set the FirstTimeSetup completed preference
-                    listener.saveLogin(email, token)
-                    listener.changeFragmentListener(Pages.LOCATION)
-                }
-                override fun onAuthFailure(error: String) {
-                    Snackbar.make(view!!, error, Snackbar.LENGTH_LONG).show()
-                }
-            })
+        // Try to login
+        listener.login(email, password)
     }
 }
