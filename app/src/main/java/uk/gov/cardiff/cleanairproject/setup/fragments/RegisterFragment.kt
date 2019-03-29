@@ -18,7 +18,7 @@ import uk.gov.cardiff.cleanairproject.setup.Animations
 import uk.gov.cardiff.cleanairproject.setup.Listeners
 import uk.gov.cardiff.cleanairproject.setup.Pages
 import uk.gov.cardiff.cleanairproject.sql.DatabaseHelper
-import uk.gov.cardiff.cleanairproject.validation.InputValidation
+import uk.gov.cardiff.cleanairproject.auth.validation.InputValidation
 
 // TODO: Automatically login after register
 

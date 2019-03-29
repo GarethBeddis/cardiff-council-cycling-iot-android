@@ -5,6 +5,7 @@ package uk.gov.cardiff.cleanairproject.setup
  */
 interface Listeners {
     fun changeFragmentListener(targetPage: Pages)
+    fun saveLogin(email: String, token: String)
     fun requestLocationPermission()
     fun finishSetup()
     fun hideKeyboard()

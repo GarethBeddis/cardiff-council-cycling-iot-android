@@ -4,6 +4,9 @@
     <string name="app_name">Prosiect Aer Glân Caerdydd</string>
     <string name="app_name_short">Aer Glân</string>
 
+    <!-- Auth -->
+    <string name="connection_error">Methu cysylltu</string>
+
     <!-- Setup -->
     <string name="setup_login">Mewngofnodi</string>
     <string name="setup_create_account">Creu cyfrif</string>
@@ -12,6 +15,7 @@
     <string name="welcome_summary">
         Gyda Phrosiect Awyr Glân Caerdydd, rydym yn gweithio gyda\'n gilydd ar gyfer dinas iachach well.
     </string>
+    <string name="login_title">Mewngofnodi</string>
     <string name="location_title">Gofyniad Mynediad Lleoliad</string>
     <string name="location_summary">
         Mae arnom angen mynediad i\'ch lleoliad fel y gallwn olrhain pa rannau o Gaerdydd sydd fwyaf llygredig.

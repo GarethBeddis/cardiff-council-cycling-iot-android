@@ -31,8 +31,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         // Check that we still have location permissions
         checkLocationPermission()
         // Set the current user
-        // TODO: Get the user email
-        currentUser.text = "user@email.com"
+        currentUser.text = getSharedPreferences("Account", MODE_PRIVATE).getString("email", "")
         // Get the FAB from the layout
         playPauseFab = playPauseButton
         // Add the FAB on click listener

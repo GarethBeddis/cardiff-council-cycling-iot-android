@@ -56,6 +56,15 @@ class SetupActivity : AppCompatActivity(), Listeners {
             .commit()
     }
 
+    override fun saveLogin(email: String, token: String) {
+        // Add the login email and token to sharedPrefs
+        getSharedPreferences("Account", MODE_PRIVATE)
+            .edit()
+            .putString("email", email)
+            .putString("token", token)
+            .apply()
+    }
+
     override fun finishSetup() {
         // Set the FirstTimeSetup completed preference
         getSharedPreferences("FirstTimeSetup", MODE_PRIVATE)
