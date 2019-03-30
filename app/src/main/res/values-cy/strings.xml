@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General -->
-    <string name="app_name">Aer Glân</string>
+    <string name="app_name">Prosiect Aer Glân Caerdydd</string>
+    <string name="app_name_short">Aer Glân</string>
 
     <!-- Setup -->
     <string name="setup_login">Mewngofnodi</string>
@@ -17,9 +18,9 @@
     </string>
     <string name="location_enable">Galluogi Lleoliad</string>
 
-    <string name="bluetooth_title">Cysylltu\'r Synwyryddion</string>
+    <string name="bluetooth_title">Canolfan Cysylltu\'r Synhwyrydd</string>
     <string name="bluetooth_summary">
-        I gysylltu y synwyryddion, cadwch y botwm pâr nes i\'r golau ddechrau plygu, yna pwyswch y Bluetooth isod.
+        I gysylltu\'r canolbwynt synhwyrydd, trowch y canolbwynt synhwyrydd ymlaen, yna pwyswch y bluetooth isod. Pan ofynnwyd am god paru, nodwch 1234.
     </string>
     <string name="bluetooth_pair">Pâr Bluetooth</string>
     <string name="finished_title">Rydych chi i gyd wedi eu gosod</string>
@@ -29,30 +30,66 @@
     <string name="finished_enter">Awn ni</string>
 
     <!-- Login / Register -->
-    <string name="hint_name">Name</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_confirm_password">Confirm Password</string>
-    <string name="text_login">Login</string>
-    <string name="text_register">Register</string>
-    <string name="error_message_email">Enter Valid Email</string>
-    <string name="error_message_password">Enter Password</string>
-    <string name="success_message">Registration Successful</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="text_not_member">Don\'t have an account? Sign up</string>
-    <string name="text_member">Have an account? Sign in</string>
-    <string name="text_already_member">Already a member? Login</string>
-    <string name="error_email_exists">Email Already Exists</string>
-    <string name="error_password_match">Password Does Not Match</string>
-    <string name="error_valid_email_password">Invalid Email or Password</string>
-    <string name="existing_user">Already a member? Login</string>
+    <string name="hint_name">Enw</string>
+    <string name="hint_email">E-bost</string>
+    <string name="hint_password">Cyfrinair</string>
+    <string name="hint_confirm_password">Cadarnhewch y Cyfrinair</string>
+    <string name="text_login">Mewngofnodi</string>
+    <string name="text_register">Cofrestrwch</string>
+    <string name="error_message_email">Rhowch e-bost dilys</string>
+    <string name="error_message_password">Rhowch Gyfrinair</string>
+    <string name="success_message">Cofrestru\'n Llwyddiannus</string>
+    <string name="forgot_password">Wedi anghofio?</string>
+    <string name="text_not_member">Peidiwch â chael cyfrif? Cofrestru</string>
+    <string name="text_member">Cael cyfrif? Mewngofnodi</string>
+    <string name="text_already_member">Eisoes yn aelod? Mewngofnodi</string>
+    <string name="error_email_exists">Eisoes yn E-bost</string>
+    <string name="error_password_match">Nid yw Cyfrinair yn Cydweddu</string>
+    <string name="error_valid_email_password">E-bost neu Gyfrinair Annilys</string>
+    <string name="existing_user">Eisoes yn aelod? Mewngofnodi</string>
 
     <!-- Reading -->
+    <string name="disconnected">Wedi\'i ddatgysylltu</string>
+    <string name="connecting">Cysylltu</string>
+    <string name="connected">Cysylltiedig</string>
     <string name="noise">Sŵn</string>
-    <string name="noise_measurement">dBA</string>
+    <string name="noise_reading">%1$sdB</string>
     <string name="air">Llygredd aer</string>
-    <string name="air_measurement">µg/m3</string>
+    <string name="air_no2">NO2</string>
+    <string name="air_pm25">PM2.5</string>
+    <string name="air_pm100">PM100</string>
+    <string name="air_reading">%1$sμg/m3</string>
+    <string name="default_reading">Synhwyro&#8230;</string>
+    <string name="air_pollution_low">Isel</string>
+    <string name="air_pollution_moderate">Cymedrol</string>
+    <string name="air_pollution_high">Uchel</string>
+    <string name="air_pollution_very_high">Uchel iawn</string>
     <string name="syncStatus">Statws Sync</string>
     <string name="upToDate">Hyd yn hyn</string>
-    <string name="connected">Cysylltiedig</string>
+
+    <!-- Menu -->
+    <string name="menu_about">Ynglŷn â</string>
+    <string name="menu_settings">Lleoliadau</string>
+    <string name="menu_logout">Allgofnodi</string>
+
+    <!-- Settings -->
+    <string name="title_activity_settings">Lleoliadau</string>
+    <string name="settings_category_general">Cyffredinol</string>
+    <string name="settings_category_privacy">Preifatrwydd</string>
+    <string name="settings_category_report">Adroddiad</string>
+    <string name="settings_language">Iaith</string>
+    <string name="settings_language_summary">Newid rhwng y Gymraeg a\'r Saesneg</string>
+    <string name="settings_share_data">Rhannu Data</string>
+    <string name="settings_share_data_summary">Trowch ymlaen neu oddi ar y rhannu data</string>
+    <string name="settings_bluetooth">Bluetooth</string>
+    <string name="settings_bluetooth_summary">Trowch ymlaen neu oddi ar gysylltedd Bluetooth</string>
+    <string name="settings_feedback">Anfon Adborth</string>
+    <string name="settings_feedback_summary">Rhoi gwybod am faterion technegol neu awgrymu nodweddion newydd</string>
+
+    <!-- Notifications -->
+    <string name="notification_title">Canolbwynt Cysylltu â\'r Synhwyrydd</string>
+    <string name="notification_title_connected">Canolfan Synhwyrydd Cysylltiedig</string>
+    <string name="notification_content">Tap i weld darlleniadau.</string>
+    <string name="notification_action">Datgysylltwch</string>
+
 </resources>

@@ -1,7 +1,7 @@
 package uk.gov.cardiff.cleanairproject.model
 
-data class User (
+data class Journey (
     var id: Long = -1,
-    var email: String,
-    var password: String
+    var RemoteId: Long,
+    var Synced: Boolean
 )

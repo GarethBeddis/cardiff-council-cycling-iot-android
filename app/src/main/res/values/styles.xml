@@ -5,10 +5,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/background</item>
+        <item name="colorPrimaryDark">@color/background_grey</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowBackground">@color/background_grey</item>
 
     </style>
 
@@ -24,6 +24,7 @@
     <!-- Launcher Theme -->
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
     </style>
     <style name="AppTheme.Launcher.NoActionBar">
@@ -35,27 +36,21 @@
 
     <!-- STYLES -->
 
-    <!-- Base Button -->
+    <!-- Buttons -->
     <style name="BaseButton">
         <item name="android:fontFamily">@font/poppins_semibold</item>
         <item name="android:stateListAnimator">@animator/button_state_list_animator</item>
         <item name="android:outlineSpotShadowColor" tools:targetApi="28">@color/shadow</item>
         <item name="android:outlineAmbientShadowColor" tools:targetApi="28">@color/shadow</item>
     </style>
-
-    <!-- Gradient Button -->
     <style name="GradientButton" parent="BaseButton">
         <item name="android:background">@drawable/button_gradient</item>
         <item name="android:textColor">@color/white</item>
     </style>
-
-    <!-- White Button -->
     <style name="WhiteButton" parent="BaseButton">
         <item name="android:background">@drawable/button_white</item>
         <item name="android:textColor">@color/black</item>
     </style>
-
-    <!-- Borderless Button -->
     <style name="BorderlessButton">
         <item name="android:background">@drawable/button_borderless</item>
         <item name="android:fontFamily">@font/poppins_semibold</item>
@@ -64,28 +59,29 @@
         <item name="android:textSize">13sp</item>
     </style>
 
-    <!-- Setup Title -->
+    <!-- Setup -->
     <style name="SetupTitle">
         <item name="android:fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">20sp</item>
     </style>
-
-    <!-- Setup Summary -->
     <style name="SetupSummary">
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/grey</item>
         <item name="android:textAlignment">center</item>
     </style>
 
-    <!-- Reading Titles -->
+    <!-- Readings -->
+    <style name="Reading">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">18sp</item>
+    </style>
     <style name="ReadingTitle">
         <item name="android:fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">12sp</item>
     </style>
-
-    <!-- Reading Measurement -->
     <style name="ReadingMeasurement">
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/grey</item>
@@ -93,11 +89,16 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <!-- Reading -->
-    <style name="Reading">
-        <item name="android:fontFamily">@font/poppins_medium</item>
+    <!-- Detailed Reading-->
+    <style name="DetailedReadingTitle">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="DetailedReadingMeasurement">
+        <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/grey</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <!-- Connection -->

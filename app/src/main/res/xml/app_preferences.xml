@@ -4,39 +4,35 @@
 
     <PreferenceCategory
             android:key="General"
-            android:title="General"/>
+            android:title="@string/settings_category_general"/>
 
     <Preference
             android:key="language"
-            android:title="Language"
-            android:summary="Switch between English and Welsh"/>
+            android:title="@string/settings_language"
+            android:summary="@string/settings_language_summary"/>
 
     <PreferenceCategory
             android:key="privacy"
-            android:title="Privacy"/>
+            android:title="@string/settings_category_privacy"/>
 
     <SwitchPreference
             android:key="shareDate"
-            android:title="Share Data"
-            android:summary="Turn on or off the Data sharing"/>
+            android:title="@string/settings_share_data"
+            android:summary="@string/settings_share_data_summary"
+            android:defaultValue="true"/>
 
     <Preference
             android:key="bluetooth"
-            android:title="Bluetooth"
-            android:summary="Turn on or off Bluetooth Connectivity"/>
-
-    <SwitchPreference
-            android:key="location"
-            android:title="Location"
-            android:summary="Turn on or off Location services"/>
+            android:title="@string/settings_bluetooth"
+            android:summary="@string/settings_bluetooth_summary"/>
 
     <PreferenceCategory
             android:key="report"
-            android:title="Report"/>
+            android:title="@string/settings_category_report"/>
 
     <Preference
             android:key="feedback"
-            android:title="Send feedback"
-            android:summary="Report technical issues or suggest new features"/>
+            android:title="@string/settings_feedback"
+            android:summary="@string/settings_feedback_summary"/>
 
 </PreferenceScreen>
