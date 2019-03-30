@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory
+            android:key="General"
+            android:title="@string/settings_category_general"/>
+
+    <Preference
+            android:key="language"
+            android:title="@string/settings_language"
+            android:summary="@string/settings_language_summary"/>
+
+    <PreferenceCategory
+            android:key="privacy"
+            android:title="@string/settings_category_privacy"/>
+
+    <SwitchPreference
+            android:key="shareDate"
+            android:title="@string/settings_share_data"
+            android:summary="@string/settings_share_data_summary"
+            android:defaultValue="true"/>
+
+    <Preference
+            android:key="bluetooth"
+            android:title="@string/settings_bluetooth"
+            android:summary="@string/settings_bluetooth_summary"/>
+
+    <PreferenceCategory
+            android:key="report"
+            android:title="@string/settings_category_report"/>
+
+    <Preference
+            android:key="feedback"
+            android:title="@string/settings_feedback"
+            android:summary="@string/settings_feedback_summary"/>
+
+</PreferenceScreen>

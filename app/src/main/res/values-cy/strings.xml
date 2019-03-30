@@ -72,6 +72,25 @@
     <string name="syncStatus">Statws Sync</string>
     <string name="upToDate">Hyd yn hyn</string>
 
+    <!-- Menu -->
+    <string name="menu_about">Ynglŷn â</string>
+    <string name="menu_settings">Lleoliadau</string>
+    <string name="menu_logout">Allgofnodi</string>
+
+    <!-- Settings -->
+    <string name="title_activity_settings">Lleoliadau</string>
+    <string name="settings_category_general">Cyffredinol</string>
+    <string name="settings_category_privacy">Preifatrwydd</string>
+    <string name="settings_category_report">Adroddiad</string>
+    <string name="settings_language">Iaith</string>
+    <string name="settings_language_summary">Newid rhwng y Gymraeg a\'r Saesneg</string>
+    <string name="settings_share_data">Rhannu Data</string>
+    <string name="settings_share_data_summary">Trowch ymlaen neu oddi ar y rhannu data</string>
+    <string name="settings_bluetooth">Bluetooth</string>
+    <string name="settings_bluetooth_summary">Trowch ymlaen neu oddi ar gysylltedd Bluetooth</string>
+    <string name="settings_feedback">Anfon Adborth</string>
+    <string name="settings_feedback_summary">Rhoi gwybod am faterion technegol neu awgrymu nodweddion newydd</string>
+
     <!-- Notifications -->
     <string name="notification_title">Canolbwynt Cysylltu â\'r Synhwyrydd</string>
     <string name="notification_title_connected">Canolfan Synhwyrydd Cysylltiedig</string>
