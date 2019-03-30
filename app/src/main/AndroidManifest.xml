@@ -19,12 +19,16 @@
             android:theme="@style/AppTheme.Launcher"
             android:usesCleartextTraffic="true">
 
-        <!-- Declare foreground service -->
         <service
-                android:name=".foreground.ForegroundService"
+                android:name=".sensors.SensorService"
                 android:enabled="true"
-                android:exported="true"
-                android:stopWithTask="true"/>
+                android:exported="false"
+                android:stopWithTask="false"/>
+        <service
+                android:name=".sync.SyncService"
+                android:enabled="true"
+                android:exported="false"
+                android:stopWithTask="false"/>
 
         <activity android:name=".LauncherActivity"
                   android:label="@string/app_name_short"

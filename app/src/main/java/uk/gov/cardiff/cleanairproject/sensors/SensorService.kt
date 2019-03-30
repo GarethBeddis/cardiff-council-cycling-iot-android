@@ -1,4 +1,4 @@
-package uk.gov.cardiff.cleanairproject.foreground
+package uk.gov.cardiff.cleanairproject.sensors
 
 import android.app.*
 import android.content.Context
@@ -25,9 +25,10 @@ import org.json.JSONObject
 import uk.gov.cardiff.cleanairproject.model.Journey
 import uk.gov.cardiff.cleanairproject.model.Reading
 import uk.gov.cardiff.cleanairproject.sql.DatabaseHelper
+import uk.gov.cardiff.cleanairproject.sync.SyncService
 import java.util.*
 
-class ForegroundService : Service() {
+class SensorService : Service() {
 
     private lateinit var binder: Binder
     private lateinit var notificationManager: NotificationManager
@@ -36,7 +37,7 @@ class ForegroundService : Service() {
     private lateinit var bluetoothManager: BluetoothManager
     private lateinit var databaseHelper: DatabaseHelper
 
-    private var callback: ServiceCallback? = null
+    private var sensorCallback: SensorServiceCallback? = null
     private var notification: NotificationCompat.Builder? = null
     private var bluetoothDevice: SimpleBluetoothDeviceInterface? = null
     private var locationGPS: Location? = null
@@ -45,17 +46,14 @@ class ForegroundService : Service() {
     var connected = false
 
     // Lifecycle functions
-
     override fun onCreate() {
         super.onCreate()
         binder = Binder()
         databaseHelper = DatabaseHelper(this)
     }
-
     override fun onBind(intent: Intent): IBinder? {
         return binder
     }
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null) {
             when (intent.action) {
@@ -65,14 +63,12 @@ class ForegroundService : Service() {
         }
         return super.onStartCommand(intent, flags, startId)
     }
-
     override fun onDestroy() {
         super.onDestroy()
         isRunning = false
     }
 
     // Start and Stop Functions
-
     private fun startForegroundService() {
         // Start getting the GPS location coordinates
         getCurrentLocation()
@@ -94,13 +90,12 @@ class ForegroundService : Service() {
         isRunning = true
         startForeground(1, notification?.build())
         // Let the activity know the service has started
-        if (this.callback != null) {
-            this.callback?.onServiceStarted()
+        if (this.sensorCallback != null) {
+            this.sensorCallback?.onSensorServiceStarted()
         }
         // Connect to the Arduino
         connectToBluetooth()
     }
-
     private fun stopForegroundService() {
         // Disconnect sensors if they're connected
         if (bluetoothDevice != null) {
@@ -108,23 +103,23 @@ class ForegroundService : Service() {
         }
         // Stop location updates
         locationManager.removeUpdates(locationListener)
-        // Let the activity know the service has stopped
-        callback?.onServiceStopped()
-        // Delete the journey if there are no readings
+        // Delete the journey if there are no readings, otherwise start synchronisation
         if (journey != null) {
             if (databaseHelper.getReadingsCount(journey!!) == 0) {
                 databaseHelper.deleteJourney(journey!!)
+            } else {
+                startService(Intent(this, SyncService::class.java))
             }
         }
         // Stop the foreground service
         connected = false
         isRunning = false
+        sensorCallback?.onSensorServiceStopped()
         stopForeground(true)
         stopSelf()
     }
 
     // Notifications
-
     private fun buildNotification():NotificationCompat.Builder {
         // Prepare the notification on tap intent
         val onTapIntent = Intent(this, MainActivity::class.java)
@@ -132,7 +127,7 @@ class ForegroundService : Service() {
             .addCategory(Intent.CATEGORY_LAUNCHER)
         val onTapPendingIntent = PendingIntent.getActivity(this, 0, onTapIntent, 0)
         // Prepare the notification stop intent
-        val stopIntent = Intent(this, ForegroundService::class.java)
+        val stopIntent = Intent(this, SensorService::class.java)
             .setAction(STOP_FOREGROUND_SERVICE)
         val stopPendingIntent = PendingIntent.getService(this, 0, stopIntent, 0)
         // Get the notification manager
@@ -150,7 +145,6 @@ class ForegroundService : Service() {
     }
 
     // Bluetooth
-
     private fun connectToBluetooth() {
         bluetoothManager = BluetoothManager.getInstance()
         var sensorHub: BluetoothDevice? = null
@@ -168,7 +162,6 @@ class ForegroundService : Service() {
                 .subscribe(this::onConnected, this::onError)
         }
     }
-
     private fun onConnected(connectedDevice: BluetoothSerialDevice) {
         // Create a journey in the database
         journey = databaseHelper.addJourney(Journey(
@@ -187,13 +180,11 @@ class ForegroundService : Service() {
         notificationManager.notify(1, notification?.build())
         // Let the main activity know that the device is connected
         connected = true
-        callback?.onConnected()
+        sensorCallback?.onConnected()
     }
-
     private fun onMessageReceived(message: String) {
         newReading(message)
     }
-
     private fun onError(error: Throwable) {
         // Handle errors - This is hopefully just the sensors being disconnected
         Log.e("Bluetooth", error.message)
@@ -201,7 +192,6 @@ class ForegroundService : Service() {
     }
 
     // Readings
-
     private fun newReading(data: String) {
         if (locationGPS != null) {
             try {
@@ -221,7 +211,7 @@ class ForegroundService : Service() {
                     Synced = false
                 ))
                 // Send the reading to the activity if it's connected
-                callback?.onReading(
+                sensorCallback?.onReading(
                     locationGPS?.longitude,
                     locationGPS?.latitude,
                     jsonData.getInt("no2"),
@@ -234,7 +224,6 @@ class ForegroundService : Service() {
             }
         }
     }
-
     private fun getCurrentLocation(){
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationListener = object : LocationListener {
@@ -256,18 +245,15 @@ class ForegroundService : Service() {
     }
 
     // Bindings
-
     inner class Binder : android.os.Binder() {
-        val service: ForegroundService
-            get() = this@ForegroundService
+        val service: SensorService
+            get() = this@SensorService
     }
-
-    fun setCallBack(callback: ServiceCallback?) {
-        this.callback = callback
+    fun setCallBack(sensorCallback: SensorServiceCallback?) {
+        this.sensorCallback = sensorCallback
     }
 
     // Static variables
-
     companion object {
         const val START_FOREGROUND_SERVICE = "ACTION_START_FOREGROUND_SERVICE"
         const val STOP_FOREGROUND_SERVICE = "ACTION_STOP_FOREGROUND_SERVICE"
