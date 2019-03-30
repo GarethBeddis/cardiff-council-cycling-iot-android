@@ -74,17 +74,14 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
     }
 
     // Service Binding
-
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         foregroundService = (service as ForegroundService.Binder).service
         foregroundService?.setCallBack(this)
         onServiceStarted()
     }
-
     override fun onServiceDisconnected(name: ComponentName?) {
         onServiceStopped()
     }
-
     private fun rebindService() {
         if (ForegroundService.isRunning) {
             val serviceBindingIntent = Intent(this, ForegroundService::class.java)
@@ -97,7 +94,6 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
     }
 
     // Service Callback Functions
-
     override fun onConnected() {
         connectionStatus.text = resources.getString(R.string.connected)
         statusImage.animate().alpha(0.0f).duration = 200
@@ -105,7 +101,6 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         noiseReading.animate().alpha(1.0f).duration = 200
         airPollution.animate().alpha(1.0f).duration = 200
     }
-
     override fun onReading(longitude: Double?, latitude: Double?, no2: Int, pm25: Int, pm100: Int, db: Int) {
         airPollutionReadingValue.text = when (AirQualityIndex().getOverall(no2, pm25, pm100)) {
             Bands.LOW -> resources.getString(R.string.air_pollution_low)
@@ -118,7 +113,6 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         pm100Reading.text = resources.getString(R.string.air_reading, pm100.toString())
         noiseReadingValue.text = resources.getString(R.string.noise_reading, db.toString())
     }
-
     override fun onServiceStarted() {
         playPauseFab.changeMode(FloatingMusicActionButton.Mode.PAUSE_TO_PLAY)
         // Check if the service is already connected and set the connection status text
@@ -128,7 +122,6 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
             connectionStatus.text = resources.getString(R.string.connecting)
         }
     }
-
     override fun onServiceStopped() {
         playPauseFab.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_PAUSE)
         // Set the connection status text
@@ -152,7 +145,6 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
             )
         }
     }
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         // If the permission has been granted, go to the Bluetooth page
         if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
@@ -164,7 +156,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
     }
 
     // Menu Button
-    fun showPopup(v: View) {
+    private fun showPopup(v: View) {
         // Inflate
         val popup = PopupMenu(this, v)
         val inflater: MenuInflater = popup.menuInflater
@@ -173,7 +165,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.about -> {
-                    TODO("Add Link to About page")
+                    true
                 }
                 R.id.settings -> {
                     val intent = Intent(this, SettingsActivity::class.java)
@@ -181,7 +173,21 @@ class MainActivity : AppCompatActivity(), ServiceConnection, ServiceCallback {
                     true
                 }
                 R.id.logout -> {
-                    TODO("Add Logout Link")
+                    // Logout the user
+                    getSharedPreferences("Account", MODE_PRIVATE)
+                        .edit()
+                        .remove("email")
+                        .remove("token")
+                        .apply()
+                    // Set first time setup completed to false
+                    getSharedPreferences("FirstTimeSetup", MODE_PRIVATE)
+                        .edit()
+                        .remove("completed")
+                        .apply()
+                    // Switch to SetupActivity and stop MainActivity
+                    startActivity(Intent(this, SetupActivity::class.java))
+                    finish()
+                    true
                 }
                 else -> super.onOptionsItemSelected(item)
             }
