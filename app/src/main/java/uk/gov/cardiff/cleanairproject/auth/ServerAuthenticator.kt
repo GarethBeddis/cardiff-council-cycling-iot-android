@@ -5,12 +5,13 @@ import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
+import uk.gov.cardiff.cleanairproject.BuildConfig
 import uk.gov.cardiff.cleanairproject.R
 
 
 class ServerAuthenticator(private val context: Context) {
 
-    private val serverAddress = "http://192.168.0.58:3000"
+    private val serverAddress = BuildConfig.API_URL
     private val requestQueue = Volley.newRequestQueue(context)
 
     fun login(email: String, password: String, listener: ServerAuthenticatorListener) {
@@ -27,7 +28,7 @@ class ServerAuthenticator(private val context: Context) {
                 listener.onAuthSuccess(response.getString("token"))
             },
             Response.ErrorListener {error ->
-                if (error is TimeoutError) {
+                if (error is TimeoutError || error is ServerError) {
                     listener.onAuthFailure(context.getString(R.string.connection_error))
                 } else {
                     listener.onAuthFailure(context.getString(R.string.error_valid_email_password))
@@ -51,7 +52,7 @@ class ServerAuthenticator(private val context: Context) {
                 listener.onAuthSuccess(response.getString("token"))
             },
             Response.ErrorListener {error ->
-                if (error is TimeoutError) {
+                if (error is TimeoutError || error is ServerError) {
                     listener.onAuthFailure(context.getString(R.string.connection_error))
                 } else {
                     listener.onAuthFailure(context.getString(R.string.error_valid_email_password))
