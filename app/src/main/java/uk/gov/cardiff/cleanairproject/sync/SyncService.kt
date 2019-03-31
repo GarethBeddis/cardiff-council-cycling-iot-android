@@ -35,17 +35,31 @@ class SyncService : Service() {
     // Start and Stop
     private fun startSyncService() {
         isRunning = true
-        syncCallback?.onSyncStateChange(SyncStates.IN_PROGRESS)
-        syncManager.isSyncRequired()
-        android.os.Handler().postDelayed({
-            syncCallback?.onSyncStateChange(SyncStates.COMPLETE)
+        // Check if synchronisation is required
+        if (syncManager.isJourneySyncRequired() || syncManager.isReadingSyncRequired()) {
+            // Set the sync status to in progress
+            setSyncStatus(SyncStates.IN_PROGRESS)
+            // Simulate a network delay
+            syncManager.syncJourneys()
+            android.os.Handler().postDelayed({
+                setSyncStatus(SyncStates.COMPLETE)
+                stopSyncService()
+            }, 1000)
+        } else {
+            setSyncStatus(SyncStates.COMPLETE)
             stopSyncService()
-        }, 1000)
+        }
     }
     private fun stopSyncService() {
         syncCallback?.onSyncServiceStopped()
         isRunning = false
         stopSelf()
+    }
+
+    // Sync Status
+    private fun setSyncStatus(state: SyncStates) {
+        syncStatus = state
+        syncCallback?.onSyncStateChange(state)
     }
 
     // Bindings
@@ -60,5 +74,6 @@ class SyncService : Service() {
     // Static variables
     companion object {
         var isRunning = false
+        var syncStatus = SyncStates.COMPLETE
     }
 }

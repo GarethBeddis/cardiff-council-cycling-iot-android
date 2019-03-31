@@ -1,6 +1,7 @@
 package uk.gov.cardiff.cleanairproject.auth
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -19,10 +20,11 @@ class ServerAuthenticator(private val context: Context) {
         val requestObject = HashMap<String, String>()
         requestObject["email"] = email
         requestObject["password"] = password
+        Log.d("server", "$serverAddress/auth/login")
         // Prepare the request
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST,
-            "$serverAddress/auth/app/login",
+            "$serverAddress/auth/login",
             JSONObject(requestObject),
             Response.Listener<JSONObject> {response ->
                 listener.onAuthSuccess(response.getString("token"))
@@ -43,10 +45,11 @@ class ServerAuthenticator(private val context: Context) {
         val requestObject = HashMap<String, String>()
         requestObject["email"] = email
         requestObject["password"] = password
+        Log.d("server", "$serverAddress/auth/login")
         // Prepare the request
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST,
-            "$serverAddress/auth/app/register",
+            "$serverAddress/auth/signup",
             JSONObject(requestObject),
             Response.Listener<JSONObject> {response ->
                 listener.onAuthSuccess(response.getString("token"))
