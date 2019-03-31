@@ -9,6 +9,7 @@ class SyncService : Service() {
 
     private lateinit var binder: Binder
     private lateinit var databaseHelper: DatabaseHelper
+    private lateinit var syncManager: SyncManager
 
     private var syncCallback: SyncServiceCallback? = null
 
@@ -17,6 +18,7 @@ class SyncService : Service() {
         super.onCreate()
         binder = Binder()
         databaseHelper = DatabaseHelper(this)
+        syncManager = SyncManager(this)
     }
     override fun onBind(intent: Intent): IBinder? {
         return binder
@@ -34,6 +36,7 @@ class SyncService : Service() {
     private fun startSyncService() {
         isRunning = true
         syncCallback?.onSyncStateChange(SyncStates.IN_PROGRESS)
+        syncManager.isSyncRequired()
         android.os.Handler().postDelayed({
             syncCallback?.onSyncStateChange(SyncStates.COMPLETE)
             stopSyncService()
