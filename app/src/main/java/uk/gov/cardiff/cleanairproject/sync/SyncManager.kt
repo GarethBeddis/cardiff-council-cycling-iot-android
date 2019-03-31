@@ -14,6 +14,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import uk.gov.cardiff.cleanairproject.BuildConfig
 import uk.gov.cardiff.cleanairproject.data.model.Journey
+import uk.gov.cardiff.cleanairproject.data.model.Reading
 import uk.gov.cardiff.cleanairproject.data.sql.DatabaseHelper
 
 class SyncManager(context: Context) {
@@ -36,7 +37,6 @@ class SyncManager(context: Context) {
         // Get the unsynced journeys from the database and convert them to JSON
         val requestJSON = Gson().toJson(databaseHelper.getUnsyncedJourneys())
         // Prepare the JSON object
-        Log.d("Journeys", requestJSON)
         val jsonRequest = JsonArrayRequest(
             Request.Method.POST,
             "$serverAddress/api/app/sync/journeys",
@@ -47,6 +47,30 @@ class SyncManager(context: Context) {
                     journeys.add(Gson().fromJson(response[i].toString(), Journey::class.java))
                 }
                 databaseHelper.updateJourneys(journeys)
+                listener.onSyncSuccess()
+            },
+            Response.ErrorListener {
+                listener.onSyncFailure()
+            })
+        // Make the request
+        requestQueue.add(jsonRequest)
+    }
+
+    fun syncReadings(listener: SyncListener) {
+        // Get the unsynced readings from the database and convert them to JSON
+        val requestJSON = Gson().toJson(databaseHelper.getUnsyncedReadings())
+        // Prepare the JSON object
+        Log.d("Readings", requestJSON)
+        val jsonRequest = JsonArrayRequest(
+            Request.Method.POST,
+            "$serverAddress/api/app/sync/readings",
+            JSONArray(requestJSON),
+            Response.Listener<JSONArray> {response ->
+                val readingIDs = mutableListOf<Int>()
+                for (i in 0 until response.length()) {
+                    readingIDs.add(response.getInt(i))
+                }
+                databaseHelper.updateReadings(readingIDs)
                 listener.onSyncSuccess()
             },
             Response.ErrorListener {
