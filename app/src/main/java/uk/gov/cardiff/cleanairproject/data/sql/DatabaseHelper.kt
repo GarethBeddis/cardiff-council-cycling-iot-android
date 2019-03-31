@@ -193,10 +193,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun updateReadings(readingIDs: List<Int>) {
         val db = writableDatabase
         for (id in readingIDs) {
-            val updatedFields = ContentValues()
-            updatedFields.put(COLUMN_READING_SYNCED, true)
-            db.update(TABLE_READING, updatedFields,
-                "$COLUMN_READING_ID = ?", arrayOf(id.toString()))
+            db.delete(TABLE_READING,"$COLUMN_READING_ID = ?", arrayOf(id.toString()))
         }
         db.close()
     }
