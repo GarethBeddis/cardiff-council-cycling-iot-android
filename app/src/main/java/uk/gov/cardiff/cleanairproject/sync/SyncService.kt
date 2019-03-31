@@ -39,12 +39,15 @@ class SyncService : Service() {
         if (syncManager.isJourneySyncRequired() || syncManager.isReadingSyncRequired()) {
             // Set the sync status to in progress
             setSyncStatus(SyncStates.IN_PROGRESS)
-            // Simulate a network delay
-            syncManager.syncJourneys()
-            android.os.Handler().postDelayed({
-                setSyncStatus(SyncStates.COMPLETE)
-                stopSyncService()
-            }, 1000)
+            // Sync Journeys
+            syncManager.syncJourneys(object : SyncListener {
+                override fun onSyncSuccess() {
+                    setSyncStatus(SyncStates.COMPLETE)
+                }
+                override fun onSyncFailure() {
+                    setSyncStatus(SyncStates.WAITING)
+                }
+            })
         } else {
             setSyncStatus(SyncStates.COMPLETE)
             stopSyncService()

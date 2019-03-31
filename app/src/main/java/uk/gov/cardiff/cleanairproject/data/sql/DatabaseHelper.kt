@@ -47,12 +47,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     // Journeys
     fun addJourney(journey: Journey):Journey {
+        val db = writableDatabase
         val values = ContentValues()
         values.put(COLUMN_REMOTE_ID, journey.RemoteId)
         values.put(COLUMN_JOURNEY_SYNCED, journey.Synced)
         // Inserting Row
-        journey.id = writableDatabase.insert(TABLE_JOURNEY, null, values)
-        writableDatabase.close()
+        journey.id = db.insert(TABLE_JOURNEY, null, values)
+        db.close()
         // Return the journey with the ID
         return journey
     }
@@ -60,26 +61,29 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         deleteJourney(journey.id.toInt())
     }
     fun deleteJourney(journeyID: Int) {
-        writableDatabase.delete(
+        val db = writableDatabase
+        db.delete(
             TABLE_JOURNEY, "$COLUMN_JOURNEY_ID = ?",
             arrayOf(journeyID.toString()))
-        writableDatabase.close()
+        db.close()
     }
     fun getJourneyReadingsCount(journey: Journey): Int {
         return getJourneyReadingsCount(journey.id.toInt())
     }
     fun getJourneyReadingsCount(journeyID: Int): Int {
+        val db = readableDatabase
         val columns = arrayOf(COLUMN_READING_ID)
         val selectionCriteria = "$COLUMN_READING_JOURNEY_ID = ?"
         val selectionArgs = arrayOf(journeyID.toString())
-        val cursor = readableDatabase.query(TABLE_READING, columns, selectionCriteria, selectionArgs, null,  //group the rows
+        val cursor = db.query(TABLE_READING, columns, selectionCriteria, selectionArgs, null,  //group the rows
             null, null)
         val cursorCount = cursor.count
         cursor.close()
-        readableDatabase.close()
+        db.close()
         return cursorCount
     }
     fun getUnsyncedJourneys(): List<Journey> {
+        val db = readableDatabase
         // Get journeys where Synced = false
         val columns = arrayOf(
             COLUMN_JOURNEY_ID,
@@ -87,7 +91,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             COLUMN_JOURNEY_SYNCED)
         val selectionCriteria = "$COLUMN_JOURNEY_SYNCED = ?"
         val selectionArgs = arrayOf("0")
-        val cursor = readableDatabase.query(
+        val cursor = db.query(
             TABLE_JOURNEY, columns, selectionCriteria, selectionArgs,null,null, null)
         // Prepare a list to hold the journeys
         val readings = mutableListOf<Journey>()
@@ -109,12 +113,24 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             }
         }
         cursor.close()
-        readableDatabase.close()
+        db.close()
         return readings
+    }
+    fun updateJourneys(journeys: List<Journey>) {
+        val db = writableDatabase
+        for (journey in journeys) {
+            val updatedFields = ContentValues()
+            updatedFields.put(COLUMN_REMOTE_ID, journey.RemoteId)
+            updatedFields.put(COLUMN_JOURNEY_SYNCED, journey.Synced)
+            db.update(TABLE_JOURNEY, updatedFields,
+                "$COLUMN_JOURNEY_ID = ?", arrayOf(journey.id.toString()))
+        }
+        db.close()
     }
 
     // Readings
     fun addReading(reading: Reading) {
+        val db = writableDatabase
         val values = ContentValues()
         values.put(COLUMN_READING_REMOTE_ID, reading.RemoteId)
         values.put(COLUMN_READING_JOURNEY_ID, reading.JourneyId)
@@ -127,10 +143,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(COLUMN_LATITUDE, reading.Latitude)
         values.put(COLUMN_READING_SYNCED, reading.Synced)
         // Inserting Row
-        writableDatabase.insert(TABLE_READING, null, values)
-        writableDatabase.close()
+        db.insert(TABLE_READING, null, values)
+        db.close()
     }
     fun getUnsyncedReadings(): List<Reading> {
+        val db = readableDatabase
         // Get journeys where Synced = false
         val columns = arrayOf(COLUMN_READING_ID,
             COLUMN_READING_REMOTE_ID,
@@ -145,7 +162,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             COLUMN_READING_SYNCED)
         val selectionCriteria = "$COLUMN_READING_SYNCED = ?"
         val selectionArgs = arrayOf("0")
-        val cursor = readableDatabase.query(TABLE_READING, columns, selectionCriteria, selectionArgs,null,
+        val cursor = db.query(TABLE_READING, columns, selectionCriteria, selectionArgs,null,
             null, null)
         // Prepare a list to hold the journey ID's
         val readings = mutableListOf<Reading>()
@@ -170,7 +187,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             }
         }
         cursor.close()
-        readableDatabase.close()
+        db.close()
         return readings
     }
 

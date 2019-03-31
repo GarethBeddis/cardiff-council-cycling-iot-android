@@ -13,6 +13,7 @@ import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONObject
 import uk.gov.cardiff.cleanairproject.BuildConfig
+import uk.gov.cardiff.cleanairproject.data.model.Journey
 import uk.gov.cardiff.cleanairproject.data.sql.DatabaseHelper
 
 class SyncManager(context: Context) {
@@ -31,7 +32,7 @@ class SyncManager(context: Context) {
         return databaseHelper.getUnsyncedReadings().isNotEmpty()
     }
 
-    fun syncJourneys() {
+    fun syncJourneys(listener: SyncListener) {
         // Get the unsynced journeys from the database and convert them to JSON
         val requestJSON = Gson().toJson(databaseHelper.getUnsyncedJourneys())
         // Prepare the JSON object
@@ -41,14 +42,15 @@ class SyncManager(context: Context) {
             "$serverAddress/api/app/sync/journeys",
             JSONArray(requestJSON),
             Response.Listener<JSONArray> {response ->
-                Log.d("Sync Success", response.toString())
-            },
-            Response.ErrorListener {error ->
-                if (error is TimeoutError || error is ServerError) {
-                    Log.e("Sync Error", error.toString())
-                } else {
-                    Log.e("Sync Error", error.toString())
+                val journeys = mutableListOf<Journey>()
+                for (i in 0 until response.length()) {
+                    journeys.add(Gson().fromJson(response[i].toString(), Journey::class.java))
                 }
+                databaseHelper.updateJourneys(journeys)
+                listener.onSyncSuccess()
+            },
+            Response.ErrorListener {
+                listener.onSyncFailure()
             })
         // Make the request
         requestQueue.add(jsonRequest)
