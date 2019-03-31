@@ -2,7 +2,6 @@ package uk.gov.cardiff.cleanairproject.setup.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +10,9 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import uk.gov.cardiff.cleanairproject.setup.Animations
 import uk.gov.cardiff.cleanairproject.setup.Listeners
 import uk.gov.cardiff.cleanairproject.setup.Pages
-import uk.gov.cardiff.cleanairproject.sql.DatabaseHelper
+import uk.gov.cardiff.cleanairproject.data.sql.DatabaseHelper
 import uk.gov.cardiff.cleanairproject.auth.validation.InputValidation
 import uk.gov.cardiff.cleanairproject.R
-import uk.gov.cardiff.cleanairproject.auth.ServerAuthenticator
-import uk.gov.cardiff.cleanairproject.auth.ServerAuthenticatorListener
 
 // Adapted from ref: https://github.com/Android-Tutorials-Hub/login-register-sqlite-tutorial-Kotlin/tree/master/app/src/main/java/com/androidtutorialshub/loginregisterkotlin/activities
 class LoginFragment : Fragment() {

@@ -12,7 +12,7 @@ import uk.gov.cardiff.cleanairproject.R
 import uk.gov.cardiff.cleanairproject.setup.Animations
 import uk.gov.cardiff.cleanairproject.setup.Listeners
 import uk.gov.cardiff.cleanairproject.setup.Pages
-import uk.gov.cardiff.cleanairproject.sql.DatabaseHelper
+import uk.gov.cardiff.cleanairproject.data.sql.DatabaseHelper
 import uk.gov.cardiff.cleanairproject.auth.validation.InputValidation
 
 // Adapted from ref: https://github.com/Android-Tutorials-Hub/login-register-sqlite-tutorial-Kotlin/tree/master/app/src/main/java/com/androidtutorialshub/loginregisterkotlin/activities

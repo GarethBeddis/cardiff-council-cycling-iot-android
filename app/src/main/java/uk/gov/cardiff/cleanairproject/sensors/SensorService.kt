@@ -22,9 +22,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONException
 import org.json.JSONObject
-import uk.gov.cardiff.cleanairproject.model.Journey
-import uk.gov.cardiff.cleanairproject.model.Reading
-import uk.gov.cardiff.cleanairproject.sql.DatabaseHelper
+import uk.gov.cardiff.cleanairproject.data.model.Journey
+import uk.gov.cardiff.cleanairproject.data.model.Reading
+import uk.gov.cardiff.cleanairproject.data.sql.DatabaseHelper
 import uk.gov.cardiff.cleanairproject.sync.SyncService
 import java.util.*
 

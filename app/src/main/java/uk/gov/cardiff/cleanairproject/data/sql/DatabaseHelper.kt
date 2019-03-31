@@ -1,11 +1,11 @@
-package uk.gov.cardiff.cleanairproject.sql
+package uk.gov.cardiff.cleanairproject.data.sql
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import uk.gov.cardiff.cleanairproject.model.Journey
-import uk.gov.cardiff.cleanairproject.model.Reading
+import uk.gov.cardiff.cleanairproject.data.model.Journey
+import uk.gov.cardiff.cleanairproject.data.model.Reading
 
 // Ref: https://github.com/Android-Tutorials-Hub/login-register-sqlite-tutorial-Kotlin/blob/master/app/src/main/java/com/androidtutorialshub/loginregisterkotlin/sql/DatabaseHelper.kt
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {

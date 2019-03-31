@@ -1,4 +1,4 @@
-package uk.gov.cardiff.cleanairproject.model;
+package uk.gov.cardiff.cleanairproject.data.model;
 
 data class Reading (
     var id: Long = -1,

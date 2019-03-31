@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.android.volley.toolbox.Volley
 import uk.gov.cardiff.cleanairproject.BuildConfig
-import uk.gov.cardiff.cleanairproject.sql.DatabaseHelper
+import uk.gov.cardiff.cleanairproject.data.sql.DatabaseHelper
 
 class SyncManager(context: Context) {
 

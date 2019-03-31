@@ -3,7 +3,7 @@ package uk.gov.cardiff.cleanairproject.sync
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import uk.gov.cardiff.cleanairproject.sql.DatabaseHelper
+import uk.gov.cardiff.cleanairproject.data.sql.DatabaseHelper
 
 class SyncService : Service() {
 
