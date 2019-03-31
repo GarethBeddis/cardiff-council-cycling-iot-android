@@ -105,7 +105,7 @@ class SensorService : Service() {
         locationManager.removeUpdates(locationListener)
         // Delete the journey if there are no readings, otherwise start synchronisation
         if (journey != null) {
-            if (databaseHelper.getReadingsCount(journey!!) == 0) {
+            if (databaseHelper.getJourneyReadingsCount(journey!!) == 0) {
                 databaseHelper.deleteJourney(journey!!)
             } else {
                 startService(Intent(this, SyncService::class.java))
@@ -163,24 +163,32 @@ class SensorService : Service() {
         }
     }
     private fun onConnected(connectedDevice: BluetoothSerialDevice) {
-        // Create a journey in the database
-        journey = databaseHelper.addJourney(Journey(
-            RemoteId = 0,
-            Synced = false
-        ))
-        // Set the device and listeners
-        bluetoothDevice = connectedDevice.toSimpleDeviceInterface()
-        bluetoothDevice?.setListeners(
-            this::onMessageReceived,
-            null,
-            this::onError)
-        bluetoothDevice?.sendMessage("OK")
-        // Update the notification text
-        notification?.setContentTitle(resources.getString(R.string.notification_title_connected))
-        notificationManager.notify(1, notification?.build())
-        // Let the main activity know that the device is connected
-        connected = true
-        sensorCallback?.onConnected()
+        if (isRunning) {
+            // Create a journey in the database
+            journey = databaseHelper.addJourney(
+                Journey(
+                    RemoteId = 0,
+                    Synced = false
+                )
+            )
+            // Set the device and listeners
+            bluetoothDevice = connectedDevice.toSimpleDeviceInterface()
+            bluetoothDevice?.setListeners(
+                this::onMessageReceived,
+                null,
+                this::onError
+            )
+            bluetoothDevice?.sendMessage("OK")
+            // Update the notification text
+            notification?.setContentTitle(resources.getString(R.string.notification_title_connected))
+            notificationManager.notify(1, notification?.build())
+            // Let the main activity know that the device is connected
+            connected = true
+            sensorCallback?.onConnected()
+        } else {
+            // If the service is no longer running, close the connection
+            bluetoothManager.closeDevice(connectedDevice.toSimpleDeviceInterface())
+        }
     }
     private fun onMessageReceived(message: String) {
         newReading(message)
@@ -188,7 +196,9 @@ class SensorService : Service() {
     private fun onError(error: Throwable) {
         // Handle errors - This is hopefully just the sensors being disconnected
         Log.e("Bluetooth", error.message)
-        stopForegroundService()
+        if (isRunning) {
+            stopForegroundService()
+        }
     }
 
     // Readings
