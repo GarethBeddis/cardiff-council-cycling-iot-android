@@ -65,9 +65,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             arrayOf(journeyID.toString()))
         db.close()
     }
-    fun getJourneyReadingsCount(journey: Journey): Int {
-        return getJourneyReadingsCount(journey.id.toInt())
-    }
     fun getJourneyReadingsCount(journeyID: Int): Int {
         val db = readableDatabase
         val columns = arrayOf(COLUMN_READING_ID)
@@ -80,6 +77,20 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
         return cursorCount
     }
+    fun getUnsyncedJourneysCount(): Int {
+        val db = readableDatabase
+        // Get journeys where Synced = false
+        val selectionCriteria = "$COLUMN_JOURNEY_SYNCED = ?"
+        val selectionArgs = arrayOf("0")
+        val cursor = db.query(
+            TABLE_JOURNEY, null, selectionCriteria, selectionArgs,
+            null,null, null, null)
+        // Get the count
+        val journeysCount = cursor.count
+        cursor.close()
+        db.close()
+        return journeysCount
+    }
     fun getUnsyncedJourneys(): List<Journey> {
         val db = readableDatabase
         // Get journeys where Synced = false
@@ -90,9 +101,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val selectionCriteria = "$COLUMN_JOURNEY_SYNCED = ?"
         val selectionArgs = arrayOf("0")
         val cursor = db.query(
-            TABLE_JOURNEY, columns, selectionCriteria, selectionArgs,null,null, null)
+            TABLE_JOURNEY, columns, selectionCriteria, selectionArgs,
+            null,null, null, "500")
         // Prepare a list to hold the journeys
-        val readings = mutableListOf<Journey>()
+        val journeys = mutableListOf<Journey>()
         // Get the journeys from the results
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast) {
@@ -103,7 +115,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                     Synced = (cursor.getInt(2) > 0))
                 // If the journey has readings, add it to the list, otherwise delete it
                 if (getJourneyReadingsCount(cursor.getInt(0)) > 0) {
-                    readings.add(journey)
+                    journeys.add(journey)
                 } else {
                     deleteJourney(journey)
                 }
@@ -112,7 +124,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         cursor.close()
         db.close()
-        return readings
+        return journeys
     }
     fun updateJourneys(journeys: List<Journey>) {
         val db = writableDatabase
@@ -142,9 +154,18 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.insert(TABLE_READING, null, values)
         db.close()
     }
+    fun getUnsyncedReadingsCount(): Int {
+        val db = readableDatabase
+        val cursor = db.query(TABLE_READING, null, null, null,
+            null,null, null, null)
+        // Get the readings count
+        val readingsCount = cursor.count
+        cursor.close()
+        db.close()
+        return readingsCount
+    }
     fun getUnsyncedReadings(): List<Reading> {
         val db = readableDatabase
-        // Get journeys where Synced = false
         val tables = "$TABLE_READING reading INNER JOIN $TABLE_JOURNEY journey " +
                 "on reading.$COLUMN_READING_JOURNEY_ID = journey.$COLUMN_JOURNEY_ID"
         val columns = arrayOf(
@@ -158,7 +179,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             COLUMN_LONGITUDE,
             COLUMN_LATITUDE,
             COLUMN_REMOTE_ID)
-        val cursor = db.query(tables, columns, null, null,null,null, null)
+        val cursor = db.query(tables, columns, null, null,
+            null,null, null, "500")
         // Prepare a list to hold the journey ID's
         val readings = mutableListOf<Reading>()
         // Get the journeys from the results

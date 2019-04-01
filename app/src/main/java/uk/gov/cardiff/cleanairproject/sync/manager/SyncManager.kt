@@ -20,11 +20,11 @@ class SyncManager(private val context: Context) {
     private val requestQueue = Volley.newRequestQueue(context)
 
     fun isJourneySyncRequired(): Boolean {
-        return databaseHelper.getUnsyncedJourneys().isNotEmpty()
+        return databaseHelper.getUnsyncedJourneysCount() > 0
     }
 
     fun isReadingSyncRequired(): Boolean {
-        return databaseHelper.getUnsyncedReadings().isNotEmpty()
+        return databaseHelper.getUnsyncedReadingsCount() > 0
     }
 
     fun syncJourneys(listener: SyncListener) {
@@ -37,13 +37,19 @@ class SyncManager(private val context: Context) {
             "$serverAddress/api/app/sync/journeys",
             JSONObject(requestJSON),
             Response.Listener<JSONObject> {response ->
+                // Process the response
                 val responseJourneys = JSONArray(response.getString("journeys"))
                 val journeys = mutableListOf<Journey>()
                 for (i in 0 until responseJourneys.length()) {
                     journeys.add(Gson().fromJson(responseJourneys[i].toString(), Journey::class.java))
                 }
                 databaseHelper.updateJourneys(journeys)
-                listener.onSyncSuccess()
+                // Loop recursively until all journeys are synced
+                if (isJourneySyncRequired()) {
+                    syncJourneys(listener)
+                } else {
+                    listener.onSyncSuccess()
+                }
             },
             Response.ErrorListener {
                 listener.onSyncFailure()
@@ -68,7 +74,12 @@ class SyncManager(private val context: Context) {
                     readingIDs.add(responseReadings.getInt(i))
                 }
                 databaseHelper.updateReadings(readingIDs)
-                listener.onSyncSuccess()
+                // Loop recursively until all journeys are synced
+                if (isReadingSyncRequired()) {
+                    syncReadings(listener)
+                } else {
+                    listener.onSyncSuccess()
+                }
             },
             Response.ErrorListener {
                 listener.onSyncFailure()
