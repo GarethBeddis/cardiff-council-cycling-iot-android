@@ -25,7 +25,7 @@
                 android:exported="false"
                 android:stopWithTask="false"/>
         <service
-                android:name=".sync.SyncService"
+                android:name=".sync.service.SyncService"
                 android:enabled="true"
                 android:exported="false"
                 android:stopWithTask="false"/>

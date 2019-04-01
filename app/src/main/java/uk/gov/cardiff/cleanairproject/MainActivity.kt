@@ -15,15 +15,15 @@ import android.os.IBinder
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import uk.gov.cardiff.cleanairproject.aqi.AirQualityIndex
 import uk.gov.cardiff.cleanairproject.aqi.Bands
 import uk.gov.cardiff.cleanairproject.sensors.SensorServiceCallback
-import uk.gov.cardiff.cleanairproject.sync.SyncService
-import uk.gov.cardiff.cleanairproject.sync.SyncServiceCallback
-import uk.gov.cardiff.cleanairproject.sync.SyncStates
+import uk.gov.cardiff.cleanairproject.sync.service.SyncService
+import uk.gov.cardiff.cleanairproject.sync.service.SyncServiceCallback
+import uk.gov.cardiff.cleanairproject.sync.service.SyncStates
 
-class MainActivity : AppCompatActivity(), SensorServiceCallback, SyncServiceCallback {
+class MainActivity : AppCompatActivity(), SensorServiceCallback,
+    SyncServiceCallback {
 
     private lateinit var playPauseFab: FloatingMusicActionButton
     private var sensorService: SensorService? = null

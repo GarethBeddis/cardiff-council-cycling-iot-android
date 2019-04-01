@@ -25,7 +25,7 @@ import org.json.JSONObject
 import uk.gov.cardiff.cleanairproject.data.model.Journey
 import uk.gov.cardiff.cleanairproject.data.model.Reading
 import uk.gov.cardiff.cleanairproject.data.sql.DatabaseHelper
-import uk.gov.cardiff.cleanairproject.sync.SyncService
+import uk.gov.cardiff.cleanairproject.sync.service.SyncService
 import java.util.*
 
 class SensorService : Service() {

@@ -1,9 +1,11 @@
-package uk.gov.cardiff.cleanairproject.sync
+package uk.gov.cardiff.cleanairproject.sync.service
 
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import uk.gov.cardiff.cleanairproject.data.sql.DatabaseHelper
+import uk.gov.cardiff.cleanairproject.sync.manager.SyncListener
+import uk.gov.cardiff.cleanairproject.sync.manager.SyncManager
 
 class SyncService : Service() {
 
@@ -38,7 +40,7 @@ class SyncService : Service() {
         if (!isRunning) {
             isRunning = true
             // Check if synchronisation is required
-            if (syncManager.isJourneySyncRequired() || syncManager.isReadingSyncRequired()) {
+            if (syncManager.isJourneySyncRequired()) {
                 // Set the sync status to in progress
                 setSyncStatus(SyncStates.IN_PROGRESS)
                 // Sync Journeys
