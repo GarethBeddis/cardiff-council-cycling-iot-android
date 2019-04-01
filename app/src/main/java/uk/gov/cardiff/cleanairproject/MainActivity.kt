@@ -1,7 +1,7 @@
 package uk.gov.cardiff.cleanairproject
 
 import android.Manifest
-import android.content.Intent
+import android.content.*
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuInflater
@@ -10,9 +10,6 @@ import android.widget.PopupMenu
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.gov.cardiff.cleanairproject.sensors.SensorService
-import android.content.ComponentName
-import android.content.Context
-import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.os.IBinder
 import android.support.design.widget.Snackbar
@@ -61,6 +58,9 @@ class MainActivity : AppCompatActivity(), SensorServiceCallback, SyncServiceCall
         }
         // Rebind the services if they're running
         rebindServices()
+        // Register broadcast receiver
+        val intentFilter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
+        applicationContext.registerReceiver(broadcastReceiver, intentFilter)
     }
     override fun onPause() {
         super.onPause()
@@ -78,6 +78,20 @@ class MainActivity : AppCompatActivity(), SensorServiceCallback, SyncServiceCall
         super.onResume()
         // Rebind the service
         rebindServices()
+    }
+
+    // Broadcast Receiver
+    private var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            // Start the sync service on network change
+            if (intent?.action == "android.net.conn.CONNECTIVITY_CHANGE") {
+                if (!SyncService.isRunning) {
+                    val serviceIntent = Intent(this@MainActivity, SyncService::class.java)
+                    startService(serviceIntent)
+                    bindService(serviceIntent, syncServiceConnection, Context.BIND_AUTO_CREATE)
+                }
+            }
+        }
     }
 
     // Service Bindings
