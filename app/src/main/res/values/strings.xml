@@ -69,7 +69,11 @@
     <string name="air_pollution_high">High</string>
     <string name="air_pollution_very_high">Very High</string>
     <string name="syncStatus">Sync Status</string>
-    <string name="upToDate">Up To Date</string>
+
+    <!-- Sync -->
+    <string name="sync_state_complete">Up To Date</string>
+    <string name="sync_state_in_progress">In Progress</string>
+    <string name="sync_state_waiting">Waiting</string>
 
     <!-- Menu -->
     <string name="menu_about">About</string>

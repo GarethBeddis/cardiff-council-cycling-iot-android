@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), SensorServiceCallback, SyncServiceCall
         menuIcon.setOnClickListener {
                 v -> showPopup(v)
         }
-        // Rebind the service if it's running
+        // Rebind the services if they're running
         rebindServices()
     }
     override fun onPause() {
@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity(), SensorServiceCallback, SyncServiceCall
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             syncService = (service as SyncService.Binder).service
             syncService?.setCallBack(this@MainActivity)
+            setSyncState(SyncService.syncStatus)
         }
         override fun onServiceDisconnected(name: ComponentName) {}
     }
@@ -110,7 +111,9 @@ class MainActivity : AppCompatActivity(), SensorServiceCallback, SyncServiceCall
             bindService(Intent(this, SyncService::class.java), syncServiceConnection,
                 Context.BIND_AUTO_CREATE)
         } else {
-            syncService = null
+            val intent = Intent(this@MainActivity, SyncService::class.java)
+            startService(intent)
+            bindService(intent, syncServiceConnection, Context.BIND_AUTO_CREATE)
         }
     }
 
@@ -151,7 +154,7 @@ class MainActivity : AppCompatActivity(), SensorServiceCallback, SyncServiceCall
 
     // Sync Service Callback Function
     override fun onSyncStateChange(state: SyncStates) {
-        Log.d("Sync State Change", state.toString())
+        setSyncState(state)
     }
     override fun onSyncServiceStopped() {
         syncService = null
@@ -188,6 +191,25 @@ class MainActivity : AppCompatActivity(), SensorServiceCallback, SyncServiceCall
         statusImageConnected.animate().alpha(1.0f).duration = 200
         noiseReading.animate().alpha(1.0f).duration = 200
         airPollution.animate().alpha(1.0f).duration = 200
+    }
+    private fun setSyncState(syncState: SyncStates) {
+        when (syncState) {
+            SyncStates.COMPLETE -> {
+                syncStatusText.text = resources.getString(R.string.sync_state_complete)
+                syncSpinner.animate().alpha(0.0f).duration = 200
+                syncTick.animate().alpha(1.0f).duration = 200
+            }
+            SyncStates.IN_PROGRESS -> {
+                syncStatusText.text = resources.getString(R.string.sync_state_in_progress)
+                syncSpinner.animate().alpha(1.0f).duration = 200
+                syncTick.animate().alpha(0.0f).duration = 200
+            }
+            SyncStates.WAITING -> {
+                syncStatusText.text = resources.getString(R.string.sync_state_waiting)
+                syncSpinner.animate().alpha(1.0f).duration = 200
+                syncTick.animate().alpha(0.0f).duration = 200
+            }
+        }
     }
 
     // Permissions

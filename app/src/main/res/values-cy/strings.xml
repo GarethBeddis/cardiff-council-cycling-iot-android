@@ -70,7 +70,11 @@
     <string name="air_pollution_high">Uchel</string>
     <string name="air_pollution_very_high">Uchel iawn</string>
     <string name="syncStatus">Statws Sync</string>
-    <string name="upToDate">Hyd yn hyn</string>
+
+    <!-- Sync -->
+    <string name="sync_state_complete">Hyd yn Hyn</string>
+    <string name="sync_state_in_progress">Ar y gweill</string>
+    <string name="sync_state_waiting">Aros</string>
 
     <!-- Menu -->
     <string name="menu_about">Ynglŷn â</string>

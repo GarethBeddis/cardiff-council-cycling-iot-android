@@ -20,7 +20,6 @@ class ServerAuthenticator(private val context: Context) {
         val requestObject = HashMap<String, String>()
         requestObject["email"] = email
         requestObject["password"] = password
-        Log.d("server", "$serverAddress/auth/login")
         // Prepare the request
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST,
@@ -45,7 +44,6 @@ class ServerAuthenticator(private val context: Context) {
         val requestObject = HashMap<String, String>()
         requestObject["email"] = email
         requestObject["password"] = password
-        Log.d("server", "$serverAddress/auth/login")
         // Prepare the request
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST,
@@ -55,6 +53,7 @@ class ServerAuthenticator(private val context: Context) {
                 listener.onAuthSuccess(response.getString("token"))
             },
             Response.ErrorListener {error ->
+                Log.e("Auth Error", error.toString())
                 if (error is TimeoutError || error is ServerError) {
                     listener.onAuthFailure(context.getString(R.string.connection_error))
                 } else {
