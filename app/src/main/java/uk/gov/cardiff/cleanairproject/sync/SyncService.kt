@@ -34,42 +34,52 @@ class SyncService : Service() {
 
     // Start and Stop
     private fun startSyncService() {
-        isRunning = true
-        // Check if synchronisation is required
-        if (syncManager.isJourneySyncRequired() || syncManager.isReadingSyncRequired()) {
-            // Set the sync status to in progress
-            setSyncStatus(SyncStates.IN_PROGRESS)
-            // Sync Journeys
-            syncManager.syncJourneys(object : SyncListener {
-                override fun onSyncSuccess() {
-                    // Sync Readings
-                    syncManager.syncReadings(object : SyncListener {
-                        override fun onSyncSuccess() {
-                            setSyncStatus(SyncStates.COMPLETE)
-                        }
-                        override fun onSyncFailure() {
-                            setSyncStatus(SyncStates.WAITING)
-                        }
-                    })
-                }
-                override fun onSyncFailure() {
-                    setSyncStatus(SyncStates.WAITING)
-                }
-            })
-        } else if (syncManager.isReadingSyncRequired()) {
-            // Set the sync status to in progress
-            setSyncStatus(SyncStates.IN_PROGRESS)
-            // Sync Journeys
-            syncManager.syncReadings(object : SyncListener {
-                override fun onSyncSuccess() {
-                    setSyncStatus(SyncStates.COMPLETE)
-                }
-                override fun onSyncFailure() {
-                    setSyncStatus(SyncStates.WAITING)
-                }
-            })
+        // Only continue if the service isn't already running
+        if (!isRunning) {
+            isRunning = true
+            // Check if synchronisation is required
+            if (syncManager.isJourneySyncRequired() || syncManager.isReadingSyncRequired()) {
+                // Set the sync status to in progress
+                setSyncStatus(SyncStates.IN_PROGRESS)
+                // Sync Journeys
+                syncManager.syncJourneys(object : SyncListener {
+                    override fun onSyncSuccess() {
+                        // Sync Readings
+                        syncManager.syncReadings(object : SyncListener {
+                            override fun onSyncSuccess() {
+                                setSyncStatus(SyncStates.COMPLETE)
+                                stopSyncService()
+                            }
+                            override fun onSyncFailure() {
+                                setSyncStatus(SyncStates.WAITING)
+                                stopSyncService()
+                            }
+                        })
+                    }
+                    override fun onSyncFailure() {
+                        setSyncStatus(SyncStates.WAITING)
+                        stopSyncService()
+                    }
+                })
+            } else if (syncManager.isReadingSyncRequired()) {
+                // Set the sync status to in progress
+                setSyncStatus(SyncStates.IN_PROGRESS)
+                // Sync Journeys
+                syncManager.syncReadings(object : SyncListener {
+                    override fun onSyncSuccess() {
+                        setSyncStatus(SyncStates.COMPLETE)
+                        stopSyncService()
+                    }
+                    override fun onSyncFailure() {
+                        setSyncStatus(SyncStates.WAITING)
+                        stopSyncService()
+                    }
+                })
+            } else {
+                setSyncStatus(SyncStates.COMPLETE)
+                stopSyncService()
+            }
         } else {
-            setSyncStatus(SyncStates.COMPLETE)
             stopSyncService()
         }
     }

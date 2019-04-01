@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import uk.gov.cardiff.cleanairproject.data.model.Journey
 import uk.gov.cardiff.cleanairproject.data.model.Reading
 
@@ -17,7 +18,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             COLUMN_JOURNEY_SYNCED + " INTEGER" + ")")
     private val CREATE_READING_TABLE = ("CREATE TABLE " + TABLE_READING + "(" +
             COLUMN_READING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            COLUMN_READING_REMOTE_ID + " INTEGER," +
             COLUMN_READING_JOURNEY_ID + " INTEGER," +
             COLUMN_NOISE_READING + " REAL," +
             COLUMN_NO2_READING + " REAL," +
@@ -25,8 +25,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             COLUMN_PM25_READING + " REAL," +
             COLUMN_TIME_TAKEN + " REAL," +
             COLUMN_LONGITUDE + " INTEGER," +
-            COLUMN_LATITUDE + " INTEGER," +
-            COLUMN_READING_SYNCED + " INTEGER" + ")")
+            COLUMN_LATITUDE + " INTEGER)")
 
     // Drop table sql query
     private val DROP_JOURNEY_TABLE = "DROP TABLE IF EXISTS $TABLE_JOURNEY"
@@ -132,7 +131,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun addReading(reading: Reading) {
         val db = writableDatabase
         val values = ContentValues()
-        values.put(COLUMN_READING_REMOTE_ID, reading.RemoteId)
         values.put(COLUMN_READING_JOURNEY_ID, reading.JourneyId)
         values.put(COLUMN_NOISE_READING, reading.NoiseReading)
         values.put(COLUMN_NO2_READING, reading.No2Reading)
@@ -141,7 +139,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(COLUMN_TIME_TAKEN, reading.TimeTaken)
         values.put(COLUMN_LONGITUDE, reading.Longitude)
         values.put(COLUMN_LATITUDE, reading.Latitude)
-        values.put(COLUMN_READING_SYNCED, reading.Synced)
         // Inserting Row
         db.insert(TABLE_READING, null, values)
         db.close()
@@ -149,8 +146,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun getUnsyncedReadings(): List<Reading> {
         val db = readableDatabase
         // Get journeys where Synced = false
-        val columns = arrayOf(COLUMN_READING_ID,
-            COLUMN_READING_REMOTE_ID,
+        val tables = "$TABLE_READING reading INNER JOIN $TABLE_JOURNEY journey " +
+                "on reading.$COLUMN_READING_JOURNEY_ID = journey.$COLUMN_JOURNEY_ID"
+        val columns = arrayOf(
+            COLUMN_READING_ID,
             COLUMN_READING_JOURNEY_ID,
             COLUMN_NOISE_READING,
             COLUMN_NO2_READING,
@@ -159,11 +158,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             COLUMN_TIME_TAKEN,
             COLUMN_LONGITUDE,
             COLUMN_LATITUDE,
-            COLUMN_READING_SYNCED)
-        val selectionCriteria = "$COLUMN_READING_SYNCED = ?"
-        val selectionArgs = arrayOf("0")
-        val cursor = db.query(TABLE_READING, columns, selectionCriteria, selectionArgs,null,
-            null, null)
+            COLUMN_REMOTE_ID)
+        val cursor = db.query(tables, columns, null, null,null,null, null)
         // Prepare a list to hold the journey ID's
         val readings = mutableListOf<Reading>()
         // Get the journeys from the results
@@ -173,16 +169,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 readings.add(
                     Reading(
                         id = cursor.getLong(0),
-                        RemoteId = cursor.getLong(1),
-                        JourneyId = cursor.getLong(2),
-                        NoiseReading = cursor.getDouble(3),
-                        No2Reading = cursor.getDouble(4),
-                        PM10Reading = cursor.getDouble(5),
-                        PM25Reading = cursor.getDouble(6),
-                        TimeTaken = cursor.getLong(7),
-                        Longitude = cursor.getDouble(8),
-                        Latitude = cursor.getDouble(9),
-                        Synced = (cursor.getInt(10) > 0)))
+                        JourneyId = cursor.getLong(1),
+                        JourneyRemoteId = cursor.getLong(9),
+                        NoiseReading = cursor.getDouble(2),
+                        No2Reading = cursor.getDouble(3),
+                        PM10Reading = cursor.getDouble(4),
+                        PM25Reading = cursor.getDouble(5),
+                        TimeTaken = cursor.getLong(6),
+                        Longitude = cursor.getDouble(7),
+                        Latitude = cursor.getDouble(8)))
                 cursor.moveToNext()
             }
         }
@@ -216,7 +211,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         // Reading Table Column names
         private val COLUMN_READING_ID = "reading_id"
-        private val COLUMN_READING_REMOTE_ID = "reading_remote_id"
         private val COLUMN_READING_JOURNEY_ID = "reading_journey_id"
         private val COLUMN_NOISE_READING = "reading_noiseReading"
         private val COLUMN_NO2_READING = "reading_No2Reading"
@@ -225,6 +219,5 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private val COLUMN_TIME_TAKEN = "reading_TimeTaken"
         private val COLUMN_LONGITUDE = "reading_longitude"
         private val COLUMN_LATITUDE = "reading_latitude"
-        private val COLUMN_READING_SYNCED = "reading_Synced"
     }
 }

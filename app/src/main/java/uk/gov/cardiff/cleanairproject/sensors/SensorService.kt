@@ -105,11 +105,7 @@ class SensorService : Service() {
         locationManager.removeUpdates(locationListener)
         // Delete the journey if there are no readings, otherwise start synchronisation
         if (journey != null) {
-            if (databaseHelper.getJourneyReadingsCount(journey!!) == 0) {
-                databaseHelper.deleteJourney(journey!!)
-            } else {
-                startService(Intent(this, SyncService::class.java))
-            }
+            startService(Intent(this, SyncService::class.java))
         }
         // Stop the foreground service
         connected = false
@@ -209,16 +205,15 @@ class SensorService : Service() {
                 val jsonData = JSONObject(data).getJSONObject("cleanAir")
                 // Add the reading to the database
                 databaseHelper.addReading(Reading(
-                    RemoteId = 0,
                     JourneyId = journey!!.id,
+                    JourneyRemoteId = null,
                     NoiseReading = jsonData.getDouble("db"),
                     No2Reading = jsonData.getDouble("no2"),
                     PM10Reading = jsonData.getDouble("pm100"),
                     PM25Reading = jsonData.getDouble("pm25"),
                     TimeTaken = Calendar.getInstance().timeInMillis,
                     Longitude = locationGPS!!.longitude,
-                    Latitude = locationGPS!!.latitude,
-                    Synced = false
+                    Latitude = locationGPS!!.latitude
                 ))
                 // Send the reading to the activity if it's connected
                 sensorCallback?.onReading(
