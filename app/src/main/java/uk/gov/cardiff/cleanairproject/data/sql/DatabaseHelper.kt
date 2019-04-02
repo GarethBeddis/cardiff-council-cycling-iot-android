@@ -102,7 +102,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val selectionArgs = arrayOf("0")
         val cursor = db.query(
             TABLE_JOURNEY, columns, selectionCriteria, selectionArgs,
-            null,null, null, "500")
+            null,null, null, "50")
         // Prepare a list to hold the journeys
         val journeys = mutableListOf<Journey>()
         // Get the journeys from the results
@@ -180,7 +180,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             COLUMN_LATITUDE,
             COLUMN_REMOTE_ID)
         val cursor = db.query(tables, columns, null, null,
-            null,null, null, "500")
+            null,null, null, "50")
         // Prepare a list to hold the journey ID's
         val readings = mutableListOf<Reading>()
         // Get the journeys from the results
