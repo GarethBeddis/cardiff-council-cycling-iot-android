@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General -->
-    <string name="app_name">Clean Air</string>
+    <string name="app_name">Cardiff Clean Air Project</string>
+    <string name="app_name_short">Clean Air</string>
+
+    <!-- Auth -->
+    <string name="connection_error">Unable to connect</string>
 
     <!-- Setup -->
     <string name="setup_login">Login</string>
@@ -11,14 +15,17 @@
     <string name="welcome_summary">
         With the Cardiff Clean Air Project, we\'re working together for a better, healthier city.
     </string>
+    <string name="login_title">Login</string>
+    <string name="register_title">Register</string>
     <string name="location_title">Location Access Required</string>
     <string name="location_summary">
         We need access to your location so we can track which parts of Cardiff are the most polluted.
     </string>
     <string name="location_enable">Enable Location</string>
-    <string name="bluetooth_title">Connecting the Sensors</string>
+    <string name="bluetooth_title">Connecting the Sensor Hub</string>
     <string name="bluetooth_summary">
-        To connect the sensors, hold the pair button until the light starts blinking, then press pair bluetooth below.
+        To connect the sensor hub, turn on the sensor hub, then press pair bluetooth below. When asked for a pairing
+        code, enter 1234.
     </string>
     <string name="bluetooth_pair">Pair Bluetooth</string>
     <string name="finished_title">You\'re all set</string>
@@ -47,12 +54,54 @@
     <string name="existing_user">Already a member? Login</string>
 
     <!-- Readings -->
-    <string name="noise">Noise</string>
-    <string name="noise_measurement">dBA</string>
-    <string name="air">Air Pollution</string>
-    <string name="air_measurement">µg/m3</string>
-    <string name="syncStatus">Sync Status</string>
-    <string name="upToDate">Up To Date</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="connecting">Connecting</string>
     <string name="connected">Connected</string>
+    <string name="air">Air Pollution</string>
+    <string name="air_no2">NO2</string>
+    <string name="air_pm25">PM2.5</string>
+    <string name="air_pm100">PM100</string>
+    <string name="air_reading">%1$sμg/m3</string>
+    <string name="noise">Noise</string>
+    <string name="noise_reading">%1$sdB</string>
+    <string name="default_reading">Sensing&#8230;</string>
+    <string name="air_pollution_low">Low</string>
+    <string name="air_pollution_moderate">Moderate</string>
+    <string name="air_pollution_high">High</string>
+    <string name="air_pollution_very_high">Very High</string>
+    <string name="syncStatus">Sync Status</string>
+
+    <!-- Sync -->
+    <string name="sync_state_complete">Up To Date</string>
+    <string name="sync_state_in_progress">In Progress</string>
+    <string name="sync_state_waiting">Waiting</string>
+
+    <!-- Menu -->
+    <string name="menu_about">About</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_logout">Logout</string>
+
+    <!-- Settings -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="settings_category_general">General</string>
+    <string name="settings_category_privacy">Privacy</string>
+    <string name="settings_category_report">Report</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_summary">Switch between English and Welsh</string>
+    <string name="settings_share_data">Share Data</string>
+    <string name="settings_share_data_summary">Turn on or off the Data sharing</string>
+    <string name="settings_bluetooth">Bluetooth</string>
+    <string name="settings_bluetooth_summary">Turn on or off Bluetooth Connectivity</string>
+    <string name="settings_feedback">Send Feedback</string>
+    <string name="settings_feedback_summary">Report technical issues or suggest new features</string>
+
+    <!-- Notifications -->
+    <string name="notification_title">Connecting to Sensor Hub</string>
+    <string name="notification_title_connected">Sensor Hub Connected</string>
+    <string name="notification_content">Tap to view readings</string>
+    <string name="notification_action">Disconnect</string>
+
+    <!-- About -->
+    <string name="partnership">Cardiff Council in partnership with the  National Software Academy</string>
 
 </resources>

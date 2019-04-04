@@ -1,12 +1,8 @@
-package uk.gov.cardiff.cleanairproject.validation
+package uk.gov.cardiff.cleanairproject.auth.validation
 
-import android.app.Activity
 import android.content.Context
 import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
-import android.view.View
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 
 // Ref: https://github.com/Android-Tutorials-Hub/login-register-sqlite-tutorial-Kotlin/blob/master/app/src/main/java/com/androidtutorialshub/loginregisterkotlin/helpers/InputValidation.kt
 class InputValidation

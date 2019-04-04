@@ -1,7 +1,6 @@
 package uk.gov.cardiff.cleanairproject
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
@@ -10,10 +9,9 @@ import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
+import uk.gov.cardiff.cleanairproject.auth.ServerAuthenticator
+import uk.gov.cardiff.cleanairproject.auth.ServerAuthenticatorListener
 
 import uk.gov.cardiff.cleanairproject.setup.Listeners
 import uk.gov.cardiff.cleanairproject.setup.Pages
@@ -26,11 +24,13 @@ class SetupActivity : AppCompatActivity(), Listeners {
     private val locationFragment = LocationFragment()
     private val bluetoothFragment = BluetoothFragment()
     private val finishedFragment = FinishedFragment()
+    private val loadingFragment = LoadingFragment()
     private val loginFragment = LoginFragment()
     private val registerFragment = RegisterFragment()
 
     private var historySteps = 0
     private var backToExitPressed = false
+    private var loading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_Setup)
@@ -56,6 +56,48 @@ class SetupActivity : AppCompatActivity(), Listeners {
             .commit()
     }
 
+    override fun login(email: String, password: String) {
+        // Show the loading screen
+        loading = true
+        changeFragmentListener(Pages.LOADING)
+        // Authenticate with the server
+        ServerAuthenticator(this).login(email, password,
+            object : ServerAuthenticatorListener {
+                override fun onAuthSuccess(token: String) {
+                    // Set the FirstTimeSetup completed preference
+                    saveLogin(email, token)
+                    changeFragmentListener(Pages.LOCATION)
+                    loading = false
+                }
+                override fun onAuthFailure(error: String) {
+                    fragmentManager.popBackStack()
+                    Snackbar.make(findViewById(R.id.content), error, Snackbar.LENGTH_LONG).show()
+                    loading = false
+                }
+            })
+    }
+
+    override fun register(email: String, password: String) {
+        // Show the loading screen
+        loading = true
+        changeFragmentListener(Pages.LOADING)
+        // Authenticate with the server
+        ServerAuthenticator(this).register(email, password,
+            object : ServerAuthenticatorListener {
+                override fun onAuthSuccess(token: String) {
+                    // Set the FirstTimeSetup completed preference
+                    saveLogin(email, token)
+                    changeFragmentListener(Pages.LOCATION)
+                    loading = false
+                }
+                override fun onAuthFailure(error: String) {
+                    fragmentManager.popBackStack()
+                    Snackbar.make(findViewById(R.id.content), error, Snackbar.LENGTH_LONG).show()
+                    loading = false
+                }
+            })
+    }
+
     override fun finishSetup() {
         // Set the FirstTimeSetup completed preference
         getSharedPreferences("FirstTimeSetup", MODE_PRIVATE)
@@ -76,6 +118,10 @@ class SetupActivity : AppCompatActivity(), Listeners {
             Pages.LOCATION -> targetFragment = locationFragment
             Pages.BLUETOOTH -> targetFragment = bluetoothFragment
             Pages.FINISHED -> targetFragment = finishedFragment
+            Pages.LOADING -> {
+                targetFragment = loadingFragment
+                canGoBack = true
+            }
             Pages.LOGIN -> {
                 targetFragment = loginFragment
                 canGoBack = true
@@ -120,8 +166,10 @@ class SetupActivity : AppCompatActivity(), Listeners {
     }
 
     override fun onBackPressed() {
+        // If loading is in progress, do nothing when back is pressed
+        if (loading) return
+        // If history steps is more than 0, go to the previous fragment
         if (historySteps > 0) {
-            // If history steps is more than 0, go to the previous fragment
             historySteps--
             fragmentManager.popBackStack()
         } else if (!backToExitPressed) {
@@ -139,14 +187,12 @@ class SetupActivity : AppCompatActivity(), Listeners {
         }
     }
 
-    // Hide the keyboard if open so snack bar message is visible
-    // Ref: https://stackoverflow.com/questions/13593069/androidhide-keyboard-after-button-click/13593232
-    override fun hideKeyboard() {
-        try {
-            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
-        } catch (e: Exception) {
-            // TODO: handle exception
-        }
+    private fun saveLogin(email: String, token: String) {
+        // Add the login email and token to sharedPrefs
+        getSharedPreferences("Account", MODE_PRIVATE)
+            .edit()
+            .putString("email", email)
+            .putString("token", token)
+            .apply()
     }
 }
