@@ -259,6 +259,8 @@ class MainActivity : AppCompatActivity(), SensorServiceCallback,
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.about -> {
+                    // Open the setup activity
+                    startActivity(Intent(this, AboutActivity::class.java))
                     true
                 }
                 R.id.settings -> {

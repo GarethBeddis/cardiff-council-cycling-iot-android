@@ -101,4 +101,7 @@
     <string name="notification_content">Tap i weld darlleniadau.</string>
     <string name="notification_action">Datgysylltwch</string>
 
+    <!-- About -->
+    <string name="partnership">Cyngor Caerdydd mewn partneriaeth â\'r Academi Feddalwedd Genedlaethol</string>
+
 </resources>
