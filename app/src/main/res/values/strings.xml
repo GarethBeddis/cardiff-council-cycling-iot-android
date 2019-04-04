@@ -24,7 +24,8 @@
     <string name="location_enable">Enable Location</string>
     <string name="bluetooth_title">Connecting the Sensor Hub</string>
     <string name="bluetooth_summary">
-        To connect the sensor hub, turn on the sensor hub, then press pair bluetooth below. When asked for a pairing code, enter 1234.
+        To connect the sensor hub, turn on the sensor hub, then press pair bluetooth below. When asked for a pairing
+        code, enter 1234.
     </string>
     <string name="bluetooth_pair">Pair Bluetooth</string>
     <string name="finished_title">You\'re all set</string>
@@ -99,5 +100,8 @@
     <string name="notification_title_connected">Sensor Hub Connected</string>
     <string name="notification_content">Tap to view readings</string>
     <string name="notification_action">Disconnect</string>
+
+    <!-- About -->
+    <string name="partnership">Cardiff Council in partnership with the  National Software Academy</string>
 
 </resources>
